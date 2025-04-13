@@ -17,9 +17,6 @@ public class MsixBuilder : IAsyncDisposable
     private readonly List<long> localHeaderOffsets = new List<long>();
     private bool finished = false;
     
-    // Constant indicating we always use Zip64
-    private const bool AlwaysUseZip64 = true;
-
     public MsixBuilder(Stream stream, Maybe<ILogger> logger)
     {
         this.logger = logger.Map(l => l.ForContext<MsixBuilder>());
@@ -175,63 +172,28 @@ public class MsixBuilder : IAsyncDisposable
                 writer.Write((int)dosTime);
                 writer.Write(await entry.Original.Crc32());
 
-                /*if (AlwaysUseZip64)
-                {
-                    writer.Write(0xFFFFFFFF); // Compressed size
-                    writer.Write(0xFFFFFFFF); // Uncompressed size
-                }
-                else
-                {*/
-                    writer.Write((uint)await entry.Compressed.GetSize());
-                    writer.Write((uint)await entry.Original.GetSize());
-                //}
+                writer.Write((uint)await entry.Compressed.GetSize());
+                writer.Write((uint)await entry.Original.GetSize());
 
                 writer.Write((short)nameBytes.Length);
-                writer.Write((short)0);//writer.Write((short)(AlwaysUseZip64 ? 28 : 0)); // Extra field size
+                writer.Write((short)0); // Extra field size
                 writer.Write((short)0); // Comment length
                 writer.Write((short)0); // Disk number
                 writer.Write((short)0); // Internal attributes
                 writer.Write((int)0);   // External attributes
 
-                writer.Write((uint)localHeaderOffset);//writer.Write(AlwaysUseZip64 ? 0xFFFFFFFF : (uint)localHeaderOffset);
+                writer.Write((uint)localHeaderOffset);
 
                 writer.Write(nameBytes);
-
-                /*if (AlwaysUseZip64)
-                {
-                    await WriteCentralDirectoryExtraField(entry, writer, localHeaderOffset);
-                }*/
             }
 
             long centralDirSize = baseStream.Position - centralDirStart;
 
-            if (AlwaysUseZip64)
-            {
-                WriteZip64EndOfCentralDirectoryRecord(centralDirStart, centralDirSize, entries.Count);
-                WriteZip64EndOfCentralDirectoryLocator(baseStream.Position - 56);
-            }
+            WriteZip64EndOfCentralDirectoryRecord(centralDirStart, centralDirSize, entries.Count);
+            WriteZip64EndOfCentralDirectoryLocator(baseStream.Position - 56);
 
             WriteEndOfCentralDirectory(centralDirStart, centralDirSize, entries.Count);
         }
-    }
-
-    private async Task WriteCentralDirectoryExtraField(MsixEntry entry, BinaryWriter writer, long localHeaderOffset)
-    {
-        // For files requiring Zip64
-        ushort headerId = 0x0001; // Extra field ID for Zip64
-        ushort dataSize = 24;
-
-        writer.Write(headerId);
-        writer.Write(dataSize);
-
-        writer.Write((uint)await entry.Original.GetSize());
-        writer.Write((uint)(await entry.Original.GetSize() >> 32));
-
-        writer.Write((uint)await entry.Compressed.GetSize());
-        writer.Write((uint)(await entry.Compressed.GetSize() >> 32));
-
-        writer.Write((uint)localHeaderOffset);
-        writer.Write((uint)(localHeaderOffset >> 32));
     }
 
     private void WriteZip64EndOfCentralDirectoryRecord(long centralDirStart, long centralDirSize, int entryCount)
@@ -268,24 +230,12 @@ public class MsixBuilder : IAsyncDisposable
         {
             writer.Write(0x06054b50); // EOCD signature
 
-            if (AlwaysUseZip64)
-            {
-                writer.Write((ushort)0xFFFF); // Disk number
-                writer.Write((ushort)0xFFFF); // Disk with central dir
-                writer.Write((ushort)0xFFFF); // Entries on this disk
-                writer.Write((ushort)0xFFFF); // Total entries
-                writer.Write(0xFFFFFFFF);     // Central dir size
-                writer.Write(0xFFFFFFFF);     // Offset of start
-            }
-            else
-            {
-                writer.Write((ushort)0);
-                writer.Write((ushort)0);
-                writer.Write((ushort)entryCount);
-                writer.Write((ushort)entryCount);
-                writer.Write((uint)centralDirSize);
-                writer.Write((uint)centralDirStart);
-            }
+            writer.Write((ushort)0xFFFF); // Disk number
+            writer.Write((ushort)0xFFFF); // Disk with central dir
+            writer.Write((ushort)0xFFFF); // Entries on this disk
+            writer.Write((ushort)0xFFFF); // Total entries
+            writer.Write(0xFFFFFFFF);     // Central dir size
+            writer.Write(0xFFFFFFFF);     // Offset of start
 
             writer.Write((ushort)0); // Comment length
         }
