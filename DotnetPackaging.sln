@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MsixPackaging.Tests", "src\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DotnetPackaging.Msix", "src\DotnetPackaging.Msix\DotnetPackaging.Msix.csproj", "{98F74F4D-5E20-8E31-6F49-BD86C4B5BEE9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemakeAppx", "RemakeAppx\RemakeAppx.csproj", "{E588BFA1-2E61-4B87-94A0-416134606B21}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{98F74F4D-5E20-8E31-6F49-BD86C4B5BEE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98F74F4D-5E20-8E31-6F49-BD86C4B5BEE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98F74F4D-5E20-8E31-6F49-BD86C4B5BEE9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E588BFA1-2E61-4B87-94A0-416134606B21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E588BFA1-2E61-4B87-94A0-416134606B21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E588BFA1-2E61-4B87-94A0-416134606B21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E588BFA1-2E61-4B87-94A0-416134606B21}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

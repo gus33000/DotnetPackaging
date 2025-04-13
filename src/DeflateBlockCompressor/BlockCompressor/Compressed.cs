@@ -18,7 +18,7 @@ public static class Compressed
     /// </summary>
     public static IObservable<DeflateBlock> Blocks(
         IObservable<byte[]> input,
-        int compressionLevel = ZLib.Z_BEST_COMPRESSION,
+        int compressionLevel = 6,
         int uncompressedBlockSize = DefaultBlockSize)
     {
         return Observable.Create<DeflateBlock>(observer =>

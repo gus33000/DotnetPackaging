@@ -14,6 +14,8 @@ public static class MsixEntryFactory
             Compressed = ByteSource.FromByteObservable(data.Bytes.Compressed()),
             FullPath = entryName,
             CompressionLevel = compressionLevel,
+            //2020-01-29 21:35:18
+            ModificationTime = new DateTime(2020, 01, 29, 21, 35, 18, DateTimeKind.Utc)
         };
 
         return msixEntry;

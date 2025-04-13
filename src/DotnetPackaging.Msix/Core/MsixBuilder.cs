@@ -42,35 +42,74 @@ public class MsixBuilder : IAsyncDisposable
         long localHeaderOffset = baseStream.Position;
         localHeaderOffsets.Add(localHeaderOffset);
 
-        WriteLocalFileHeader(entry);
+        await WriteLocalFileHeader(entry);
         logger.Debug("Dumping data for {Entry}", entry);
         await entry.Compressed.DumpTo(baseStream);
-        await WriteDataDescriptor(entry);
+
+        if (!entry.FullPath.Equals("[Content_Types].xml") &&
+            !entry.FullPath.Equals("AppxSignature.p7x") &&
+            !entry.FullPath.Equals("AppxMetadata/CodeIntegrity.cat"))
+        {
+            await WriteDataDescriptor(entry);
+        }
 
         //// Add the entry for the central directory
         entries.Add(entry);
     }
 
-    private void WriteLocalFileHeader(MsixEntry entry)
+    private async Task WriteLocalFileHeader(MsixEntry entry)
     {
         using (var writer = new BinaryWriter(baseStream, Encoding.UTF8, leaveOpen: true))
         {
             // Signature
             writer.Write(0x04034b50);
+
             // Version
-            writer.Write((short)45); // 0x002D for MSIX
-            // Flags: enable Data Descriptor (bit 3)
-            writer.Write((short)8); // 0x0008
+            if (entry.FullPath.Equals("[Content_Types].xml") ||
+                entry.FullPath.Equals("AppxSignature.p7x") ||
+                entry.FullPath.Equals("AppxMetadata/CodeIntegrity.cat"))
+            {
+                writer.Write((short)20); // 0x0014
+
+                // Flags: none
+                writer.Write((short)0); // 0x0000
+            }
+            else
+            {
+                writer.Write((short)45); // 0x002D for MSIX
+
+                // Flags: enable Data Descriptor (bit 3)
+                writer.Write((short)8); // 0x0008
+            }
+
             // Compression method
             short compressionMethod = (short)(entry.CompressionLevel == CompressionLevel.Optimal ? 8 : 0);
             writer.Write(compressionMethod);
             // Date/time
             int dosTime = GetDosTime(entry.ModificationTime);
             writer.Write(dosTime);
-            // CRC-32, compressed size and uncompressed size: 0 (to be specified in Data Descriptor)
-            writer.Write(0); // CRC-32
-            writer.Write(0); // Compressed size
-            writer.Write(0); // Uncompressed size
+
+            if (entry.FullPath.Equals("[Content_Types].xml") ||
+                entry.FullPath.Equals("AppxSignature.p7x") ||
+                entry.FullPath.Equals("AppxMetadata/CodeIntegrity.cat"))
+            {
+                uint CRC32 = await entry.Original.Crc32();
+                long compressedSize = await entry.Compressed.GetSize();
+                long uncompressedSize = await entry.Original.GetSize();
+
+                // CRC-32, compressed size and uncompressed size
+                writer.Write((int)CRC32);                  // CRC-32
+                writer.Write((int)compressedSize);   // Compressed size
+                writer.Write((int)uncompressedSize); // Uncompressed size
+            }
+            else
+            {
+                // CRC-32, compressed size and uncompressed size: 0 (to be specified in Data Descriptor)
+                writer.Write(0); // CRC-32
+                writer.Write(0); // Compressed size
+                writer.Write(0); // Uncompressed size
+            }
+
             // Name
             byte[] nameBytes = Encoding.UTF8.GetBytes(entry.FullPath);
             writer.Write((short)nameBytes.Length);
@@ -115,40 +154,53 @@ public class MsixBuilder : IAsyncDisposable
                 // Central header signature: 0x02014b50
                 writer.Write(0x02014b50);
                 writer.Write((short)45); // Version made by
-                writer.Write((short)45); // Version needed to extract
-                writer.Write((short)8);  // General purpose flag (Data Descriptor)
+
+                 // Version needed to extract
+                if (entry.FullPath.Equals("[Content_Types].xml") ||
+                    entry.FullPath.Equals("AppxSignature.p7x") ||
+                    entry.FullPath.Equals("AppxMetadata/CodeIntegrity.cat"))
+                {
+                    writer.Write((short)20);
+                    writer.Write((short)0);
+                }
+                else
+                {
+                    writer.Write((short)45);
+                    writer.Write((short)8);  // General purpose flag (Data Descriptor)
+                }
+
                 short compressionMethod = (short)(entry.CompressionLevel == CompressionLevel.Optimal ? 8 : 0);
                 writer.Write(compressionMethod);
                 int dosTime = GetDosTime(entry.ModificationTime);
                 writer.Write((int)dosTime);
                 writer.Write(await entry.Original.Crc32());
 
-                if (AlwaysUseZip64)
+                /*if (AlwaysUseZip64)
                 {
                     writer.Write(0xFFFFFFFF); // Compressed size
                     writer.Write(0xFFFFFFFF); // Uncompressed size
                 }
                 else
-                {
+                {*/
                     writer.Write((uint)await entry.Compressed.GetSize());
                     writer.Write((uint)await entry.Original.GetSize());
-                }
+                //}
 
                 writer.Write((short)nameBytes.Length);
-                writer.Write((short)(AlwaysUseZip64 ? 28 : 0)); // Extra field size
+                writer.Write((short)0);//writer.Write((short)(AlwaysUseZip64 ? 28 : 0)); // Extra field size
                 writer.Write((short)0); // Comment length
                 writer.Write((short)0); // Disk number
                 writer.Write((short)0); // Internal attributes
                 writer.Write((int)0);   // External attributes
 
-                writer.Write(AlwaysUseZip64 ? 0xFFFFFFFF : (uint)localHeaderOffset);
+                writer.Write((uint)localHeaderOffset);//writer.Write(AlwaysUseZip64 ? 0xFFFFFFFF : (uint)localHeaderOffset);
 
                 writer.Write(nameBytes);
 
-                if (AlwaysUseZip64)
+                /*if (AlwaysUseZip64)
                 {
                     await WriteCentralDirectoryExtraField(entry, writer, localHeaderOffset);
-                }
+                }*/
             }
 
             long centralDirSize = baseStream.Position - centralDirStart;

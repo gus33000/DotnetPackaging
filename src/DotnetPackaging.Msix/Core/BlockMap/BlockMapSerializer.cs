@@ -12,8 +12,8 @@ public class BlockMapSerializer(Maybe<ILogger> logger)
     {
         var settings = new XmlWriterSettings
         {
-            Encoding = Encoding.UTF8,
-            Indent = true,
+            Encoding = new UTF8Encoding(false),
+            Indent = false,
             OmitXmlDeclaration = true,
             Async = true,
         };
@@ -30,12 +30,17 @@ public class BlockMapSerializer(Maybe<ILogger> logger)
             writer.WriteStartElement("BlockMap", "http://schemas.microsoft.com/appx/2010/blockmap");
 
             // Añadimos los demás atributos en el orden correcto
-            await writer.WriteAttributeStringAsync("xmlns", "b4", null, "http://schemas.microsoft.com/appx/2021/blockmap");
-            writer.WriteAttributeString("IgnorableNamespaces", "b4");
             writer.WriteAttributeString("HashMethod", "http://www.w3.org/2001/04/xmlenc#sha256");
 
+            IEnumerable<FileBlockInfo> orderedFiles = model.Files.OrderBy(fileInfo => fileInfo.Entry.FullPath.Replace("/", "\\"));
+
+            if (orderedFiles.Any(t => t.Entry.FullPath.Equals("AppxManifest.xml")))
+            {
+                orderedFiles = orderedFiles.Where(t => !t.Entry.FullPath.Equals("AppxManifest.xml")).Append(orderedFiles.First(t => t.Entry.FullPath.Equals("AppxManifest.xml")));
+            }
+
             // Iterar sobre los archivos
-            foreach (var fileInfo in model.Files)
+            foreach (var fileInfo in orderedFiles)
             {
                 writer.WriteStartElement("File");
                 writer.WriteAttributeString("Name", fileInfo.Entry.FullPath.Replace("/", "\\"));
@@ -57,14 +62,6 @@ public class BlockMapSerializer(Maybe<ILogger> logger)
                     }
 
                     await writer.WriteEndElementAsync(); // Block
-                }
-
-                // Incluir el hash del archivo completo si está disponible
-                if (fileInfo.Blocks.Count > 1)
-                {
-                    await writer.WriteStartElementAsync("b4", "FileHash", "http://schemas.microsoft.com/appx/2021/blockmap");
-                    writer.WriteAttributeString("Hash", Convert.ToBase64String(await fileInfo.Entry.Original.Sha256()));
-                    await writer.WriteEndElementAsync(); // b4:FileHash
                 }
 
                 await writer.WriteEndElementAsync(); // File

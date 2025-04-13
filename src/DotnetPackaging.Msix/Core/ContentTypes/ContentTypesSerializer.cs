@@ -32,14 +32,14 @@ public static class ContentTypesSerializer
             )
         );
 
-        var doc = new XDocument(new XDeclaration("1.0", "UTF-8", "no"), typesElement);
+        var doc = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"), typesElement);
 
         // Configuramos XmlWriterSettings para que use UTF8 y se incluya la cabecera
         var settings = new XmlWriterSettings
         {
-            Encoding = Encoding.UTF8,
-            Indent = true,
-            OmitXmlDeclaration = false
+            Encoding = new UTF8Encoding(false),
+            Indent = false,
+            OmitXmlDeclaration = true
         };
 
         using (var ms = new MemoryStream())
@@ -47,7 +47,8 @@ public static class ContentTypesSerializer
         {
             doc.Save(writer);
             writer.Flush();
-            return Encoding.UTF8.GetString(ms.ToArray());
+            return $@"<?xml version=""1.0"" encoding=""UTF-8"" standalone=""yes""?>
+{Encoding.UTF8.GetString(ms.ToArray())}";
         }
     }
 }

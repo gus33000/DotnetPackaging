@@ -40,7 +40,7 @@ internal class ZStreamWrapper
     /// <param name="compressionLevel">The compression level to use, defaults to best compression.</param>
     /// <returns>A new byte array containing the compressed data.</returns>
     /// <exception cref="InvalidOperationException">Thrown when ZLib initialization fails.</exception>
-    public byte[] Deflate(byte[] input, int compressionLevel = ZLib.Z_BEST_COMPRESSION)
+    public byte[] Deflate(byte[] input, int compressionLevel = 6)
     {
         // Estimation of the maximum possible size for compressed data
         uint compressedSizeEstimate = (uint)input.Length +
@@ -107,7 +107,7 @@ internal class ZStreamWrapper
                 compressionLevel,
                 ZLib.Z_DEFLATED,
                 -15,  // Negative for raw deflate (no header/trailer)
-                9,    // MAX_MEM_LEVEL = 9
+                8,    // MAX_MEM_LEVEL = 9
                 ZLib.Z_DEFAULT_STRATEGY);
                 
             if (LastResult != ZLib.Z_OK)
