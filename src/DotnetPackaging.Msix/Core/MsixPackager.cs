@@ -1,9 +1,11 @@
+using System.Collections.Generic;
 using System.Text;
 using BlockCompressor;
 using CSharpFunctionalExtensions;
 using DotnetPackaging.Msix.Core.BlockMap;
 using DotnetPackaging.Msix.Core.Compression;
 using DotnetPackaging.Msix.Core.ContentTypes;
+using Zafiro.DataModel;
 using Zafiro.Mixins;
 using Zafiro.Reactive;
 
@@ -11,9 +13,9 @@ namespace DotnetPackaging.Msix.Core;
 
 public class MsixPackager(Maybe<ILogger> logger)
 {
-    private const bool USE_EXTERNAL_CONTENTTYPE = false;
+    private const bool USE_EXTERNAL_CONTENTTYPE = true;
     private const string EXTERNAL_CONTENTTYPE_LOCATION = @"C:\Users\gus33\Documents\GitHub\DotnetPackaging\RemakeAppxTestContent\Microsoft.zGamesTwoGo_8wekyb3d8bbwe\[Content_Types].xml";
-    private const bool USE_EXISTING_BLOCKMAP = false;
+    private const bool USE_EXISTING_BLOCKMAP = true;
 
     private string[] NoCompressionExtensions =
     [
@@ -170,16 +172,19 @@ public class MsixPackager(Maybe<ILogger> logger)
             }
             else
             {
-                var compressionBlocks = file.Bytes.CompressionBlocks();
                 entry = new MsixEntry
                 {
                     Original = file,
-                    Compressed = ByteSource.FromByteObservable(compressionBlocks.Select(x => x.CompressedData)),
+                    Compressed = ByteSource.FromByteObservable(MakeAppxDeflate.GetMakeAppxVersionOfDeflate(ByteSource.FromByteObservable(file.Bytes))),
                     FullPath = file.FullPath(),
                     CompressionLevel = CompressionLevel.Optimal
                 };
 
-                blocks = await compressionBlocks.ToList();
+                blocks = await file.Bytes.Flatten().Buffer(64 * 1024).Select(list => new DeflateBlock
+                {
+                    CompressedData = MakeAppxDeflate.GetMakeAppxVersionOfDeflate(list.ToArray()).GetAwaiter().GetResult(),
+                    OriginalData = list.ToArray(),
+                }).ToList();
             }
             
             await msix.PutNextEntry(entry);
