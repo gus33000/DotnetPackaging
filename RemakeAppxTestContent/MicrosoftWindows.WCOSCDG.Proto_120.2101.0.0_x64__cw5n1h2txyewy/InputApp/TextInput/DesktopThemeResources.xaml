@@ -1,0 +1,450 @@
+﻿<ResourceDictionary
+    x:Class="WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Controls.DesktopThemeResources"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <!-- Redlines are in http://uni/DesignDepot.FrontEnd/#/Search/13613/0/dv/?t=touch%7Ckeyboard
+         Acrylic Keyboard: https://microsoft.sharepoint.com/teams/wdg_ptp_shell/ae/GlobalTXT/Shared%20Documents/Acrylic%20touch%20keyboard.pptx?d=wd8276bb97b2c4e0bb289186eed3fb194
+         Please keep the brushes alphabetized. -->
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="CHSHardwareKeyboardBarCandidateForegroundBrush" Color="White" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateBackgroundBrush" Color="White" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateItemPanelPointerOverBackgroundBrush" Color="{ThemeResource SystemAccentColorLight3}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateForegroundBrush" Color="White" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateLabelPointerOverBrush" Color="White" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateLabelSelectedBrush" Color="White" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateWindowBorderColor" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardShortcutForegroundBrush" Color="{StaticResource ChineseHardwareKeyboardGrayColor}" />
+            <SolidColorBrush x:Key="DefaultButtonPointerOverBackgroundColor" Color="#383838"/>
+            <SolidColorBrush x:Key="DefaultButtonPressedBackgroundColor" Color="{StaticResource XboxClrVideoSafeWhiteColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonPressedForegroundColor" Color="{StaticResource XboxClrVideoSafeBlackColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonSelectedBackgroundColor" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonSelectedForegroundColor" Color="White"/>
+            <!-- Note that HardwareKeyboard light + dark is actually the same theme. -->
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateBackgroundBrush" Color="{StaticResource SystemChromeMediumLowColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateWindowBackgroundColor" Color="{StaticResource SystemChromeMediumLowColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateWindowBorderColor" Color="{ThemeResource SystemChromeHighColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateLabelBrush" Color="{ThemeResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateSecondaryLabelBrush" Color="Gray" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateItemPanelPointerOverBackgroundBrush" Color="{ThemeResource SystemListMediumColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateSecondaryLabelPointerOverBrush" Color="Black" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateStringPointerOverForegroundBrush" Color="{ThemeResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateItemPanelSelectedItemForegroundBrush" Color="{ThemeResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateListFooterBackgroundColor" Color="{ThemeResource SystemChromeMediumLowColor}" />
+            <SolidColorBrush x:Key="HighlightedTextBackgroundColor" Color="Black" Opacity="0" />
+            <SolidColorBrush x:Key="HighlightedTextForegroundColor" Color="{StaticResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="TextControlForegroundColor" Color="#ACACAC" />
+            <SolidColorBrush x:Key="ShapewritingTrailBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="WideNarrowButtonXForegroundBrush" Color="#3B96DE" />
+            <SolidColorBrush x:Key="WideNarrowButtonYForegroundBrush" Color="#FCE000" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelPointerOverBackgroundBrush" Color="White" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelSelectedItemForegroundBrush" Color="White" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelSelectedItemBackgroundBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidateLabelBrush" Color="White" />
+            <SolidColorBrush x:Key="WideNarrowCandidatePanelBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="WideNarrowCandidateSecondaryLabelBrush" Color="Gray" />
+            <SolidColorBrush x:Key="WideNarrowCandidateSecondaryLabelPointerOverBrush" Color="Gray" />
+            <SolidColorBrush x:Key="WideNarrowCandidateStringPointerOverForegroundBrush" Color="Black" />
+            <!-- child key brushes -->
+            <SolidColorBrush x:Key="WideNarrowChildKeyBackgroundBrush" Color="#C6C6C6" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyBorderBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyHoveredBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="WideNarrowChildKeyPressedBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="WideNarrowChildKeyLabelBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyHoveredLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyPressedLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <!-- /child key brushes -->
+            <SolidColorBrush x:Key="WideNarrowCHSIMEModeSecondaryLabelBrush" Color="#A2A2A2" />
+            <SolidColorBrush x:Key="WideNarrowChildPanelBackgroundBrush" Color="#1A1A1A" Opacity="0.7"/>
+            <SolidColorBrush x:Key="WideNarrowFlowerPanelBackgroundBrush" Opacity="0" />
+            <AcrylicBrush x:Key="WideNarrowKeyboardBackgroundAcrylicBrush" BackgroundSource="Backdrop" TintColor="#1F1F1F" FallbackColor="#444444" TintOpacity="0.8" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardBackgroundBrush" Color="#252525" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardPaddingBackgroundBrush" Color="Black" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardBorderBrush" Color="#1A1A1A" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardSettingsMenuBackgroundBrush" Color="#191919" />
+            <!-- key brushes -->
+            <SolidColorBrush x:Key="WideNarrowFunctionalKeyBackgroundBrush" Color="#4D4D4D" />
+            <SolidColorBrush x:Key="WideNarrowKeyBackgroundBrush" Color="#333333" />
+            <SolidColorBrush x:Key="WideNarrowFunctionalKeyBackgroundTranslucentBrush" Color="#FFFFFF" Opacity="0.08" />
+            <SolidColorBrush x:Key="WideNarrowKeyBackgroundTranslucentBrush" Color="#FFFFFF" Opacity="0.16" />
+            <SolidColorBrush x:Key="WideNarrowKeyDisabledLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" Opacity="0.25" />
+            <SolidColorBrush x:Key="WideNarrowModernUXKeyDisabledLabelBrush" Color="#FFFFFF" Opacity="0.20" />
+            <SolidColorBrush x:Key="WideNarrowModernUXKeyDisabledBackgroundBrush" Color="#464646" Opacity="0.20" />
+            <SolidColorBrush x:Key="WideNarrowFunctionalKeyHoveredBackgroundBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyHoveredBackgroundBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyHoveredLabelBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyPressedLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyPressedBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyToggledLabelBrush" Color="{ThemeResource ForegroundOnAccentColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyToggledBackgroundBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeySecondaryLabelBrush" Color="#838383" />
+            <SolidColorBrush x:Key="WideNarrowKeyFnLabelBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyAltGrLabelBrush" Color="#75D04B" />
+            <SolidColorBrush x:Key="WideNarrowKeyHoveredSecondaryLabelBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyPressedSecondaryLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <!-- /key brushes -->
+            <SolidColorBrush x:Key="WideNarrowScrollButtonBackground" Color="{StaticResource XboxClrVideoSafeBlackColor}" />
+            <SolidColorBrush x:Key="WideNarrowScrollButtonForeground" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <SolidColorBrush x:Key="WideNarrowPinyinListItemForeground" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <SolidColorBrush x:Key="WideNarrowCategoryListItemBackground" Color="Transparent" />
+            <Thickness x:Key="WideNarrowCategoryListItemMargin">0</Thickness>
+
+            <x:String x:Key="WideNarrowKeyDefaultFontFamily">Segoe UI</x:String>
+
+            <x:Double x:Key="WideNarrowChildKeyDefaultFontSize">24</x:Double>
+
+            <Thickness x:Key="HardwareKeyboardCandidateWindowBorderThickness">1</Thickness>
+
+            <AcrylicBrush x:Key="ScrollButtonBackgroundRestBrush" BackgroundSource="Backdrop" TintColor="#FFFFFF" FallbackColor="#777777" TintOpacity="0.2" />
+            <AcrylicBrush x:Key="ScrollButtonBackgroundHoverBrush" BackgroundSource="Backdrop" TintColor="#FFFFFF" FallbackColor="#999999" TintOpacity="0.4" />
+            <AcrylicBrush x:Key="ScrollButtonBackgroundPressBrush" BackgroundSource="Backdrop" TintColor="#FFFFFF" FallbackColor="#BBBBBB" TintOpacity="0.6" />
+            <SolidColorBrush x:Key="ScrollButtonForegroundBrush" Color="#000000" />
+            <SolidColorBrush x:Key="ScrollButtonBorderBrush" Color="Transparent" />
+            <Thickness x:Key="ScrollButtonBorderThickness">3</Thickness>
+
+            <SolidColorBrush x:Key="HandwritingBaselineColor" Color="#FFFFFF" Opacity="0.2" />
+            <SolidColorBrush x:Key="HandwritingPlaceholderTextColor" Color="#858585" />
+            <SolidColorBrush x:Key="HandwritingTipTextColor" Color="#FFFFFF" />
+            <SolidColorBrush x:Key="HandwritingIntegratedTextSelectionColor" Color="#858585" />
+            <SolidColorBrush x:Key="HandwritingInsertButtonBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+
+            <SolidColorBrush x:Key="GestureCursorStandardKeyBackgroundColorBrush" Color="#515151"/>
+            <SolidColorBrush x:Key="GestureCursorFunctionalKeyBackgroundColorBrush" Color="#474747"/>
+
+            <!--CHS CW New UX-->
+            <SolidColorBrush x:Key="HorizontalCandidatePanelBorderBrush" Color="#1A000000" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelIndexBrush" Color="#99000000" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelTextBrush" Color="Black" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelIconBrush" Color="#66000000" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelTipBrush" Color="#99000000" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelBackgroundBrush" Color="White" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelItemDisabledBrush" Color="#66000000" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelPointerOverBackgroundBrush" Color="#19000000"/>
+            <SolidColorBrush x:Key="HorizontalCandidatePanelSelectionBackgroundBrush" Color="{ThemeResource SystemAccentColorLight3}"/>
+            <AcrylicBrush x:Key="HorizontalCandidatePanelBackgroundAcrylicBrush" BackgroundSource="Backdrop" TintColor="White" TintOpacity="0.8" FallbackColor="White" />
+
+            <!--V3 CW Lite-->
+            <SolidColorBrush x:Key="CandidatePanelBorderBrush" Color="#1A000000" />
+            <SolidColorBrush x:Key="CandidatePanelIndexBrush" Color="#99000000" />
+            <SolidColorBrush x:Key="CandidatePanelTextBrush" Color="Black" />
+            <SolidColorBrush x:Key="CandidatePanelIconBrush" Color="#66000000" />
+            <SolidColorBrush x:Key="CandidatePanelTipBrush" Color="#99000000" />
+            <SolidColorBrush x:Key="CandidatePanelBackgroundBrush" Color="White" />
+            <SolidColorBrush x:Key="CandidatePanelPointerOverBackgroundBrush" Color="#66FFFFFF"/>
+            <SolidColorBrush x:Key="CandidatePanelSelectionBackgroundBrush" Color="#CCFFFFFF"/>
+            <SolidColorBrush x:Key="CandidatePanelSelectionIndicatorBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <AcrylicBrush x:Key="CandidatePanelBackgroundAcrylicBrush" BackgroundSource="Backdrop" TintColor="White" TintOpacity="0.8" FallbackColor="White" />
+
+            <!-- Speech Correction -->
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateWindowBackgroundColor" Color="#FF414141" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateWindowBorderColor" Color="#FF414141" />
+            <SolidColorBrush x:Key="SpeechCorrectionPseudoSeparatorLineColor" Color="#1AFFFFFF"/>
+            <SolidColorBrush x:Key="SpeechCorrectionDidYouMeanTextColor" Color="White" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemTextColor" Color="White" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemSelectedBackgroundColor" Color="#17FFFFFF" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemSelectedForegroundColor" Color="White" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemPointerOverBackgroundColor" Color="#17FFFFFF" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemPointerOverForegroundColor" Color="White" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemPressedBackgroundColor" Color="#17FFFFFF" />
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="CHSHardwareKeyboardBarCandidateForegroundBrush" Color="White" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateBackgroundBrush" Color="White" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateItemPanelPointerOverBackgroundBrush" Color="{ThemeResource SystemAccentColorLight3}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateForegroundBrush" Color="Black" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateLabelSelectedBrush" Color="White" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateLabelPointerOverBrush" Color="Black" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateWindowBorderColor" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardShortcutForegroundBrush" Color="Gray" />
+            <SolidColorBrush x:Key="DefaultButtonPointerOverBackgroundColor" Color="{ThemeResource SystemAltMediumColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonPressedBackgroundColor" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonPressedForegroundColor" Color="{StaticResource XboxClrVideoSafeWhiteColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonSelectedBackgroundColor" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonSelectedForegroundColor" Color="{StaticResource XboxClrVideoSafeWhiteColor}"/>
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateBackgroundBrush" Color="{StaticResource SystemChromeMediumLowColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateWindowBackgroundColor" Color="{StaticResource SystemChromeMediumLowColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateWindowBorderColor" Color="{ThemeResource SystemChromeHighColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateLabelBrush" Color="{ThemeResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateSecondaryLabelBrush" Color="Gray" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateItemPanelPointerOverBackgroundBrush" Color="{ThemeResource SystemListMediumColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateSecondaryLabelPointerOverBrush" Color="Black" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateStringPointerOverForegroundBrush" Color="{ThemeResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateItemPanelSelectedItemForegroundBrush" Color="{ThemeResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateListFooterBackgroundColor" Color="{ThemeResource SystemChromeMediumLowColor}" />
+            <SolidColorBrush x:Key="HighlightedTextBackgroundColor" Color="Black" Opacity="0" />
+            <SolidColorBrush x:Key="HighlightedTextForegroundColor" Color="{ThemeResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="TextControlForegroundColor" Color="#ACACAC" />
+            <SolidColorBrush x:Key="ShapewritingTrailBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="WideNarrowButtonXForegroundBrush" Color="#3B96DE" />
+            <SolidColorBrush x:Key="WideNarrowButtonYForegroundBrush" Color="#FCE000" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelPointerOverBackgroundBrush" Color="DarkGray" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelSelectedItemForegroundBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelSelectedItemBackgroundBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidateLabelBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidatePanelBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="WideNarrowCandidateSecondaryLabelBrush" Color="Gray" />
+            <SolidColorBrush x:Key="WideNarrowCandidateSecondaryLabelPointerOverBrush" Color="Black" />
+            <SolidColorBrush x:Key="WideNarrowCandidateStringPointerOverForegroundBrush" Color="White" />
+            <!-- child key brushes -->
+            <SolidColorBrush x:Key="WideNarrowChildKeyBackgroundBrush" Color="DarkGray" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyBorderBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}"/>
+            <SolidColorBrush x:Key="WideNarrowChildKeyHoveredBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="WideNarrowChildKeyPressedBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="WideNarrowChildKeyLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyHoveredLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyPressedLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <!-- /child key brushes -->
+            <SolidColorBrush x:Key="WideNarrowCHSIMEModeSecondaryLabelBrush" Color="White" />
+            <SolidColorBrush x:Key="WideNarrowChildPanelBackgroundBrush" Color="#DDDDDD" Opacity="0.7"/>
+            <SolidColorBrush x:Key="WideNarrowFlowerPanelBackgroundBrush" Opacity="0" />
+            <AcrylicBrush x:Key="WideNarrowKeyboardBackgroundAcrylicBrush" BackgroundSource="Backdrop" TintColor="#DADADA" FallbackColor="#DADADA" TintOpacity="0.8" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardBackgroundBrush" Color="#DADADA" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardPaddingBackgroundBrush" Color="Black" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardBorderBrush" Color="#878787" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardSettingsMenuBackgroundBrush" Color="#FAFAFA" />
+            <!-- key brushes -->
+            <SolidColorBrush x:Key="WideNarrowFunctionalKeyBackgroundBrush" Color="{ThemeResource SystemAltMediumColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyBackgroundBrush" Color="{ThemeResource SystemAltHighColor}" />
+            <SolidColorBrush x:Key="WideNarrowFunctionalKeyBackgroundTranslucentBrush" Color="{ThemeResource SystemAltMediumColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyBackgroundTranslucentBrush" Color="{ThemeResource SystemAltHighColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyDisabledLabelBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}" Opacity="0.25" />
+            <SolidColorBrush x:Key="WideNarrowModernUXKeyDisabledLabelBrush" Color="#FFFFFF" Opacity="0.20" />
+            <SolidColorBrush x:Key="WideNarrowModernUXKeyDisabledBackgroundBrush" Color="#464646" Opacity="0.20" />
+            <SolidColorBrush x:Key="WideNarrowFunctionalKeyHoveredBackgroundBrush" Color="{ThemeResource SystemAltLowColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyHoveredBackgroundBrush" Color="{ThemeResource SystemAltMediumColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyLabelBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyHoveredLabelBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyPressedLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyPressedBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyToggledLabelBrush" Color="{ThemeResource ForegroundOnAccentColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyToggledBackgroundBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeySecondaryLabelBrush" Color="#838383" />
+            <SolidColorBrush x:Key="WideNarrowKeyFnLabelBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyAltGrLabelBrush" Color="#75D04B" />
+            <SolidColorBrush x:Key="WideNarrowKeyHoveredSecondaryLabelBrush" Color="#838383" />
+            <SolidColorBrush x:Key="WideNarrowKeyPressedSecondaryLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <!-- /key brushes -->
+
+            <SolidColorBrush x:Key="WideNarrowScrollButtonBackground" Color="DarkGray" />
+            <SolidColorBrush x:Key="WideNarrowScrollButtonForeground" Color="{StaticResource XboxClrVideoSafeBlackColor}" />
+            <SolidColorBrush x:Key="WideNarrowPinyinListItemForeground" Color="{StaticResource XboxClrVideoSafeBlackColor}" />
+            <SolidColorBrush x:Key="WideNarrowCategoryListItemBackground" Color="Transparent" />
+            <Thickness x:Key="WideNarrowCategoryListItemMargin">0</Thickness>
+
+            <x:String x:Key="WideNarrowKeyDefaultFontFamily">Segoe UI</x:String>
+
+            <x:Double x:Key="WideNarrowChildKeyDefaultFontSize">24</x:Double>
+            <Thickness x:Key="HardwareKeyboardCandidateWindowBorderThickness">1</Thickness>
+            <!-- Need to check to acrylicBrush -->
+            <AcrylicBrush x:Key="ScrollButtonBackgroundRestBrush" BackgroundSource="Backdrop" TintColor="#FFFFFF" FallbackColor="#777777" TintOpacity="0.2" />
+            <AcrylicBrush x:Key="ScrollButtonBackgroundHoverBrush" BackgroundSource="Backdrop" TintColor="#FFFFFF" FallbackColor="#999999" TintOpacity="0.4" />
+            <AcrylicBrush x:Key="ScrollButtonBackgroundPressBrush" BackgroundSource="Backdrop" TintColor="#FFFFFF" FallbackColor="#BBBBBB" TintOpacity="0.6" />
+            <SolidColorBrush x:Key="ScrollButtonForegroundBrush" Color="{ThemeResource SystemBaseHighColor}" />
+            <SolidColorBrush x:Key="ScrollButtonBorderBrush" Color="Transparent" />
+            <Thickness x:Key="ScrollButtonBorderThickness">3</Thickness>
+
+            <SolidColorBrush x:Key="HandwritingBaselineColor" Color="#7A7A7A" Opacity="0.2" />
+            <SolidColorBrush x:Key="HandwritingPlaceholderTextColor" Color="#7A7A7A" />
+            <SolidColorBrush x:Key="HandwritingTipTextColor" Color="#7A7A7A" />
+            <SolidColorBrush x:Key="HandwritingIntegratedTextSelectionColor" Color="#7A7A7A" />
+            <SolidColorBrush x:Key="HandwritingInsertButtonBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+
+            <SolidColorBrush x:Key="GestureCursorStandardKeyBackgroundColorBrush" Color="#F6F6F6"/>
+            <SolidColorBrush x:Key="GestureCursorFunctionalKeyBackgroundColorBrush" Color="#C8C8C8"/>
+
+            <!--CHS CW New UX-->
+            <SolidColorBrush x:Key="HorizontalCandidatePanelBorderBrush" Color="#1A000000" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelIndexBrush" Color="#99000000" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelTextBrush" Color="Black" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelIconBrush" Color="#66000000" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelTipBrush" Color="#99000000" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelBackgroundBrush" Color="White" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelItemDisabledBrush" Color="#66000000" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelPointerOverBackgroundBrush" Color="#19000000"/>
+            <SolidColorBrush x:Key="HorizontalCandidatePanelSelectionBackgroundBrush" Color="{ThemeResource SystemAccentColorLight3}"/>
+            <AcrylicBrush x:Key="HorizontalCandidatePanelBackgroundAcrylicBrush" BackgroundSource="Backdrop" TintColor="White" TintOpacity="0.8" FallbackColor="White" />
+
+            <!--v3 CW Lite-->
+            <SolidColorBrush x:Key="CandidatePanelBorderBrush" Color="#1A000000" />
+            <SolidColorBrush x:Key="CandidatePanelIndexBrush" Color="#99000000" />
+            <SolidColorBrush x:Key="CandidatePanelTextBrush" Color="Black" />
+            <SolidColorBrush x:Key="CandidatePanelIconBrush" Color="#66000000" />
+            <SolidColorBrush x:Key="CandidatePanelTipBrush" Color="#99000000" />
+            <SolidColorBrush x:Key="CandidatePanelBackgroundBrush" Color="White" />
+            <SolidColorBrush x:Key="CandidatePanelPointerOverBackgroundBrush" Color="#66FFFFFF"/>
+            <SolidColorBrush x:Key="CandidatePanelSelectionBackgroundBrush" Color="#CCFFFFFF"/>
+            <SolidColorBrush x:Key="CandidatePanelSelectionIndicatorBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <AcrylicBrush x:Key="CandidatePanelBackgroundAcrylicBrush" BackgroundSource="Backdrop" TintColor="White" TintOpacity="0.8" FallbackColor="White" />
+
+            <!-- Speech Correction -->
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateWindowBackgroundColor" Color="#FFDEDEDE" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateWindowBorderColor" Color="#FFDEDEDE" />
+            <SolidColorBrush x:Key="SpeechCorrectionPseudoSeparatorLineColor" Color="#17000000"/>
+            <SolidColorBrush x:Key="SpeechCorrectionDidYouMeanTextColor" Color="Black" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemTextColor" Color="Black" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemSelectedBackgroundColor" Color="#CCFFFFFF" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemSelectedForegroundColor" Color="Black" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemPointerOverBackgroundColor" Color="#CCFFFFFF" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemPointerOverForegroundColor" Color="Black" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemPressedBackgroundColor" Color="#CCFFFFFF" />
+        </ResourceDictionary>
+
+        <!--
+            This covers all High Contrast Themes as long as the standard High Contrast colors are used (ThemeResource SystemColor)
+        -->
+        <ResourceDictionary x:Key="HighContrast">
+            <SolidColorBrush x:Key="CHSHardwareKeyboardBarCandidateForegroundBrush" Color="{ThemeResource SystemColorButtonTextColor}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateBackgroundBrush" Color="{ThemeResource SystemColorBackgroundColor}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateItemPanelPointerOverBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateForegroundBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateLabelPointerOverBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateLabelSelectedBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardShortcutForegroundBrush" Color="{ThemeResource SystemColorDisabledTextColor}" />
+            <SolidColorBrush x:Key="CHSHardwareKeyboardCandidateWindowBorderColor" Color="{ThemeResource SystemColorControlAccentColor}" />
+            <SolidColorBrush x:Key="DefaultButtonPointerOverBackgroundColor" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonPressedBackgroundColor" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonPressedForegroundColor" Color="{ThemeResource SystemColorHighlightTextColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonSelectedBackgroundColor" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="DefaultButtonSelectedForegroundColor" Color="{ThemeResource SystemColorButtonTextColor}"/>
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateBackgroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateWindowBackgroundColor" Color="{StaticResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateWindowBorderColor" Color="{ThemeResource SystemColorButtonTextColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateLabelBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateSecondaryLabelBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateItemPanelPointerOverBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateSecondaryLabelPointerOverBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateStringPointerOverForegroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateItemPanelSelectedItemForegroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="HardwareKeyboardCandidateListFooterBackgroundColor" Color="{ThemeResource SystemChromeMediumLowColor}" />
+            <SolidColorBrush x:Key="HighlightedTextBackgroundColor" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="HighlightedTextForegroundColor" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <SolidColorBrush x:Key="ShapewritingTrailBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="TextControlForegroundColor" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowButtonXForegroundBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowButtonYForegroundBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelBackgroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelPointerOverBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelSelectedItemForegroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidateItemPanelSelectedItemBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidateLabelBrush" Color="{ThemeResource SystemColorButtonTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidatePanelBackgroundBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="WideNarrowCandidateSecondaryLabelBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidateSecondaryLabelPointerOverBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowCandidateStringPointerOverForegroundBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <!-- child key brushes -->
+            <SolidColorBrush x:Key="WideNarrowChildKeyBackgroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyBorderBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyHoveredBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="WideNarrowChildKeyPressedBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyLabelBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyHoveredLabelBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildKeyPressedLabelBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <!-- /child key brushes -->
+            <SolidColorBrush x:Key="WideNarrowCHSIMEModeSecondaryLabelBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowChildPanelBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}" Opacity="0.7"/>
+            <SolidColorBrush x:Key="WideNarrowFlowerPanelBackgroundBrush" Opacity="0" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardBackgroundAcrylicBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardBackgroundBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardPaddingBackgroundBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardBorderBrush" Color="Transparent" />
+            <SolidColorBrush x:Key="WideNarrowKeyboardSettingsMenuBackgroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <!-- key brushes -->
+            <SolidColorBrush x:Key="WideNarrowFunctionalKeyBackgroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyBackgroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="WideNarrowFunctionalKeyBackgroundTranslucentBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyBackgroundTranslucentBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyDisabledLabelBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowModernUXKeyDisabledLabelBrush" Color="#FFFFFF" Opacity="0.20" />
+            <SolidColorBrush x:Key="WideNarrowModernUXKeyDisabledBackgroundBrush" Color="#464646" Opacity="0.20" />
+            <SolidColorBrush x:Key="WideNarrowFunctionalKeyHoveredBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyHoveredBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyLabelBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyHoveredLabelBrush" Color="{ThemeResource SystemColorHighlightTextColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyPressedLabelBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyPressedBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="WideNarrowKeyToggledLabelBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyToggledBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}" />	    
+            <SolidColorBrush x:Key="WideNarrowKeySecondaryLabelBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyFnLabelBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyAltGrLabelBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyHoveredSecondaryLabelBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <SolidColorBrush x:Key="WideNarrowKeyPressedSecondaryLabelBrush" Color="{ThemeResource SystemColorHighlightTextColor}" />
+            <!-- /key brushes -->
+            <SolidColorBrush x:Key="WideNarrowScrollButtonBackground" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="WideNarrowScrollButtonForeground" Color="{ThemeResource XboxClrVideoSafeWhiteColor}" />
+            <SolidColorBrush x:Key="WideNarrowPinyinListItemForeground" Color="{ThemeResource XboxClrVideoSafeWhiteColor}" />
+            <!-- CategoryList - see http://osgvsowi/19245528 -->
+            <SolidColorBrush x:Key="WideNarrowCategoryListItemBackground" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <Thickness x:Key="WideNarrowCategoryListItemMargin">2,1</Thickness>
+            <!-- /CategoryList -->
+
+            <x:String x:Key="WideNarrowKeyDefaultFontFamily">Segoe UI</x:String>
+
+            <x:Double x:Key="WideNarrowChildKeyDefaultFontSize">24</x:Double>
+
+            <Thickness x:Key="HardwareKeyboardCandidateWindowBorderThickness">1</Thickness>
+
+            <SolidColorBrush x:Key="ScrollButtonBackgroundRestBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="ScrollButtonBackgroundHoverBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="ScrollButtonBackgroundPressBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="ScrollButtonForegroundBrush" Color="{ThemeResource SystemColorButtonTextColor}" />
+            <SolidColorBrush x:Key="ScrollButtonBorderBrush" Color="{ThemeResource SystemColorButtonTextColor}" />
+            <Thickness x:Key="ScrollButtonBorderThickness">2</Thickness>
+
+            <SolidColorBrush x:Key="HandwritingBaselineColor" Color="{ThemeResource SystemColorButtonTextColor}" />
+            <SolidColorBrush x:Key="HandwritingPlaceholderTextColor" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="HandwritingTipTextColor" Color="{ThemeResource SystemColorHotlightColor}" />
+            <SolidColorBrush x:Key="HandwritingIntegratedTextSelectionColor" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="HandwritingInsertButtonBackgroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}"/>
+
+            <SolidColorBrush x:Key="GestureCursorStandardKeyBackgroundColorBrush" Color="{ThemeResource SystemColorHighlightTextColor}"/>
+            <SolidColorBrush x:Key="GestureCursorFunctionalKeyBackgroundColorBrush" Color="{ThemeResource SystemColorHighlightTextColor}"/>
+
+            <!--CHS CW New UX-->
+            <SolidColorBrush x:Key="HorizontalCandidatePanelBorderBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelIndexBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelTextBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelIconBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelTipBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelItemDisabledBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelPointerOverBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="HorizontalCandidatePanelSelectionBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="HorizontalCandidatePanelBackgroundAcrylicBrush" Color="{ThemeResource SystemColorWindowColor}" />
+
+            <!--v3 CW Lite-->
+            <SolidColorBrush x:Key="CandidatePanelBorderBrush" Color="{ThemeResource SystemColorHighlightColor}" />
+            <SolidColorBrush x:Key="CandidatePanelIndexBrush" Color="{ThemeResource SystemColorGrayTextColor}" />
+            <SolidColorBrush x:Key="CandidatePanelTextBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="CandidatePanelIconBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="CandidatePanelTipBrush" Color="{ThemeResource SystemColorWindowTextColor}" />
+            <SolidColorBrush x:Key="CandidatePanelBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}" />
+            <SolidColorBrush x:Key="CandidatePanelPointerOverBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="CandidatePanelSelectionBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="CandidatePanelSelectionIndicatorBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="CandidatePanelBackgroundAcrylicBrush" Color="{ThemeResource SystemColorWindowColor}" />
+
+            <!-- Speech Correction -->
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateWindowBackgroundColor" Color="Black" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateWindowBorderColor" Color="#FF1AEBFF" />
+            <SolidColorBrush x:Key="SpeechCorrectionPseudoSeparatorLineColor" Color="Black"/>
+            <SolidColorBrush x:Key="SpeechCorrectionDidYouMeanTextColor" Color="#FF3FF23F" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemTextColor" Color="White" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemSelectedBackgroundColor" Color="#FF1AEBFF" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemSelectedForegroundColor" Color="Black" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemPointerOverBackgroundColor" Color="#FF1AEBFF" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemPointerOverForegroundColor" Color="Black" />
+            <SolidColorBrush x:Key="SpeechCorrectionCandidateItemPressedBackgroundColor" Color="#FF1AEBFF" />
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+</ResourceDictionary>
+

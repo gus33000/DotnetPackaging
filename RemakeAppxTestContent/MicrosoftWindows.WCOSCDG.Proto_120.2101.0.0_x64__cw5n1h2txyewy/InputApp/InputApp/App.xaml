@@ -1,0 +1,31 @@
+﻿<Application
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Controls"
+    xmlns:clipboard="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Clipboard"
+    xmlns:textinput="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked"
+    xmlns:common="using:WindowsInternal.ComposableShell.Experiences.TextInput.Common"
+    xmlns:shellUI="using:WindowsInternal.ComposableShell.Experiences.TextInput.Common.ShellUI">
+    
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <common:CommonUIStyles />
+                <!-- Provides color ramp and overrides WinUI's Windows common control styles -->
+                <shellUI:FluentThemeResources/>
+                <!-- Default styles for ShellUI controls -->
+                <shellUI:ShellUIResources/>
+                <controls:AdaptiveUIStyles />
+                <controls:Styles />
+                <controls:DesktopThemeResources />
+                <controls:ModernUXThemeResources />
+                <controls:ExpressiveUIStyles />
+                <controls:DictationStyles />
+                <controls:ToolBarStyles />
+                <clipboard:ClipboardUIStyles />
+                <textinput:InputSwitcherStylesAndTemplates/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
+

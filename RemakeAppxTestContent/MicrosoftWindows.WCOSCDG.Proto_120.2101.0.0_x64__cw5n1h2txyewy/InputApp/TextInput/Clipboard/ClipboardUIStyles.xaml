@@ -1,0 +1,1292 @@
+﻿<ResourceDictionary
+    x:Class="WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Clipboard.ClipboardUIStyles"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:clipboard="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Clipboard"
+    xmlns:controls="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Controls"
+    xmlns:converter="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Converter"
+    mc:Ignorable="d">
+
+    <!-- *********************************** Clipboard control themed color styles *********************************** -->
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <AcrylicBrush x:Key="ClipboardControlBackgroundBrush" BackgroundSource="Backdrop" TintColor="#1F1F1F" FallbackColor="#1C1C1C" TintOpacity="0.8" />
+            <SolidColorBrush x:Key="ClipboardControlTitleBarTextForegroundBrush" Color="White" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonForeground" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonHoverForeground" Color="White" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonPressedForeground" Color="White" Opacity="0.4"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonDefaultBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonHoverBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonSelectedBorderBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterBackgroundBrush" Color="#1F1F1F"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterForegroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterCloseButtonForeground" Color="#221F1F" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterCloseButtonHoverForeground" Color="#221F1F"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterCloseButtonPressedForeground" Color="#221F1F" Opacity="0.8"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemDefaultBackgroundBrush" Color="White" Opacity="0.16"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemInnerBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemPointerOverInnerBorderBrush" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemSelectedItemInnerBorderBrush" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemPointerOverBorderBrush" Color="DarkGray"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemSelectedItemBorderBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemTextForegroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemFooterTextForegroundBrush" Color="White" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemOverlayBackgroundBrush" Color="Black" Opacity="0.5"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemTextForegroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonHoverBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonPressedBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonForeground" Color="White" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonHoverForeground" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonPressedForeground" Color="White" Opacity="0.8"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemActionButtonForeground" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemActionButtonHoverForeground" Color="White" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemActionButtonPressedForeground" Color="White" Opacity="0.8"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelForegroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelTextForegroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelIconForegroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonForegroundBrush" Color="{ThemeResource SystemChromeWhiteColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonFocusedBorderBrush" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonPressedBackgroundBrush" Color="Black" Opacity="0.2"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonHoverBackground" Color="#EB1123"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonHoverForeground" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonPressedBackground" Color="#EB1123" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonPressedForeground" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelTurnOnButtonIconForeground" Color="White" Opacity="0.6"/>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Light">
+            <AcrylicBrush x:Key="ClipboardControlBackgroundBrush" BackgroundSource="Backdrop" TintColor="White" FallbackColor="#E9E9E9" TintOpacity="0.8" />
+            <SolidColorBrush x:Key="ClipboardControlTitleBarTextForegroundBrush" Color="Black" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonForeground" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonHoverForeground" Color="Black"  Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonPressedForeground" Color="Black" Opacity="0.4"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonDefaultBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonHoverBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonSelectedBorderBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterBackgroundBrush" Color="#E6E6E6"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterForegroundBrush" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterCloseButtonForeground" Color="#221F1F" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterCloseButtonHoverForeground" Color="#221F1F"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterCloseButtonPressedForeground" Color="#221F1F" Opacity="0.8"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemDefaultBackgroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemInnerBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemPointerOverInnerBorderBrush" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemSelectedItemInnerBorderBrush" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemPointerOverBorderBrush" Color="DarkGray"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemSelectedItemBorderBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemTextForegroundBrush" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemFooterTextForegroundBrush" Color="Black" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemOverlayBackgroundBrush" Color="Black" Opacity="0.5"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemTextForegroundBrush" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonHoverBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonPressedBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonForeground" Color="Black" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonHoverForeground" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonPressedForeground" Color="Black" Opacity="0.8"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemActionButtonForeground" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemActionButtonHoverForeground" Color="White" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemActionButtonPressedForeground" Color="White" Opacity="0.8"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelForegroundBrush" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelTextForegroundBrush" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelIconForegroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonBackgroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonForegroundBrush" Color="{ThemeResource SystemChromeWhiteColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonFocusedBorderBrush" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonPressedBackgroundBrush" Color="Black" Opacity="0.2"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonHoverBackground" Color="#EB1123"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonHoverForeground" Color="White"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonPressedBackground" Color="#EB1123" Opacity="0.6"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonPressedForeground" Color="Black"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelTurnOnButtonIconForeground" Color="Black" Opacity="0.6"/>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="HighContrast">
+            <SolidColorBrush x:Key="ClipboardControlBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTitleBarTextForegroundBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonForeground" Color="{ThemeResource SystemColorHotlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonHoverForeground" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonPressedForeground" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonDefaultBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonHoverBorderBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlClearAllButtonSelectedBorderBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterBackgroundBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterForegroundBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterCloseButtonForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterCloseButtonHoverForeground" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipFooterCloseButtonPressedForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemDefaultBackgroundBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemInnerBorderBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemPointerOverInnerBorderBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemSelectedItemInnerBorderBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemPointerOverBorderBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemSelectedItemBorderBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemTextForegroundBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemFooterTextForegroundBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemOverlayBackgroundBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemTextForegroundBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonBorderBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonHoverBorderBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonPressedBorderBrush" Color="Transparent"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonHoverForeground" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewItemActionButtonPressedForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemActionButtonForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemActionButtonHoverForeground" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlListViewImageItemActionButtonPressedForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelForegroundBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelTextForegroundBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelIconForegroundBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonForegroundBrush" Color="{ThemeResource SystemColorHighlightTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonBorderBrush" Color="{ThemeResource SystemAccentColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonFocusedBorderBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelButtonPressedBackgroundBrush" Color="{ThemeResource SystemColorWindowColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonHoverBackground" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonHoverForeground" Color="{ThemeResource SystemColorHighlightTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonPressedBackground" Color="{ThemeResource SystemColorHighlightTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelCloseButtonPressedForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ClipboardControlTipPanelTurnOnButtonIconForeground" Color="{ThemeResource SystemColorWindowTextColor}"/>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+
+    <!-- *********************************** Clipboard control static resources *********************************** -->
+    <x:String x:Key="ClipboardListViewItemInnerBorderBackgroundThickness">4</x:String>
+    <x:String x:Key="ClipboardListViewItemBorderBackgroundThickness">2</x:String>
+    <x:String x:Key="ClipboardControlTitleBarHeight">40</x:String>
+    <x:String x:Key="AXPMDL2Assets">ms-resource:///Files/InputApp/Assets/Fonts/AXPMDL2.ttf#AXP MDL2 Assets,/Assets/Fonts/AXPMDL2.ttf#AXP MDL2 Assets</x:String>
+    <x:String x:Key="ClipboardListViewImageItemMargin">0,0,-32,0</x:String> <!-- note: this 32 should keep consistent as the below width 32 -->
+    <x:String x:Key="ClipboardListViewItemActionButtonWidth">32</x:String>
+    <x:String x:Key="ClipboardListViewItemActionButtonHeight">18</x:String>
+    <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+
+    <!-- *********************************** Clipboard control container style *********************************** -->
+    <Style x:Key="ClipboardControlContainerStyle" TargetType="clipboard:ClipboardControlContainer">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="clipboard:ClipboardControlContainer">
+                    <clipboard:ClipboardControl x:Name="TEMPLATE_PART_ClipboardControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"
+                                                IsTextScaleFactorEnabled="False"
+                                                Style="{StaticResource StandaloneClipboardControlStyle}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** Clipboard control style *********************************** -->
+    <Style x:Key="StandaloneClipboardControlStyle" TargetType="clipboard:ClipboardControl">
+        <Setter Property="Background" Value="{ThemeResource ClipboardControlBackgroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="clipboard:ClipboardControl">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource ClipboardControlTitleBarHeight}"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock x:Name="TEMPLATE_PART_ClipboardTitleBar"
+                                       Style="{StaticResource ClipboardControlTitleBarTextStyle}"/>
+                            <controls:SimpleButton x:Name="TEMPLATE_PART_ClearAll"
+                                                   Style="{StaticResource ClipboardClearAllButtonStyle}">
+                                <ToolTipService.ToolTip>
+                                    <clipboard:ClipboardToolTip x:Name="TEMPLATE_PART_ClearAllToolTip" Style="{StaticResource DefaultClipboardToolTip}"/>
+                                </ToolTipService.ToolTip>
+                            </controls:SimpleButton>
+                            <Button x:Name="TEMPLATE_PART_CloseButton"
+                                    Style="{StaticResource ClipboardControlTipPanelCloseButtonStyle}"
+                                    Visibility="Collapsed"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <clipboard:ClipboardListView x:Name="TEMPLATE_PART_ClipboardItemsList"
+                                                         Grid.Row="0" Grid.Column="0"
+                                                         Style="{StaticResource ClipboardItemsListStyle}">
+                            </clipboard:ClipboardListView>
+
+                            <ProgressRing x:Name="TEMPLATE_PART_ClipboardProgressUI" Width="100" Height="100" IsActive="False" Visibility="Collapsed" />
+                            <!-- This Tip Panel is used in empty case, while Tip Footer below is for promoting -->
+                            <Grid x:Name="TEMPLATE_PART_ClipboardTipPanel" Visibility="Collapsed">
+                                <StackPanel HorizontalAlignment="Center"
+                                            VerticalAlignment="Top"
+                                            Margin="16,30,16,0">
+                                    <TextBlock Text="&#xF6DE;"
+                                               FontFamily="{StaticResource AXPMDL2Assets}"
+                                               FontSize="80"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{ThemeResource ClipboardControlTipPanelIconForegroundBrush}"/>
+                                    <TextBlock x:Name="TEMPLATE_PART_ClipboardTipCaptionTextBlock"
+                                               FontSize="21"
+                                               TextAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{ThemeResource ClipboardControlTipPanelTextForegroundBrush}"
+                                               FontWeight="Bold"
+                                               TextWrapping="Wrap"
+                                               Margin="0,24,0,0"/>
+                                    <TextBlock x:Name="TEMPLATE_PART_ClipboardTipBodyTextBlock"
+                                               FontSize="15"
+                                               TextAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{ThemeResource ClipboardControlTipPanelTextForegroundBrush}"
+                                               FontWeight="Normal"
+                                               TextWrapping="Wrap"
+                                               Margin="0,12,0,0"/>
+                                    <clipboard:ClipboardTurnOnButton x:Name="TEMPLATE_PART_ClipboardTurnOnButton" Style="{StaticResource ClipboardControlTurnOnButtonStyle}" Visibility="Collapsed"
+                                                                     Margin="0,24,0,0">
+                                        <TextBlock x:Name="TEMPLATE_PART_ClipboardTurnOnTextBlock"
+                                               FontSize="15"
+                                               TextAlignment="Center"
+                                               HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch"
+                                               FontWeight="Normal"
+                                               TextWrapping="Wrap"
+                                               Margin="0,0,0,0"/>
+                                    </clipboard:ClipboardTurnOnButton>
+                                </StackPanel>
+                            </Grid>
+                            <Grid x:Name="TEMPLATE_PART_ClipboardTipFooter"
+                                  Padding="16,5,16,5"
+                                  Background="{ThemeResource ClipboardControlTipFooterBackgroundBrush}"
+                                  VerticalAlignment="Bottom"
+                                  Visibility="Collapsed">
+                                <ContentControl x:Name="TEMPLATE_PART_ClipboardTipFooterContentControl"
+                                                ContentTemplateSelector="{StaticResource ClipboardTipDataTemplateSelector}"
+                                                HorizontalAlignment="Stretch"
+                                                HorizontalContentAlignment="Stretch"
+                                                VerticalContentAlignment="Stretch"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** Small Clipboard control style *********************************** -->
+    <Style x:Key="SmallClipboardControlStyle" TargetType="clipboard:ClipboardControl">
+        <Setter Property="Background" Value="{ThemeResource ClipboardControlBackgroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="clipboard:ClipboardControl">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource ClipboardControlTitleBarHeight}"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0">
+                            <TextBlock x:Name="TEMPLATE_PART_ClipboardTitleBar"
+                                       Style="{StaticResource ClipboardControlTitleBarTextStyle}"/>
+                            <controls:SimpleButton x:Name="TEMPLATE_PART_ClearAll"
+                                                   Style="{StaticResource ClipboardClearAllButtonStyle}">
+                                <ToolTipService.ToolTip>
+                                    <clipboard:ClipboardToolTip x:Name="TEMPLATE_PART_ClearAllToolTip" Style="{StaticResource DefaultClipboardToolTip}"/>
+                                </ToolTipService.ToolTip>
+                            </controls:SimpleButton>
+                            <Button x:Name="TEMPLATE_PART_CloseButton"
+                                    Style="{StaticResource ClipboardControlTipPanelCloseButtonStyle}"
+                                    Visibility="Collapsed"/>
+                        </Grid>
+                        <Grid Grid.Row="1">
+                            <clipboard:ClipboardListView x:Name="TEMPLATE_PART_ClipboardItemsList"
+                                                         Grid.Row="0" Grid.Column="0"
+                                                         Style="{StaticResource ClipboardItemsListStyle}">
+                            </clipboard:ClipboardListView>
+                            <ProgressRing x:Name="TEMPLATE_PART_ClipboardProgressUI" Width="100" Height="100" IsActive="False" Visibility="Collapsed" />
+                            <!-- This Tip Panel is used in empty case, while Tip Footer below is for promoting -->
+                            <Grid x:Name="TEMPLATE_PART_ClipboardTipPanel" Visibility="Collapsed">
+                                <StackPanel HorizontalAlignment="Center"
+                                            VerticalAlignment="Top"
+                                            Margin="0,50,0,0">
+                                    <TextBlock x:Name="TEMPLATE_PART_ClipboardTipCaptionTextBlock"
+                                               FontSize="20"
+                                               TextAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{ThemeResource ClipboardControlTipPanelTextForegroundBrush}"
+                                               FontWeight="Bold"
+                                               TextWrapping="Wrap"
+                                               Margin="0"/>
+                                    <TextBlock x:Name="TEMPLATE_PART_ClipboardTipBodyTextBlock"
+                                               FontSize="15"
+                                               TextAlignment="Center"
+                                               HorizontalAlignment="Center"
+                                               Foreground="{ThemeResource ClipboardControlTipPanelTextForegroundBrush}"
+                                               FontWeight="Normal"
+                                               TextWrapping="Wrap"
+                                               Margin="10,6,10,0"/>
+                                </StackPanel>
+                            </Grid>
+                            <clipboard:ClipboardTurnOnButton x:Name="TEMPLATE_PART_ClipboardTurnOnButton" Style="{StaticResource SmallClipboardControlTurnOnButtonStyle}">
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="&#xE81C;"
+                                            FontFamily="Segoe MDL2 Assets"
+                                            FontSize="15"
+                                            TextAlignment="Center"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Center"
+                                            FontWeight="Normal"
+                                            TextWrapping="Wrap"
+                                            Foreground="{ThemeResource ClipboardControlTipPanelTurnOnButtonIconForeground}"
+                                            Margin="0"/>
+                                    <TextBlock x:Name="TEMPLATE_PART_ClipboardTurnOnTextBlock"
+                                            FontSize="15"
+                                            TextAlignment="Center"
+                                            HorizontalAlignment="Stretch"
+                                            VerticalAlignment="Stretch"
+                                            FontWeight="Normal"
+                                            TextWrapping="Wrap"
+                                            Margin="10,0,10,0"/>
+                                </StackPanel>
+                            </clipboard:ClipboardTurnOnButton>
+                            <Grid x:Name="TEMPLATE_PART_ClipboardTipFooter"
+                                  Padding="16,5,16,5"
+                                  Background="{ThemeResource ClipboardControlTipFooterBackgroundBrush}"
+                                  VerticalAlignment="Bottom"
+                                  Visibility="Collapsed">
+                                <ContentControl x:Name="TEMPLATE_PART_ClipboardTipFooterContentControl"
+                                                ContentTemplateSelector="{StaticResource ClipboardTipDataTemplateSelector}"
+                                                HorizontalAlignment="Stretch"
+                                                HorizontalContentAlignment="Stretch"
+                                                VerticalContentAlignment="Stretch"/>
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** Clipboard control title bar style *********************************** -->
+    <Style x:Key="ClipboardControlTitleBarTextStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="Padding" Value="16,0,0,0" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{ThemeResource ClipboardControlTitleBarTextForegroundBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <!-- *********************************** Clipboard control ClearAll button style *********************************** -->
+    <Style x:Key="ClipboardClearAllButtonStyle" TargetType="Button">
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource ClipboardControlClearAllButtonDefaultBorderBrush}" />
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Margin" Value="0,0,16,0"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="ToolTipService.Placement" Value="Mouse"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootGrid"  BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Label">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlClearAllButtonHoverForeground}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlClearAllButtonHoverBorderBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Label">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlClearAllButtonPressedForeground}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent"/>
+                        <TextBlock x:Name="Label"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Text="{TemplateBinding Content}"
+                                   FontSize="13"
+                                   Foreground="{ThemeResource ClipboardControlClearAllButtonForeground}"
+                                   FontFamily="Segoe UI"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** Clipboard control tip panel turn on button style *********************************** -->
+    <Style x:Key="ClipboardControlTurnOnButtonStyle" TargetType="clipboard:ClipboardTurnOnButton">
+        <Setter Property="Background" Value="{ThemeResource ClipboardControlTipPanelButtonBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{ThemeResource ClipboardControlTipPanelButtonForegroundBrush}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource ClipboardControlTipPanelButtonBorderBrush}" />
+        <Setter Property="IsTabStop" Value="True"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="Margin" Value="0,32,0,0"/>
+        <Setter Property="Width" Value="120"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="ContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseMediumLowBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlTipPanelButtonPressedBackgroundBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource SystemControlHighlightBaseHighBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Unfocused"/>
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlTipPanelButtonFocusedBorderBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="ContentPresenter"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Content="{TemplateBinding Content}"
+                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            AutomationProperties.AccessibilityView="Raw"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** Clipboard control tip panel turn on button in small clipboard control style *********************************** -->
+    <Style x:Key="SmallClipboardControlTurnOnButtonStyle" TargetType="clipboard:ClipboardTurnOnButton">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{ThemeResource SystemAccentColor}"/>
+        <Setter Property="BorderThickness" Value="2"/>
+        <Setter Property="BorderBrush" Value="{ThemeResource ClipboardControlTipPanelButtonBorderBrush}" />
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Width" Value="320"/>
+        <Setter Property="Height" Value="40"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootGrid" Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="RootGrid.Background" Value="{ThemeResource ClipboardControlTipPanelButtonPressedBackgroundBrush}"/>
+                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                    </VisualState.Setters>
+                                    <Storyboard>
+                                        <PointerDownThemeAnimation Storyboard.TargetName="RootGrid" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Unfocused"/>
+                                <VisualState x:Name="Focused">
+                                    <VisualState.Setters>
+                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource SystemControlHighlightBaseHighBrush}"/>
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="ContentPresenter"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Content="{TemplateBinding Content}"
+                            ContentTransitions="{TemplateBinding ContentTransitions}"
+                            ContentTemplate="{TemplateBinding ContentTemplate}"
+                            Padding="{TemplateBinding Padding}"
+                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                            AutomationProperties.AccessibilityView="Raw"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** Clipboard control tip panel close button style *********************************** -->
+    <Style x:Key="ClipboardControlTipPanelCloseButtonStyle" TargetType="Button">
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Width" Value="48"/>
+        <Setter Property="Height" Value="31"/>
+        <Setter Property="HorizontalAlignment" Value="Right"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="Content" Value="&#xE894;"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootGrid" BorderBrush="Black" BorderThickness="0">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlTipPanelCloseButtonHoverBackground}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Label">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlTipPanelCloseButtonHoverForeground}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlTipPanelCloseButtonPressedBackground}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Label">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlTipPanelCloseButtonPressedForeground}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="FocusStates">
+                                <VisualState x:Name="Unfocused"/>
+                                <VisualState x:Name="Focused">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlTipPanelForegroundBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent"/>
+                        <TextBlock x:Name="Label"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Text="{TemplateBinding Content}"
+                                   FontSize="10"
+                                   Foreground="{ThemeResource ClipboardControlTipPanelForegroundBrush}"
+                                   FontFamily="Segoe MDL2 Assets"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** Clipboard control listView styles *********************************** -->
+    <Style x:Key="ClipboardItemsListBaseStyle" TargetType="ListView">
+        <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
+        <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
+        <Setter Property="IsItemClickEnabled" Value="True"/>
+        <Setter Property="CanDrag" Value="False" />
+        <Setter Property="CanDragItems" Value="False" />
+        <Setter Property="CanReorderItems" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="SelectionMode" Value="Single" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="ItemTemplateSelector" Value="{StaticResource ClipboardItemDataTemplateSelector}" />
+        <Setter Property="ItemContainerTransitions">
+            <Setter.Value>
+                <!-- disable default list transitions -->
+                <TransitionCollection/>
+            </Setter.Value>
+        </Setter>
+        
+    </Style>
+
+    <Style x:Key="ClipboardItemsListStyle" BasedOn="{StaticResource ClipboardItemsListBaseStyle}" TargetType="clipboard:ClipboardListView">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Disabled"/>
+        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Auto"/>
+        <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled" Value="False" />
+        <Setter Property="ScrollViewer.IsVerticalScrollChainingEnabled" Value="True" />
+        <Setter Property="ItemContainerStyleSelector" Value="{StaticResource ClipboardItemContainerStyleSelector}"/>
+        <Setter Property="Margin" Value="0,8,0,8"/>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListView">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer x:Name="ScrollViewer"
+                                      TabNavigation="{TemplateBinding TabNavigation}"
+                                      HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                                      VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                      IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                                      IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                      IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                      ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
+                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                      BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}">
+                            <ItemsPresenter
+                                Header="{TemplateBinding Header}"
+                                HeaderTemplate="{TemplateBinding HeaderTemplate}"
+                                HeaderTransitions="{TemplateBinding HeaderTransitions}"
+                                Footer="{TemplateBinding Footer}"
+                                FooterTemplate="{TemplateBinding FooterTemplate}"
+                                FooterTransitions="{TemplateBinding FooterTransitions}"
+                                Padding="{TemplateBinding Padding}"/>
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ClipboardItemsListNarrowStyle" BasedOn="{StaticResource ClipboardItemsListStyle}" TargetType="clipboard:ClipboardListView">
+        <Setter Property="Margin" Value="0,4,0,0"/>
+    </Style>
+
+    <!-- *********************************** Clipboard control listView item style *********************************** -->
+    <Style x:Key="ClipboardListViewItemStyle" TargetType="clipboard:ClipboardListViewItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="16,8,16,8"/>
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="UseSystemFocusVisuals" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <!-- template for listviewitem is based on https://msdn.microsoft.com/en-us/library/windows/apps/mt299136.aspx then stripped of unnecessary stuff like dragging/multiselect etc + some UI tree/VSM/style modifications -->
+                <ControlTemplate TargetType="ListViewItem">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="InnerBorderBackground.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemPointerOverInnerBorderBrush}" />
+                                        <Setter Target="InnerBorderBackground.BorderThickness" Value="{StaticResource ClipboardListViewItemInnerBorderBackgroundThickness}" />
+                                        <Setter Target="BorderBackground.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemPointerOverBorderBrush}" />
+                                        <Setter Target="BorderBackground.BorderThickness" Value="{StaticResource ClipboardListViewItemBorderBackgroundThickness}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed"/>
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Target="InnerBorderBackground.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemSelectedItemInnerBorderBrush}" />
+                                        <Setter Target="InnerBorderBackground.BorderThickness" Value="{StaticResource ClipboardListViewItemInnerBorderBackgroundThickness}" />
+                                        <Setter Target="BorderBackground.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemSelectedItemBorderBrush}" />
+                                        <Setter Target="BorderBackground.BorderThickness" Value="{StaticResource ClipboardListViewItemBorderBackgroundThickness}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverSelected">
+                                    <VisualState.Setters>
+                                        <Setter Target="InnerBorderBackground.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemSelectedItemInnerBorderBrush}" />
+                                        <Setter Target="InnerBorderBackground.BorderThickness" Value="{StaticResource ClipboardListViewItemInnerBorderBackgroundThickness}" />
+                                        <Setter Target="BorderBackground.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemSelectedItemBorderBrush}" />
+                                        <Setter Target="BorderBackground.BorderThickness" Value="{StaticResource ClipboardListViewItemBorderBackgroundThickness}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid x:Name="ContentPresenterGrid"
+                              Background="{ThemeResource ClipboardControlListViewItemDefaultBackgroundBrush}"
+                              Margin="0,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="{StaticResource ClipboardListViewItemActionButtonWidth}"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              Grid.Column="0"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"/>
+
+                            <StackPanel x:Name="TEMPLATE_PART_ButtonsStackPanel" Orientation="Vertical" Margin="0,12,0,0" Grid.Column="1" Visibility="Collapsed">
+                                <controls:SimpleButton x:Name="TEMPLATE_PART_DeleteButton" Width="{StaticResource ClipboardListViewItemActionButtonWidth}" Height="{StaticResource ClipboardListViewItemActionButtonHeight}"
+                                                       Content="&#xE711;" Visibility="Collapsed" ToolTipService.Placement="Mouse">
+                                    <ToolTipService.ToolTip>
+                                        <clipboard:ClipboardToolTip x:Name="TEMPLATE_PART_DeleteItemToolTip" Style="{StaticResource DefaultClipboardToolTip}"/>
+                                    </ToolTipService.ToolTip>
+                                </controls:SimpleButton>
+                                <controls:SimpleButton x:Name="TEMPLATE_PART_PinButton" Width="{StaticResource ClipboardListViewItemActionButtonWidth}" Height="{StaticResource ClipboardListViewItemActionButtonHeight}"
+                                                       Margin="0,12,0,0" Visibility="Collapsed" ToolTipService.Placement="Mouse">
+                                    <ToolTipService.ToolTip>
+                                        <clipboard:ClipboardToolTip x:Name="TEMPLATE_PART_PinItemToolTip" Style="{StaticResource DefaultClipboardToolTip}"/>
+                                    </ToolTipService.ToolTip>
+                                </controls:SimpleButton>
+                                <controls:SimpleButton x:Name="TEMPLATE_PART_UploadButton" Width="{StaticResource ClipboardListViewItemActionButtonWidth}" Height="{StaticResource ClipboardListViewItemActionButtonHeight}"
+                                                       Margin="0,12,0,0" Content="&#xEC8E;" Visibility="Collapsed" ToolTipService.Placement="Mouse">
+                                    <ToolTipService.ToolTip>
+                                        <clipboard:ClipboardToolTip x:Name="TEMPLATE_PART_UploadItemToolTip" Style="{StaticResource DefaultClipboardToolTip}"/>
+                                    </ToolTipService.ToolTip>
+                                </controls:SimpleButton>
+                            </StackPanel>
+                        </Grid>
+
+                        <!-- highlight borders -->
+                        <Border x:Name="InnerBorderBackground" BorderThickness="0"/>
+                        <Border x:Name="BorderBackground" BorderThickness="0"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ClipboardListViewItemNarrowStyle" BasedOn="{StaticResource ClipboardListViewItemStyle}" TargetType="clipboard:ClipboardListViewItem">
+        <Setter Property="Margin" Value="16,0,16,8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <!-- template for listviewitem is based on https://msdn.microsoft.com/en-us/library/windows/apps/mt299136.aspx then stripped of unnecessary stuff like dragging/multiselect etc + some UI tree/VSM/style modifications -->
+                <ControlTemplate TargetType="ListViewItem">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal"/>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="BorderBackground.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemPointerOverBorderBrush}" />
+                                        <Setter Target="BorderBackground.BorderThickness" Value="{StaticResource ClipboardListViewItemBorderBackgroundThickness}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed"/>
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Target="BorderBackground.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemSelectedItemBorderBrush}" />
+                                        <Setter Target="BorderBackground.BorderThickness" Value="{StaticResource ClipboardListViewItemBorderBackgroundThickness}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOverSelected">
+                                    <VisualState.Setters>
+                                        <Setter Target="BorderBackground.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemSelectedItemBorderBrush}" />
+                                        <Setter Target="BorderBackground.BorderThickness" Value="{StaticResource ClipboardListViewItemBorderBackgroundThickness}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Grid x:Name="ContentPresenterGrid"
+                              Background="{ThemeResource ClipboardControlListViewItemDefaultBackgroundBrush}"
+                              Margin="0,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="{StaticResource ClipboardListViewItemActionButtonWidth}"/>
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              Grid.Column="0"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              Content="{TemplateBinding Content}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Margin="{TemplateBinding Padding}"/>
+
+                            <Button x:Name="TEMPLATE_PART_ContextMenuButton" Grid.Column="1" Style="{StaticResource ClipboardEllipsisButtonStyle}" Visibility="Collapsed">
+                                <FontIcon VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="{ThemeResource SymbolThemeFontFamily}" FontSize="12" Glyph="&#xE10C;"/>
+                                <Button.Flyout>
+                                    <MenuFlyout x:Name="TEMPLATE_PART_ClipboardMenuFlyout" Placement="BottomEdgeAlignedRight" MenuFlyoutPresenterStyle="{StaticResource ClipboardMenuFlyoutPresenterStyle}">
+                                        <MenuFlyoutItem x:Name="TEMPLATE_PART_DeleteMenuItem" Style="{StaticResource ClipboardMenuFlyoutItemStyle}">
+                                            <ToolTipService.ToolTip>
+                                                <clipboard:ClipboardToolTip x:Name="TEMPLATE_PART_DeleteMenuItemToolTip" Style="{StaticResource DefaultClipboardToolTip}"/>
+                                            </ToolTipService.ToolTip>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutItem x:Name="TEMPLATE_PART_PinMenuItem" Style="{StaticResource ClipboardMenuFlyoutItemStyle}" Visibility="Collapsed">
+                                            <ToolTipService.ToolTip>
+                                                <clipboard:ClipboardToolTip x:Name="TEMPLATE_PART_PinMenuItemToolTip" Style="{StaticResource DefaultClipboardToolTip}"/>
+                                            </ToolTipService.ToolTip>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutItem x:Name="TEMPLATE_PART_UploadMenuItem" Style="{StaticResource ClipboardMenuFlyoutItemStyle}" Visibility="Collapsed">
+                                            <ToolTipService.ToolTip>
+                                                <clipboard:ClipboardToolTip x:Name="TEMPLATE_PART_UploadMenuItemToolTip" Style="{StaticResource DefaultClipboardToolTip}"/>
+                                            </ToolTipService.ToolTip>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutItem x:Name="TEMPLATE_PART_PlainTextMenuItem" Style="{StaticResource ClipboardMenuFlyoutItemStyle}" Visibility="Collapsed">
+                                            <ToolTipService.ToolTip>
+                                                <clipboard:ClipboardToolTip x:Name="TEMPLATE_PART_PlainTextMenuItemToolTip" Style="{StaticResource DefaultClipboardToolTip}"/>
+                                            </ToolTipService.ToolTip>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutSeparator/>
+                                        <MenuFlyoutItem x:Name="TEMPLATE_PART_ClearAllMenuItem" Style="{StaticResource ClipboardMenuFlyoutItemStyle}">
+                                            <ToolTipService.ToolTip>
+                                                <clipboard:ClipboardToolTip x:Name="TEMPLATE_PART_ClearAllMenuItemToolTip" Style="{StaticResource DefaultClipboardToolTip}"/>
+                                            </ToolTipService.ToolTip>
+                                        </MenuFlyoutItem>
+                                        <MenuFlyoutItem x:Name="TEMPLATE_PART_ToggleDoubleCopyGestureMenuItem" Style="{StaticResource ClipboardMenuFlyoutItemStyle}" Visibility="Collapsed"/>
+                                    </MenuFlyout>
+                                </Button.Flyout>
+                            </Button>
+                        </Grid>
+
+                        <!-- highlight borders -->
+                        <Border x:Name="BorderBackground" BorderThickness="0"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <clipboard:ClipboardItemContainerStyleSelector x:Key="ClipboardItemContainerStyleSelector"
+                                                 DefaultStyle="{StaticResource ClipboardListViewItemStyle}"
+                                                 NarrowStyle="{StaticResource ClipboardListViewItemNarrowStyle}"
+                                                 />
+
+    <Style x:Key="ClipboardMenuFlyoutPresenterStyle" TargetType="MenuFlyoutPresenter">
+        <Setter Property="Margin" Value="0,0,0,0"/>
+    </Style>
+
+    <Style x:Key="ClipboardMenuFlyoutItemStyle" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="2,2,2,2" />
+        <Setter Property="BorderThickness" Value="2" />
+    </Style>
+
+    <Style x:Key="ClipboardEllipsisButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="Foreground" Value="{ThemeResource ClipboardControlListViewItemActionButtonForeground}"/>
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Margin" Value="0,2,0,0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Width" Value="26" />
+        <Setter Property="Height" Value="26" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <VisualState.Setters>
+                                        <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemActionButtonBorderBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ClipboardControlListViewItemActionButtonHoverForeground}" />
+                                        <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemActionButtonHoverBorderBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ClipboardControlListViewItemActionButtonPressedForeground}" />
+                                        <Setter Target="ContentPresenter.BorderBrush" Value="{ThemeResource ClipboardControlListViewItemActionButtonPressedBorderBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="ContentPresenter"
+                          Background="{TemplateBinding Background}"
+                          Foreground="{TemplateBinding Foreground}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}"
+                          ContentTransitions="{TemplateBinding ContentTransitions}"
+                          ContentTemplate="{TemplateBinding ContentTemplate}"
+                          Padding="{TemplateBinding Padding}"
+                          HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                          VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                          AutomationProperties.AccessibilityView="Raw" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** Clipboard control listView item action button style *********************************** -->
+    <Style x:Key="ClipboardListViewItemActionButtonStyle" TargetType="Button">
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootGrid" BorderThickness="1">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlListViewItemActionButtonBorderBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Label">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlListViewItemActionButtonHoverForeground}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlListViewItemActionButtonHoverBorderBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Label">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlListViewItemActionButtonPressedForeground}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlListViewItemActionButtonPressedBorderBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent"/>
+                        <TextBlock x:Name="Label"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Text="{TemplateBinding Content}"
+                                   FontSize="12"
+                                   Foreground="{ThemeResource ClipboardControlListViewItemActionButtonForeground}"
+                                   FontFamily="{StaticResource AXPMDL2Assets}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** Clipboard control listView image item action button style *********************************** -->
+    <Style x:Key="ClipboardListViewImageItemActionButtonStyle" TargetType="Button">
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootGrid" BorderThickness="1">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlListViewItemActionButtonBorderBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Label">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlListViewImageItemActionButtonHoverForeground}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlListViewItemActionButtonHoverBorderBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground" Storyboard.TargetName="Label">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlListViewImageItemActionButtonPressedForeground}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ClipboardControlListViewItemActionButtonPressedBorderBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Rectangle IsHitTestVisible="True" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent"/>
+                        <TextBlock x:Name="Label"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Text="{TemplateBinding Content}"
+                                   FontSize="12"
+                                   Foreground="{ThemeResource ClipboardControlListViewImageItemActionButtonForeground}"
+                                   FontFamily="{StaticResource AXPMDL2Assets}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** ClipboardToolTip default style *********************************** -->
+    <Style x:Key="DefaultClipboardToolTip" TargetType="clipboard:ClipboardToolTip">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="clipboard:ClipboardToolTip">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{TemplateBinding CaptionText}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" FontWeight="Bold"/>
+                        <TextBlock Text="{TemplateBinding BodyText}" FontFamily="{TemplateBinding FontFamily}" FontSize="{TemplateBinding FontSize}" TextWrapping="Wrap" Margin="0,10,0,0"/>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- *********************************** element styles for below data templates *********************************** -->
+    <Style x:Key="DefaultClipboardItemTextStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="15"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Foreground" Value="{ThemeResource ClipboardControlListViewItemTextForegroundBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="LineHeight" Value="20" />
+        <Setter Property="MaxHeight" Value="60" />
+    </Style>
+
+    <Style x:Key="NarrowClipboardItemTextStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="Foreground" Value="{ThemeResource ClipboardControlListViewItemTextForegroundBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="LineHeight" Value="16" />
+        <Setter Property="MaxHeight" Value="48" />
+        <Setter Property="MaxWidth" Value="212" />
+    </Style>
+
+    <Style x:Key="DefaultIconStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="FontFamily" Value="{StaticResource AXPMDL2Assets}"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="Height" Value="13"/>
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Foreground" Value="{ThemeResource ClipboardControlListViewItemTextForegroundBrush}" />
+    </Style>
+
+    <Style x:Key="DefaultClipboardItemFooterStyle" TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="Height" Value="18"/>
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Foreground" Value="{ThemeResource ClipboardControlListViewItemFooterTextForegroundBrush}" />
+    </Style>
+
+    <!-- *********************************** data templates for suggestion list/selector menu items *********************************** -->
+    <!-- TODO: additional work on defining templates here -->
+    <DataTemplate x:Key="FallbackClipboardItemTemplate"                                         >
+        <Grid Padding="12,20,12,16">
+            <TextBlock Text="Unknown Clipboard Item!" Style="{StaticResource DefaultClipboardItemTextStyle}"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TextClipboardItemTemplate"                                         >
+        <Grid x:ConnectionId='32' Padding="12,20,12,16" Height="128">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <TextBlock x:ConnectionId='33'                                   Grid.Row="0" Style="{StaticResource DefaultClipboardItemTextStyle}"/>
+            <StackPanel Grid.Row="1" VerticalAlignment="Bottom" Orientation="Horizontal">
+                <!-- Icon -->
+                <TextBlock x:ConnectionId='34'                                   Style="{StaticResource DefaultIconStyle}" Padding="0,0,12,0"                                                    >
+                    <ToolTipService.ToolTip>
+                        <ToolTip x:ConnectionId='36'                                       Placement="Mouse"/>
+                    </ToolTipService.ToolTip>
+                </TextBlock>
+                <!-- Timestamp -->
+                <TextBlock x:ConnectionId='35'                                        Style="{StaticResource DefaultClipboardItemFooterStyle}"/>
+            </StackPanel>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ImageClipboardItemTemplate"                                         >
+        <Grid x:ConnectionId='26' Margin="{StaticResource ClipboardListViewImageItemMargin}">
+            <Image x:ConnectionId='27'                                      Stretch="None" MaxHeight="128"/>
+            <!-- dark and semi-transparent overlay -->
+            <Rectangle Height="128" Fill="{ThemeResource ClipboardControlListViewImageItemOverlayBackgroundBrush}"/>
+            <Grid VerticalAlignment="Bottom" Margin="12,0,12,16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal">
+                    <!-- Icon -->
+                    <TextBlock x:ConnectionId='28'                                   Style="{StaticResource DefaultIconStyle}"
+                               Foreground="{ThemeResource ClipboardControlListViewImageItemTextForegroundBrush}" Padding="0,0,12,0"
+                                                                                  >
+                        <ToolTipService.ToolTip>
+                            <ToolTip x:ConnectionId='30'                                       Placement="Mouse"/>
+                        </ToolTipService.ToolTip>
+                    </TextBlock>
+                    <!-- Timestamp -->
+                    <TextBlock x:ConnectionId='29'                                        Style="{StaticResource DefaultClipboardItemFooterStyle}"
+                               Foreground="{ThemeResource ClipboardControlListViewImageItemTextForegroundBrush}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="TextClipboardItemNarrowTemplate"                                         >
+        <Grid x:ConnectionId='23' Padding="12,8,12,12" Height="68">
+            <TextBlock x:ConnectionId='24'                                   Style="{StaticResource NarrowClipboardItemTextStyle}"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ImageClipboardItemNarrowTemplate"                                         >
+        <Grid x:ConnectionId='20' Margin="{StaticResource ClipboardListViewImageItemMargin}" Padding="4,4,0,4" Height="68">
+            <Image x:ConnectionId='21'                                      Stretch="None" MaxHeight="60" MaxWidth="220" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </Grid>
+    </DataTemplate>
+
+    <clipboard:ClipboardItemDataTemplateSelector x:Key="ClipboardItemDataTemplateSelector"
+                                                 FallbackTemplate="{StaticResource FallbackClipboardItemTemplate}"
+                                                 TextTemplate="{StaticResource TextClipboardItemTemplate}"
+                                                 ImageTemplate="{StaticResource ImageClipboardItemTemplate}"
+                                                 TextNarrowTemplate="{StaticResource TextClipboardItemNarrowTemplate}"
+                                                 ImageNarrowTemplate="{StaticResource ImageClipboardItemNarrowTemplate}"
+                                                 />
+
+    <!-- *********************************** element styles for below data templates *********************************** -->
+    <Style x:Key="ClipboardControlTipFooterTextStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Foreground" Value="{ThemeResource ClipboardControlTipFooterForegroundBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="LineHeight" Value="16" />
+    </Style>
+
+    <Style x:Key="ClipboardControlTipFooterSmallerTextStyle"  BasedOn="{StaticResource ClipboardControlTipFooterTextStyle}" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <Style x:Key="ClipboardControlTipFooterRichTextStyle" TargetType="RichTextBlock">
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="FontWeight" Value="Normal"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="TextAlignment" Value="Left" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="Foreground" Value="{ThemeResource ClipboardControlTipFooterForegroundBrush}" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="LineHeight" Value="16" />
+    </Style>
+
+    <Style x:Key="ClipboardControlTipFooterSmallerRichTextStyle"  BasedOn="{StaticResource ClipboardControlTipFooterRichTextStyle}" TargetType="RichTextBlock">
+        <Setter Property="FontSize" Value="12"/>
+    </Style>
+
+    <!-- *********************************** data templates for tip footer item/selector items *********************************** -->
+    <DataTemplate x:Key="FallbackClipboardTipTemplate"                                    >
+        <Grid/>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ShellHotkeyPromotionClipboardTipTemplate"                                    >
+        <Grid x:ConnectionId='15'>
+            <TextBlock x:ConnectionId='16'                                                                         />
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="CloudPromotionClipboardTipTemplate"                                    >
+        <Grid x:ConnectionId='3'>
+            <RichTextBlock x:ConnectionId='4'                                        >
+                <Paragraph>
+                    <Run x:ConnectionId='5'                                     />
+                    <InlineUIContainer>
+                        <StackPanel>
+                            <Grid x:ConnectionId='6'                                                                                                                                                 
+                                  BorderBrush="{ThemeResource ClipboardControlTipFooterBackgroundBrush}"
+                                  BorderThickness = "1"
+                                  Margin="0,0,0,-4">
+                                <TextBlock x:ConnectionId='11'                                    >
+                                   <Span xml:space="preserve"><Hyperlink x:ConnectionId='12'                                       ><Run x:ConnectionId='13'                                          /></Hyperlink></Span>
+                                </TextBlock>
+                            </Grid>
+                            <Grid x:ConnectionId='7'                                                             
+                                  BorderBrush="{ThemeResource ClipboardControlListViewItemSelectedItemBorderBrush}"
+                                  BorderThickness = "1"
+                                  Margin="0,0,0,-4">
+                                <TextBlock x:ConnectionId='8'                                    >
+                                   <Span xml:space="preserve"><Hyperlink x:ConnectionId='9'                                       ><Run x:ConnectionId='10'                                          /></Hyperlink></Span>
+                                </TextBlock>
+                            </Grid>
+                        </StackPanel>
+                    </InlineUIContainer>
+                </Paragraph>
+            </RichTextBlock>
+        </Grid>
+    </DataTemplate>
+
+    <clipboard:ClipboardTipDataTemplateSelector x:Key="ClipboardTipDataTemplateSelector"
+                                                FallbackTemplate="{StaticResource FallbackClipboardTipTemplate}"
+                                                ShellHotkeyPromotionTemplate="{StaticResource ShellHotkeyPromotionClipboardTipTemplate}"
+                                                CloudPromotionTemplate="{StaticResource CloudPromotionClipboardTipTemplate}"/>
+
+</ResourceDictionary>
+

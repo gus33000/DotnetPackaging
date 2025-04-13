@@ -1,0 +1,1354 @@
+﻿<ResourceDictionary x:Class="WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Controls.ControllerSipStyles"
+                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Controls"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+    <!--  Child key panel  -->
+    <x:Int32 x:Key="ControllerChildKeyAnimationDurationMs">0</x:Int32>
+    <!--  These control how to scale the size of child keys based on the size of base key; 1.0 means equal to base key dimension  -->
+    <x:Double x:Key="ControllerChildKeyPanelYOffsetInUnitKeys">0.0</x:Double>
+    <x:Double x:Key="ControllerChildKeyWidthInUnitKeys">1.0</x:Double>
+    <x:Double x:Key="ControllerChildKeyHeightInUnitKeys">1.0</x:Double>
+
+    <!--  These control how much space in height does SIP occupy  -->
+    <GridLength x:Key="ControllerKeyboardGridHeight">5*</GridLength>
+    <GridLength x:Key="ControllerKeyboardCandidateBarHeight">1*</GridLength>
+
+    <x:Double x:Key="ControllerCandidateItemDefaultFontSize">26</x:Double>
+
+    <x:Double x:Key="PressedBorderPressedThickness">6</x:Double>
+    <x:Double x:Key="ControllerHighlightThickness">12</x:Double>
+
+    <controls:DirectionalNavigableListViewItemFactory x:Key="DirectionalNavigableListViewItemFactory" />
+    <controls:CandidateItemToStringValueConverter x:Key="ControllerCandidateItemToStringValueConverter" />
+
+    <Style x:Key="ControllerKeyboardControlWithAdaptiveStyle" TargetType="controls:InputPanelControl">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:InputPanelControl">
+                    <Grid x:Name="TEMPLATE_PART_InputPanelGrid"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Background="{ThemeResource ControllerKeyboardBackgroundBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition x:Name="TEMPLATE_PART_CandidateBarRowDef" Height="{StaticResource ControllerKeyboardCandidateBarHeight}" />
+                            <RowDefinition x:Name="TEMPLATE_PART_KeyboardGridRowDef" Height="{StaticResource ControllerKeyboardGridHeight}" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="TEMPLATE_PART_BackgroundLeftColumn" Width="*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition x:Name="TEMPLATE_PART_BackgroundRightColumn" Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="TEMPLATE_PART_InputPanelBorder"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="5"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Style="{StaticResource ControllerKeyboardBackgroundStyle}" />
+                        <controls:KeyboardGrid x:Name="TEMPLATE_PART_KeyboardGrid"
+                                               Grid.Row="1"
+                                               Grid.Column="1"
+                                               Margin="0"
+                                               HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch"
+                                               Style="{StaticResource ControllerKeyboardGrid}" />
+                        <controls:AdaptiveControl x:Name="TEMPLATE_PART_CandidateBar"
+                                                  Grid.Row="0"
+                                                  Grid.RowSpan="2"
+                                                  Grid.Column="1"
+                                                  Margin="0"
+                                                  HorizontalAlignment="Stretch" />
+                        <Rectangle Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   Grid.Column="1"
+                                   Fill="{ThemeResource ControllerChildKeyOverlayBrush}"
+                                   Visibility="{Binding ElementName=TEMPLATE_PART_ChildKeyGrid, Path=Visibility}" />
+                        <controls:ChildKeyPanel x:Name="TEMPLATE_PART_ChildKeyGrid" Grid.Column="1" />
+                        <controls:DirectionalNavigationHighlight x:Name="TEMPLATE_PART_DirectionalNavigationHighlight"
+                                                                 Grid.Row="0"
+                                                                 Grid.RowSpan="2"
+                                                                 Grid.Column="0"
+                                                                 Grid.ColumnSpan="3" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerKeyboardControlWithLanguageSwitchAdaptiveStyle" TargetType="controls:InputPanelControl">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:InputPanelControl">
+                    <Grid x:Name="TEMPLATE_PART_InputPanelGrid"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Background="{ThemeResource ControllerKeyboardBackgroundBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition x:Name="TEMPLATE_PART_CandidateBarRowDef" Height="{StaticResource ControllerKeyboardCandidateBarHeight}" />
+                            <RowDefinition x:Name="TEMPLATE_PART_KeyboardGridRowDef" Height="{StaticResource ControllerKeyboardGridHeight}" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition x:Name="TEMPLATE_PART_BackgroundLeftColumn" Width="*" />
+                            <ColumnDefinition />
+                            <ColumnDefinition x:Name="TEMPLATE_PART_BackgroundRightColumn" Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="TEMPLATE_PART_InputPanelBorder"
+                                Grid.Row="0"
+                                Grid.RowSpan="2"
+                                Grid.Column="0"
+                                Grid.ColumnSpan="5"
+                                HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                Style="{StaticResource ControllerKeyboardBackgroundStyle}" />
+                        <controls:KeyboardGrid x:Name="TEMPLATE_PART_KeyboardGrid"
+                                               Grid.Row="1"
+                                               Grid.Column="1"
+                                               Margin="0"
+                                               HorizontalAlignment="Stretch"
+                                               VerticalAlignment="Stretch"
+                                               Style="{StaticResource ControllerKeyboardGrid}" />
+                        <controls:AdaptiveControl x:Name="TEMPLATE_PART_CandidateBar"
+                                                  Grid.Row="0"
+                                                  Grid.RowSpan="2"
+                                                  Grid.Column="1"
+                                                  Margin="0"
+                                                  HorizontalAlignment="Stretch" />
+                        <Rectangle Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   Grid.Column="1"
+                                   Fill="{ThemeResource ControllerChildKeyOverlayBrush}"
+                                   Visibility="{Binding ElementName=TEMPLATE_PART_ChildKeyGrid, Path=Visibility}" />
+                        <controls:ChildKeyPanel x:Name="TEMPLATE_PART_ChildKeyGrid" Grid.Column="1" />
+                        <controls:DirectionalNavigationHighlight x:Name="TEMPLATE_PART_DirectionalNavigationHighlight"
+                                                                 Grid.Row="0"
+                                                                 Grid.RowSpan="2"
+                                                                 Grid.Column="0"
+                                                                 Grid.ColumnSpan="3" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerHardwareKeyboardCompactViewWithAdaptiveStyle" TargetType="controls:InputPanelControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:InputPanelControl">
+                    <Grid x:Name="TEMPLATE_PART_InputPanelGrid"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Background="{ThemeResource ControllerKeyboardBackgroundBrush}">
+                        <Border x:Name="TEMPLATE_PART_InputPanelBorder"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Style="{StaticResource ControllerKeyboardBackgroundStyle}" />
+                        <controls:AdaptiveControl x:Name="TEMPLATE_PART_CandidateBar"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch" />
+                        <controls:DirectionalNavigationHighlight x:Name="TEMPLATE_PART_DirectionalNavigationHighlight" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerHardwareKeyboardCompactViewWithLanguageSwitchAdaptiveStyle" TargetType="controls:InputPanelControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:InputPanelControl">
+                    <Grid x:Name="TEMPLATE_PART_InputPanelGrid"
+                          HorizontalAlignment="Stretch"
+                          VerticalAlignment="Stretch"
+                          Background="{ThemeResource ControllerKeyboardBackgroundBrush}">
+                        <Border x:Name="TEMPLATE_PART_InputPanelBorder"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Style="{StaticResource ControllerKeyboardBackgroundStyle}" />
+                        <controls:AdaptiveControl x:Name="TEMPLATE_PART_CandidateBar"
+                                                HorizontalAlignment="Stretch"
+                                                VerticalAlignment="Stretch" />
+                        <controls:DirectionalNavigationHighlight x:Name="TEMPLATE_PART_DirectionalNavigationHighlight" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerHighlight" TargetType="controls:DirectionalNavigationHighlight">
+        <Setter Property="HighlightThickness" Value="{StaticResource ControllerHighlightThickness}" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:DirectionalNavigationHighlight">
+                    <Canvas>
+                        <Rectangle x:Name="TEMPLATE_PART_HighlightRectangle" Style="{StaticResource HighlightRectangle}" />
+                        <Rectangle x:Name="TEMPLATE_PART_SecondaryHighlightRectangle" Style="{StaticResource HighlightRectangle}" />
+                    </Canvas>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="HighlightRectangle" TargetType="Rectangle">
+        <Setter Property="StrokeThickness" Value="{StaticResource ControllerHighlightThickness}" />
+        <Setter Property="Stroke" Value="{ThemeResource SystemAccentColorLight1}" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="IsHitTestVisible" Value="False" />
+    </Style>
+
+    <Style x:Key="ControllerKeyboardGrid" TargetType="controls:KeyboardGrid">
+        <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:KeyboardGrid">
+                    <Grid x:Name="TEMPLATE_PART_KeyGrid" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerChildKeyPanelBaseStyle" TargetType="controls:ChildKeyPanel">
+        <Setter Property="Grid.Row" Value="0" />
+        <Setter Property="Grid.RowSpan" Value="3" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Visibility" Value="Collapsed" />
+        <Setter Property="ChildKeyAnimationDurationMs" Value="{StaticResource ControllerChildKeyAnimationDurationMs}" />
+    </Style>
+
+    <Style x:Key="ControllerChildKeyPanelStyle"
+           BasedOn="{StaticResource ControllerChildKeyPanelBaseStyle}"
+           TargetType="controls:ChildKeyPanel">
+        <Setter Property="KeyWidthInUnitKeys" Value="{StaticResource ControllerChildKeyWidthInUnitKeys}" />
+        <Setter Property="KeyHeightInUnitKeys" Value="{StaticResource ControllerChildKeyHeightInUnitKeys}" />
+        <Setter Property="YOffsetInUnitKeys" Value="{StaticResource ControllerChildKeyPanelYOffsetInUnitKeys}" />
+    </Style>
+
+    <Style x:Key="ControllerAdaptiveControlStyle" TargetType="controls:AdaptiveControl">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:AdaptiveControl">
+                    <Grid x:Name="TEMPLATE_PART_AdaptiveControlRoot">
+                        <Border Grid.Row="0">
+                            <Grid x:Name="TEMPLATE_PART_AdaptiveControlCandidateBar">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <controls:DictationStateErrorControl x:Name="TEMPLATE_PART_DictationStateErrorControl"
+                                                                     Grid.Column="1"
+                                                                     HorizontalAlignment="Left"
+                                                                     VerticalAlignment="Center"
+                                                                     Style="{StaticResource ControllerDictationStateErrorControlStyle}"
+                                                                     Visibility="Collapsed" />
+                                <controls:DictationHintControl x:Name="TEMPLATE_PART_DictationHintControl"
+                                                               Grid.Column="1"
+                                                               HorizontalAlignment="Right"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource ControllerDictationHintControlStyle}"
+                                                               Visibility="Collapsed" />
+                                <controls:SelectableListView x:Name="TEMPLATE_PART_AdaptiveSuggestionList"
+                                                             Grid.Column="1"
+                                                             Style="{StaticResource ControllerAdaptiveSuggestionListStyle}"
+                                                             ListViewItemFactory="{StaticResource DirectionalNavigableListViewItemFactory}" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerWithLanguageSwitchAdaptiveControlStyle" TargetType="controls:AdaptiveControl">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:AdaptiveControl">
+                    <Grid x:Name="TEMPLATE_PART_AdaptiveControlRoot">
+                        <Border Grid.Row="0">
+                            <Grid x:Name="TEMPLATE_PART_AdaptiveControlCandidateBar">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <controls:ToggleInputProfileSwitcher x:Name="TEMPLATE_PART_InputProfileSwitcherButton"
+                                                                     Grid.Column="0"
+                                                                     Margin="0,0,20,0"
+                                                                     Style="{StaticResource ControllerInputProfileSwitcher}"
+                                                                     AutomationProperties.AutomationId="InputProfileSwitcher" />
+                                <controls:DictationStateErrorControl x:Name="TEMPLATE_PART_DictationStateErrorControl"
+                                                                     Grid.Column="1"
+                                                                     HorizontalAlignment="Left"
+                                                                     VerticalAlignment="Center"
+                                                                     Style="{StaticResource ControllerDictationStateErrorControlStyle}"
+                                                                     Visibility="Collapsed" />
+                                <controls:DictationHintControl x:Name="TEMPLATE_PART_DictationHintControl"
+                                                               Grid.Column="1"
+                                                               HorizontalAlignment="Right"
+                                                               VerticalAlignment="Center"
+                                                               Style="{StaticResource ControllerDictationHintControlStyle}"
+                                                               Visibility="Collapsed" />
+                                <controls:SelectableListView x:Name="TEMPLATE_PART_AdaptiveSuggestionList"
+                                                             Grid.Column="1"
+                                                             Style="{StaticResource ControllerAdaptiveSuggestionListStyle}"
+                                                             ListViewItemFactory="{StaticResource DirectionalNavigableListViewItemFactory}" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerHardwareKeyboardCompactViewAdaptiveControlStyle" TargetType="controls:AdaptiveControl">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:AdaptiveControl">
+                    <Grid x:Name="TEMPLATE_PART_AdaptiveControlRoot">
+                        <Grid x:Name="TEMPLATE_PART_AdaptiveControlCandidateBar" Background="{ThemeResource ControllerKeyboardBackgroundBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <controls:SimpleButton x:Name="TEMPLATE_PART_ContextualButton"
+                                                   Grid.Column="0"
+                                                   Margin="80,0,10,0"
+                                                   Style="{StaticResource ControllerExpandKeyboardButtonStyle}" />
+                            <controls:SelectableListView x:Name="TEMPLATE_PART_AdaptiveSuggestionList"
+                                                         Grid.Column="1"
+                                                         Margin="0,0,80,0"
+                                                         Style="{StaticResource ControllerAdaptiveSuggestionListStyle}"
+                                                         ListViewItemFactory="{StaticResource DirectionalNavigableListViewItemFactory}" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerHardwareKeyboardWithLanguageSwitchCompactViewAdaptiveControlStyle" TargetType="controls:AdaptiveControl">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:AdaptiveControl">
+                    <Grid x:Name="TEMPLATE_PART_AdaptiveControlRoot">
+                        <Grid x:Name="TEMPLATE_PART_AdaptiveControlCandidateBar" Background="{ThemeResource ControllerKeyboardBackgroundBrush}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <controls:ToggleInputProfileSwitcher x:Name="TEMPLATE_PART_InputProfileSwitcherButton"
+                                                                 Grid.Column="0"
+                                                                 Margin="80,0,10,0"
+                                                                 Style="{StaticResource ControllerInputProfileSwitcher}"
+                                                                 AutomationProperties.AutomationId="InputProfileSwitcher" />
+                            <controls:SimpleButton x:Name="TEMPLATE_PART_ContextualButton"
+                                                   Grid.Column="1"
+                                                   Margin="10,0,10,0"
+                                                   Style="{StaticResource ControllerExpandKeyboardButtonStyle}" />
+                            <controls:SelectableListView x:Name="TEMPLATE_PART_AdaptiveSuggestionList"
+                                                         Grid.Column="2"
+                                                         Margin="0,0,80,0"
+                                                         Style="{StaticResource ControllerAdaptiveSuggestionListStyle}"
+                                                         ListViewItemFactory="{StaticResource DirectionalNavigableListViewItemFactory}" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerAdaptiveSuggestionListStyle" TargetType="controls:SelectableListView">
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden" />
+        <Setter Property="ScrollViewer.HorizontalScrollMode" Value="Auto" />
+        <Setter Property="ScrollViewer.VerticalScrollMode" Value="Disabled" />
+        <Setter Property="ScrollViewer.IsHorizontalScrollChainingEnabled" Value="True" />
+        <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
+        <Setter Property="ScrollViewer.ZoomMode" Value="Disabled" />
+        <Setter Property="IsItemClickEnabled" Value="False" />
+        <Setter Property="CanDrag" Value="False" />
+        <Setter Property="CanDragItems" Value="False" />
+        <Setter Property="CanReorderItems" Value="False" />
+        <Setter Property="FlowDirection" Value="LeftToRight" />
+        <Setter Property="IsTabStop" Value="True" />
+        <Setter Property="SelectionMode" Value="None" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ControllerAdaptiveSuggestionListItemContainerStyle}" />
+        <Setter Property="ItemTemplateSelector" Value="{StaticResource ControllerAdaptiveItemDataTemplateSelector}" />
+        <Setter Property="ItemContainerTransitions">
+            <Setter.Value>
+                <!--  disable default list transitions  -->
+                <TransitionCollection />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:SelectableListView">
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <ScrollViewer x:Name="ScrollViewer"
+                                      Grid.Column="1"
+                                      AutomationProperties.AccessibilityView="Raw"
+                                      BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                      HorizontalSnapPointsAlignment="Near"
+                                      HorizontalSnapPointsType="Mandatory"
+                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                      IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                      IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                                      IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                      IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                                      TabNavigation="{TemplateBinding TabNavigation}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                      VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                      ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}">
+                            <ItemsPresenter Padding="{TemplateBinding Padding}"
+                                            Footer="{TemplateBinding Footer}"
+                                            FooterTemplate="{TemplateBinding FooterTemplate}"
+                                            FooterTransitions="{TemplateBinding FooterTransitions}"
+                                            Header="{TemplateBinding Header}"
+                                            HeaderTemplate="{TemplateBinding HeaderTemplate}"
+                                            HeaderTransitions="{TemplateBinding HeaderTransitions}" />
+                        </ScrollViewer>
+                        <FontIcon x:Name="RightStickLeftIcon"
+                                  Margin="10,5,10,0"
+                                  Opacity="{ThemeResource SecondaryLabelOpacity}"
+                                  FontFamily="Segoe Xbox MDL2 Symbol"
+                                  FontSize="32"
+                                  Glyph="&#xE3D6;"
+                                  Visibility="{Binding Path=HasItems, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+                        <FontIcon x:Name="RightStickRightIcon"
+                                  Grid.Column="2"
+                                  Margin="10,5,10,0"
+                                  Opacity="{ThemeResource SecondaryLabelOpacity}"
+                                  FontFamily="Segoe Xbox MDL2 Symbol"
+                                  FontSize="32"
+                                  Glyph="&#xE3D8;"
+                                  Visibility="{Binding Path=HasItems, RelativeSource={RelativeSource Mode=TemplatedParent}, FallbackValue=Collapsed, TargetNullValue=Collapsed}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerAdaptiveSuggestionListItemContainerStyle" TargetType="ListViewItem">
+        <Setter Property="FontFamily" Value="{ThemeResource ContentControlThemeFontFamily}" />
+        <Setter Property="FontSize" Value="{ThemeResource ControlContentThemeFontSize}" />
+        <Setter Property="Foreground" Value="{ThemeResource ControllerKeyLabelBrush}" />
+        <Setter Property="TabNavigation" Value="Local" />
+        <Setter Property="IsHoldingEnabled" Value="False" />
+        <Setter Property="Padding" Value="20,0,20,0" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="1" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Stretch" />
+        <Setter Property="UseSystemFocusVisuals" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CustomSelectionStates">
+                                <VisualState x:Name="CustomSelectionOff" />
+                                <VisualState x:Name="CustomSelectionOn">
+                                    <VisualState.Setters>
+                                        <Setter Target="CandidateBackground.Opacity" Value="1" />
+                                        <Setter Target="CandidateBackground.Fill" Value="{ThemeResource ControllerKeySelectedBackgroundBrush}" />
+                                        <Setter Target="ContentPresenter.Foreground" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <VisualStateManager.CustomVisualStateManager>
+                            <controls:CustomSelectableItemVisualStateManager />
+                        </VisualStateManager.CustomVisualStateManager>
+                        <Rectangle x:Name="CandidateBackground"
+                                   Opacity="0"
+                                   IsHitTestVisible="False" />
+                        <Grid x:Name="ContentPresenterGrid"
+                              Margin="0,0,0,0"
+                              Background="Transparent">
+                            <ContentPresenter x:Name="ContentPresenter"
+                                              Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              Content="{TemplateBinding Content}"
+                                              ContentTemplate="{TemplateBinding ContentTemplate}"
+                                              ContentTransitions="{TemplateBinding ContentTransitions}" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerExpandKeyboardButtonStyle"
+           BasedOn="{StaticResource ControllerSimpleButtonStyle}"
+           TargetType="controls:SimpleButton">
+        <Setter Property="DirectionalContainerType" Value="ShowKeyboardButton" />
+        <Setter Property="FontFamily" Value="Segoe Xbox MDL2 Symbol" />
+        <Setter Property="FontSize" Value="36" />
+    </Style>
+
+    <Style x:Key="ControllerSimpleButtonStyle" TargetType="controls:SimpleButton">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="Foreground" Value="{ThemeResource ControllerKeyLabelBrush}" />
+        <Setter Property="Background" Value="{ThemeResource ControllerKeyboardBackgroundBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:SimpleButton">
+                    <Border x:Name="TEMPLATE_PART_SimpleButtonRootBorder"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="TEMPLATE_PART_SimpleButtonRootBorder.Background" Value="{ThemeResource ControllerKeySelectedBackgroundBrush}" />
+                                        <Setter Target="TEMPLATE_PART_SimpleButtonContent.Foreground" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="TEMPLATE_PART_SimpleButtonRootBorder.Background" Value="{ThemeResource ControllerKeySelectedBackgroundBrush}" />
+                                        <Setter Target="TEMPLATE_PART_SimpleButtonContent.Foreground" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                        <Setter Target="PressedBorder.StrokeThickness" Value="{StaticResource PressedBorderPressedThickness}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <TextBlock x:Name="TEMPLATE_PART_SimpleButtonContent"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontFamily="{TemplateBinding FontFamily}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       AutomationProperties.AccessibilityView="Raw"
+                                       Text="{TemplateBinding ButtonText}" />
+                            <Rectangle x:Name="PressedBorder"
+                                       Fill="Transparent"
+                                       Stroke="Black"
+                                       StrokeThickness="0" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerInputProfileSwitcher" TargetType="controls:ToggleInputProfileSwitcher">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="Foreground" Value="{ThemeResource ControllerKeyLabelBrush}" />
+        <Setter Property="Background" Value="{ThemeResource ControllerKeyboardBackgroundBrush}" />
+        <Setter Property="HorizontalAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ToggleInputProfileSwitcher">
+                    <Border x:Name="TEMPLATE_PART_ButtonRootBorder"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Background="{TemplateBinding Background}">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="TEMPLATE_PART_ButtonRootBorder.Background" Value="{ThemeResource ControllerKeySelectedBackgroundBrush}" />
+                                        <Setter Target="TEMPLATE_PART_ButtonContent.Foreground" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="TEMPLATE_PART_ButtonRootBorder.Background" Value="{ThemeResource ControllerKeySelectedBackgroundBrush}" />
+                                        <Setter Target="TEMPLATE_PART_ButtonContent.Foreground" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                        <Setter Target="PressedBorder.StrokeThickness" Value="{StaticResource PressedBorderPressedThickness}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <TextBlock x:Name="TEMPLATE_PART_ButtonContent"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       FontSize="{TemplateBinding FontSize}"
+                                       AutomationProperties.AccessibilityView="Raw" />
+                            <Rectangle x:Name="PressedBorder"
+                                       Fill="Transparent"
+                                       Stroke="Black"
+                                       StrokeThickness="0" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerDictationStateErrorControlStyle" TargetType="controls:DictationStateErrorControl">
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:DictationStateErrorControl">
+                    <Grid>
+                        <ScrollViewer x:Name="TEMPLATE_PART_DictationTextContainer"
+                                      Margin="0"
+                                      Padding="0"
+                                      AutomationProperties.AccessibilityView="Raw"
+                                      CharacterSpacing="1"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      HorizontalScrollMode="Disabled"
+                                      IsEnabled="True"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      VerticalScrollMode="Disabled">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0"
+                                           Margin="10,0,30,0"
+                                           Foreground="{ThemeResource ControllerKeyLabelBrush}"
+                                           FontFamily="Segoe Xbox MDL2 Symbol"
+                                           FontSize="28"
+                                           Text="&#xE37B;" />
+                                <TextBlock x:Name="TEMPLATE_PART_DictationTextBlock"
+                                           Grid.Column="1"
+                                           Margin="0"
+                                           Padding="0"
+                                           Foreground="{ThemeResource ControllerKeyLabelBrush}"
+                                           FontSize="15"
+                                           FontWeight="Normal"
+                                           AutomationProperties.AccessibilityView="Content"
+                                           AutomationProperties.AutomationId="DictationStateErrorBlock"
+                                           LineStackingStrategy="MaxHeight"
+                                           TextWrapping="WrapWholeWords" />
+                                <!--
+                                    Deliberately make the text in the hyperlink the same as the keyboard background
+                                    as it cannot be selected and the Xbox shell will open a modal dialog instead
+                                -->
+                                <HyperlinkButton x:Name="TEMPLATE_PART_DictationTextHyperlink"
+                                                 Grid.Column="1"
+                                                 Margin="0"
+                                                 Padding="0"
+                                                 Foreground="{ThemeResource ControllerKeyboardBackgroundBrush}"
+                                                 AutomationProperties.AccessibilityView="Control"
+                                                 AutomationProperties.AutomationId="DictationStateErrorHyperlink">
+                                    <TextBlock x:Name="TEMPLATE_PART_DictationTextHyperlinkBlock"
+                                               Grid.Column="1"
+                                               Margin="0"
+                                               Padding="0"
+                                               FontSize="15"
+                                               FontWeight="Normal"
+                                               AutomationProperties.AccessibilityView="Raw"
+                                               LineStackingStrategy="MaxHeight"
+                                               TextDecorations="Underline"
+                                               TextWrapping="WrapWholeWords" />
+                                </HyperlinkButton>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerDictationHintControlStyle" TargetType="controls:DictationHintControl">
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:DictationHintControl">
+                    <Grid Margin="0,0,30,0">
+                        <Border x:Name="BackgroundBorder"
+                                Margin="0,10,0,10"
+                                Background="{ThemeResource ControllerFunctionalKeyBackgroundBrush}"
+                                CornerRadius="8" />
+                        <ScrollViewer x:Name="TEMPLATE_PART_DictationTextContainer"
+                                      Margin="0"
+                                      Padding="0"
+                                      AutomationProperties.AccessibilityView="Raw"
+                                      CharacterSpacing="1"
+                                      HorizontalScrollBarVisibility="Disabled"
+                                      HorizontalScrollMode="Disabled"
+                                      IsEnabled="True"
+                                      VerticalScrollBarVisibility="Hidden"
+                                      VerticalScrollMode="Disabled">
+                            <Grid Margin="16,0,16,0">
+                                <TextBlock x:Name="TEMPLATE_PART_DictationTextBlock"
+                                           Margin="0"
+                                           Padding="0"
+                                           Foreground="{ThemeResource ControllerKeyLabelBrush}"
+                                           FontSize="15"
+                                           FontWeight="SemiLight"
+                                           AutomationProperties.AccessibilityView="Content"
+                                           AutomationProperties.AutomationId="DictationHintBlock"
+                                           LineStackingStrategy="MaxHeight"
+                                           TextWrapping="WrapWholeWords" />
+                                <HyperlinkButton x:Name="TEMPLATE_PART_DictationTextHyperlink"
+                                                 Margin="0"
+                                                 Padding="0"
+                                                 Foreground="{ThemeResource ControllerKeyLabelBrush}"
+                                                 AutomationProperties.AccessibilityView="Control"
+                                                 AutomationProperties.AutomationId="DictationHintHyperlink">
+                                    <TextBlock x:Name="TEMPLATE_PART_DictationTextHyperlinkBlock"
+                                               Margin="0"
+                                               Padding="0"
+                                               FontSize="15"
+                                               FontWeight="SemiLight"
+                                               AutomationProperties.AccessibilityView="Raw"
+                                               LineStackingStrategy="MaxHeight"
+                                               TextDecorations="Underline"
+                                               TextWrapping="WrapWholeWords" />
+                                </HyperlinkButton>
+                            </Grid>
+                        </ScrollViewer>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerCandidateStyle" TargetType="TextBlock">
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="FontSize" Value="{StaticResource ControllerCandidateItemDefaultFontSize}" />
+        <Setter Property="FontWeight" Value="SemiLight" />
+        <Setter Property="MinHeight" Value="0" />
+        <Setter Property="MinWidth" Value="0" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="ControllerKeyboardStandardKeyFrameStyle"
+           BasedOn="{StaticResource ControllerKeyboardKeyFrameStyle}"
+           TargetType="controls:KeyboardKey">
+        <Setter Property="Background" Value="{ThemeResource ControllerKeyBackgroundBrush}" />
+    </Style>
+
+    <Style x:Key="ControllerKeyboardFunctionalKeyFrameStyle"
+           BasedOn="{StaticResource ControllerKeyboardKeyFrameStyle}"
+           TargetType="controls:KeyboardKey">
+        <Setter Property="Background" Value="{ThemeResource ControllerFunctionalKeyBackgroundBrush}" />
+    </Style>
+
+    <Style x:Key="ControllerKeyboardChildKeyFrameStyle"
+           BasedOn="{StaticResource ControllerKeyboardKeyFrameStyle}"
+           TargetType="controls:KeyboardKey">
+        <Setter Property="Background" Value="{ThemeResource ControllerChildKeyBackgroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid x:Name="TEMPLATE_PART_KeyboardKeyGrid"
+                          Margin="-2"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{ThemeResource ControllerKeyHighContrastBorderBrush}"
+                          BorderThickness="{ThemeResource ControllerKeyHighContrastBorderThickness}"
+                          RenderTransformOrigin="0.5,0.5">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="TEMPLATE_PART_KeyDataContainer.Opacity" Value="0.25" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="TEMPLATE_PART_KeyboardKeyGrid.Background" Value="{ThemeResource ControllerKeySelectedBackgroundBrush}" />
+                                        <Setter Target="TEMPLATE_PART_KeyDataContainer.Foreground" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                        <Setter Target="TEMPLATE_PART_KeyDataContainer.Background" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="PressedBorder.StrokeThickness" Value="{StaticResource PressedBorderPressedThickness}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected" />
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Target="TEMPLATE_PART_KeyboardKeyGrid.Background" Value="{ThemeResource ControllerKeySelectedBackgroundBrush}" />
+                                        <Setter Target="TEMPLATE_PART_KeyDataContainer.Foreground" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                        <Setter Target="TEMPLATE_PART_KeyDataContainer.Background" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentControl x:Name="TEMPLATE_PART_KeyDataContainer"
+                                        HorizontalContentAlignment="Stretch"
+                                        VerticalContentAlignment="Stretch"
+                                        HighContrastAdjustment="None"
+                                        RenderTransformOrigin="0.5,0.5" />
+                        <Rectangle x:Name="PressedBorder"
+                                   Fill="Transparent"
+                                   Stroke="Black"
+                                   StrokeThickness="0" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ControllerKeyboardKeyFrameStyle" TargetType="controls:KeyboardKey">
+        <Setter Property="FontWeight" Value="SemiLight" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Foreground" Value="{ThemeResource ControllerKeyLabelBrush}" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid x:Name="TEMPLATE_PART_KeyboardKeyGrid"
+                          Margin="0"
+                          Background="{TemplateBinding Background}"
+                          BorderBrush="{ThemeResource ControllerKeyHighContrastBorderBrush}"
+                          BorderThickness="{ThemeResource ControllerKeyHighContrastBorderThickness}"
+                          RenderTransformOrigin="0.5,0.5">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="Disabled">
+                                    <VisualState.Setters>
+                                        <Setter Target="TEMPLATE_PART_KeyDataContainer.Opacity" Value="0.25" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <VisualState.Setters>
+                                        <Setter Target="TEMPLATE_PART_KeyboardKeyGrid.Background" Value="{ThemeResource ControllerKeySelectedBackgroundBrush}" />
+                                        <Setter Target="TEMPLATE_PART_KeyDataContainer.Foreground" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                        <Setter Target="TEMPLATE_PART_KeyDataContainer.Background" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <VisualState.Setters>
+                                        <Setter Target="PressedBorder.StrokeThickness" Value="{StaticResource PressedBorderPressedThickness}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="SelectionStates">
+                                <VisualState x:Name="Unselected" />
+                                <VisualState x:Name="Selected">
+                                    <VisualState.Setters>
+                                        <Setter Target="TEMPLATE_PART_KeyboardKeyGrid.Background" Value="{ThemeResource ControllerKeySelectedBackgroundBrush}" />
+                                        <Setter Target="TEMPLATE_PART_KeyDataContainer.Foreground" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                        <Setter Target="TEMPLATE_PART_KeyDataContainer.Background" Value="{ThemeResource ControllerKeySelectedLabelBrush}" />
+                                    </VisualState.Setters>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentControl x:Name="TEMPLATE_PART_KeyDataContainer"
+                                        HorizontalContentAlignment="Stretch"
+                                        VerticalContentAlignment="Stretch"
+                                        HighContrastAdjustment="None" />
+                        <Rectangle x:Name="PressedBorder"
+                                   Fill="Transparent"
+                                   Stroke="Black"
+                                   StrokeThickness="0" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="DefaultKeyStyle" TargetType="ContentControl">
+        <Setter Property="FocusVisualPrimaryBrush" Value="Transparent" />
+        <Setter Property="FocusVisualPrimaryThickness" Value="0" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid BorderBrush="{TemplateBinding FocusVisualPrimaryBrush}" BorderThickness="{TemplateBinding FocusVisualPrimaryThickness}">
+                        <TextBlock x:Name="TEMPLATE_PART_KeyLabel"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="SemiLight"
+                                   AutomationProperties.AccessibilityView="Raw" >
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateY="-2" TranslateX="-1" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ChildKeyStyle"
+           BasedOn="{StaticResource DefaultKeyStyle}"
+           TargetType="ContentControl">
+        <Setter Property="Foreground" Value="{ThemeResource ControllerChildKeyLabelBrush}" />
+        <Setter Property="FocusVisualPrimaryBrush" Value="{ThemeResource ControllerChildKeyHighContrastBorderBrush}" />
+        <Setter Property="FocusVisualPrimaryThickness" Value="{ThemeResource ControllerChildKeyHighContrastBorderThickness}" />
+    </Style>
+
+    <Style x:Key="HorizontalControlKeyStyle" TargetType="ContentControl">
+        <Setter Property="Background" Value="{ThemeResource ControllerKeyLabelBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock x:Name="TEMPLATE_PART_KeyLabel"
+                                   Margin="0,0,5,0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="SemiLight"
+                                   AutomationProperties.AccessibilityView="Raw" />
+                        <TextBlock x:Name="TEMPLATE_PART_KeySecondaryLabel"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Background}"
+                                   Opacity="{ThemeResource SecondaryLabelOpacity}"
+                                   FontWeight="SemiLight">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateY="-2" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FloatingHorizontalControlKeyStyle" TargetType="ContentControl">
+        <Setter Property="Background" Value="{ThemeResource ControllerKeyLabelBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock x:Name="TEMPLATE_PART_KeyLabel"
+                                   Margin="0,0,5,0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="SemiLight"
+                                   AutomationProperties.AccessibilityView="Raw" />
+                        <TextBlock x:Name="TEMPLATE_PART_KeySecondaryLabel"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Background}"
+                                   Opacity="{ThemeResource SecondaryLabelOpacity}"
+                                   FontWeight="SemiLight">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateX="-7" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="BackspaceControlKeyStyle" TargetType="ContentControl">
+        <Setter Property="Background" Value="{ThemeResource ButtonXForegroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock x:Name="TEMPLATE_PART_KeyLabel"
+                                   Margin="0,0,10,0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="SemiLight"
+                                   AutomationProperties.AccessibilityView="Raw" />
+                        <TextBlock x:Name="TEMPLATE_PART_KeySecondaryLabel"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Background}"
+                                   FontWeight="SemiLight">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateY="-2" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="VerticalBackspaceControlKeyStyle" TargetType="ContentControl">
+        <Setter Property="Background" Value="{ThemeResource ButtonXForegroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Vertical">
+                        <TextBlock x:Name="TEMPLATE_PART_KeyLabel"
+                                   Margin="0,0,0,20"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="SemiLight"
+                                   AutomationProperties.AccessibilityView="Raw"
+                                   RenderTransformOrigin="0.5,0.5">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateX="1" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="TEMPLATE_PART_KeySecondaryLabel"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Background}"
+                                   Opacity="{ThemeResource SecondaryLabelOpacity}"
+                                   FontWeight="SemiLight" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SpaceControlKeyStyle" TargetType="ContentControl">
+        <Setter Property="Background" Value="{ThemeResource ButtonYForegroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock x:Name="TEMPLATE_PART_KeyLabel"
+                                   Margin="0,0,5,0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="SemiLight"
+                                   AutomationProperties.AccessibilityView="Raw">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateY="-10" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="TEMPLATE_PART_KeySecondaryLabel"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Background}"
+                                   FontWeight="SemiLight" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FloatingSpaceControlKeyStyle" TargetType="ContentControl">
+        <Setter Property="Background" Value="{ThemeResource ButtonYForegroundBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                        <TextBlock x:Name="TEMPLATE_PART_KeyLabel"
+                                   Margin="0,0,5,0"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="SemiLight"
+                                   AutomationProperties.AccessibilityView="Raw">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateY="-10" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="TEMPLATE_PART_KeySecondaryLabel"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Background}"
+                                   FontWeight="SemiLight" >
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateY="1" TranslateX="6"  />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="VerticalControlKeyStyle" TargetType="ContentControl">
+        <Setter Property="Background" Value="{ThemeResource ControllerKeyLabelBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Vertical">
+                        <TextBlock x:Name="TEMPLATE_PART_KeyLabel"
+                                   Margin="0,0,0,20"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="SemiLight"
+                                   AutomationProperties.AccessibilityView="Raw"
+                                   RenderTransformOrigin="0.5,0.5">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateX="3" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="TEMPLATE_PART_KeySecondaryLabel"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Background}"
+                                   Opacity="{ThemeResource SecondaryLabelOpacity}"
+                                   FontWeight="SemiLight" />
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="FloatingVerticalControlKeyStyle" TargetType="ContentControl">
+        <Setter Property="Background" Value="{ThemeResource ControllerKeyLabelBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Vertical">
+                        <TextBlock x:Name="TEMPLATE_PART_KeyLabel"
+                                   Margin="0,0,0,20"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   FontWeight="SemiLight"
+                                   AutomationProperties.AccessibilityView="Raw"
+                                   RenderTransformOrigin="0.5,0.5">
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateX="-1" TranslateY="4" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        <TextBlock x:Name="TEMPLATE_PART_KeySecondaryLabel"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Background}"
+                                   Opacity="{ThemeResource SecondaryLabelOpacity}"
+                                   FontWeight="SemiLight" >
+                            <TextBlock.RenderTransform>
+                                <CompositeTransform TranslateX="-3" TranslateY="-6" />
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                    </StackPanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="SkinToneCategoryKeyStyle" TargetType="ContentControl">
+        <Setter Property="Background" Value="{ThemeResource ControllerKeyLabelBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate>
+                    <Grid>
+                        <TextBlock x:Name="TEMPLATE_PART_KeySecondaryLabel"
+                                   Margin="0,3,3,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Top"
+                                   AutomationProperties.AccessibilityView="Raw" />
+                        <TextBlock x:Name="TEMPLATE_PART_KeyLabel"
+                                   HorizontalAlignment="Center"
+                                   VerticalAlignment="Center"
+                                   Foreground="{TemplateBinding Foreground}"
+                                   AutomationProperties.AccessibilityView="Raw"
+                                   TextAlignment="Center" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Color Themes definitions  -->
+    <Color x:Key="BlackColor">#FF000000</Color>
+    <Color x:Key="WhiteColor">#FFFFFFFF</Color>
+    <Style x:Key="ControllerKeyboardBackgroundStyle" TargetType="Border">
+        <Setter Property="Background" Value="{ThemeResource ControllerKeyboardBackgroundBrush}" />
+    </Style>
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <!--  xbox colors and brushes  -->
+            <Color x:Key="XboxSystemPrimaryColor">#1F1F1F</Color>
+            <Color x:Key="XboxSystemSecondaryColor">#303030</Color>
+            <!--  /xbox colors and brushes  -->
+
+            <!--  child key brushes  -->
+            <SolidColorBrush x:Key="ControllerChildKeyBackgroundBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerChildKeyLabelBrush" Color="{StaticResource BlackColor}" />
+            <SolidColorBrush x:Key="ControllerChildKeyHighContrastBorderBrush" Color="Transparent" />
+            <Thickness x:Key="ControllerChildKeyHighContrastBorderThickness">0</Thickness>
+            <!--  /child key brushes  -->
+
+            <SolidColorBrush x:Key="ControllerKeyboardBackgroundBrush" Color="{StaticResource BlackColor}" />
+
+            <!--  key brushes  -->
+            <SolidColorBrush x:Key="ButtonYForegroundBrush" Color="#FFA21A" />
+            <SolidColorBrush x:Key="ButtonXForegroundBrush" Color="#0094CE" />
+            <SolidColorBrush x:Key="ControllerFunctionalKeyBackgroundBrush" Color="{ThemeResource XboxSystemSecondaryColor}" />
+            <SolidColorBrush x:Key="ControllerKeyBackgroundBrush" Color="{ThemeResource XboxSystemPrimaryColor}" />
+            <SolidColorBrush x:Key="ControllerKeyLabelBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerKeySelectedLabelBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerKeySelectedBackgroundBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="ControllerKeyHighContrastBorderBrush" Color="Transparent" />
+            <Thickness x:Key="ControllerKeyHighContrastBorderThickness">0</Thickness>
+            <SolidColorBrush x:Key="ControllerChildKeyOverlayBrush"
+                             Opacity="0.55"
+                             Color="Black" />
+            <!--  /key brushes  -->
+
+            <x:Double x:Key="SecondaryLabelOpacity">0.6</x:Double>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="Light">
+            <!--  xbox colors and brushes  -->
+            <Color x:Key="XboxSystemPrimaryColor">#DBDBDB</Color>
+            <Color x:Key="XboxSystemSecondaryColor">#FFFFFF</Color>
+            <!--  /xbox colors and brushes  -->
+
+            <!--  child key brushes  -->
+            <SolidColorBrush x:Key="ControllerChildKeyBackgroundBrush" Color="#FF505050" />
+            <SolidColorBrush x:Key="ControllerChildKeyLabelBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerChildKeyHighContrastBorderBrush" Color="Transparent" />
+            <Thickness x:Key="ControllerChildKeyHighContrastBorderThickness">0</Thickness>
+            <!--  /child key brushes  -->
+
+            <SolidColorBrush x:Key="ControllerKeyboardBackgroundBrush" Color="{StaticResource WhiteColor}" />
+
+            <!--  key brushes  -->
+            <SolidColorBrush x:Key="ButtonYForegroundBrush" Color="#EF8511" />
+            <SolidColorBrush x:Key="ButtonXForegroundBrush" Color="#0F76B8" />
+            <SolidColorBrush x:Key="ControllerFunctionalKeyBackgroundBrush" Color="#EDEDED" />
+            <SolidColorBrush x:Key="ControllerKeyBackgroundBrush" Color="{ThemeResource XboxSystemPrimaryColor}" />
+            <SolidColorBrush x:Key="ControllerKeyLabelBrush" Color="{StaticResource BlackColor}" />
+            <SolidColorBrush x:Key="ControllerKeySelectedLabelBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerKeySelectedBackgroundBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="ControllerKeyHighContrastBorderBrush" Color="Transparent" />
+            <Thickness x:Key="ControllerKeyHighContrastBorderThickness">0</Thickness>
+            <SolidColorBrush x:Key="ControllerChildKeyOverlayBrush"
+                             Opacity="0.55"
+                             Color="White" />
+            <!--  /key brushes  -->
+
+            <x:Double x:Key="SecondaryLabelOpacity">0.6</x:Double>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="HighContrastBlack">
+            <!--  xbox colors and brushes  -->
+            <StaticResource x:Key="XboxSystemPrimaryColor" ResourceKey="BlackColor" />
+            <StaticResource x:Key="XboxSystemSecondaryColor" ResourceKey="BlackColor" />
+            <!--  /xbox colors and brushes  -->
+
+            <!--  child key brushes  -->
+            <SolidColorBrush x:Key="ControllerChildKeyBackgroundBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerChildKeyLabelBrush" Color="{StaticResource BlackColor}" />
+            <SolidColorBrush x:Key="ControllerChildKeyHighContrastBorderBrush" Color="{StaticResource BlackColor}" />
+            <Thickness x:Key="ControllerChildKeyHighContrastBorderThickness">1</Thickness>
+            <!--  /child key brushes  -->
+
+            <SolidColorBrush x:Key="ControllerKeyboardBackgroundBrush" Color="{StaticResource BlackColor}" />
+
+            <!--  key brushes  -->
+            <SolidColorBrush x:Key="ButtonYForegroundBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ButtonXForegroundBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerFunctionalKeyBackgroundBrush" Color="{StaticResource BlackColor}" />
+            <SolidColorBrush x:Key="ControllerKeyBackgroundBrush" Color="{StaticResource BlackColor}" />
+            <SolidColorBrush x:Key="ControllerKeyLabelBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerKeySelectedLabelBrush" Color="{StaticResource BlackColor}" />
+            <SolidColorBrush x:Key="ControllerKeySelectedBackgroundBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="ControllerKeyHighContrastBorderBrush" Color="{StaticResource WhiteColor}" />
+            <Thickness x:Key="ControllerKeyHighContrastBorderThickness">1</Thickness>
+            <SolidColorBrush x:Key="ControllerChildKeyOverlayBrush"
+                             Opacity="0.55"
+                             Color="Black" />
+            <!--  /key brushes  -->
+
+            <x:Double x:Key="SecondaryLabelOpacity">1</x:Double>
+        </ResourceDictionary>
+        <ResourceDictionary x:Key="HighContrastWhite">
+            <!--  xbox colors and brushes  -->
+            <StaticResource x:Key="XboxSystemPrimaryColor" ResourceKey="WhiteColor" />
+            <StaticResource x:Key="XboxSystemSecondaryColor" ResourceKey="WhiteColor" />
+            <!--  /xbox colors and brushes  -->
+
+            <!--  child key brushes  -->
+            <SolidColorBrush x:Key="ControllerChildKeyBackgroundBrush" Color="{StaticResource BlackColor}" />
+            <SolidColorBrush x:Key="ControllerChildKeyLabelBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerChildKeyHighContrastBorderBrush" Color="{StaticResource WhiteColor}" />
+            <Thickness x:Key="ControllerChildKeyHighContrastBorderThickness">1</Thickness>
+            <!--  /child key brushes  -->
+
+            <SolidColorBrush x:Key="ControllerKeyboardBackgroundBrush" Color="{StaticResource WhiteColor}" />
+
+            <!--  key brushes  -->
+            <SolidColorBrush x:Key="ButtonYForegroundBrush" Color="{StaticResource BlackColor}" />
+            <SolidColorBrush x:Key="ButtonXForegroundBrush" Color="{StaticResource BlackColor}" />
+            <SolidColorBrush x:Key="ControllerFunctionalKeyBackgroundBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerKeyBackgroundBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerKeyLabelBrush" Color="{StaticResource BlackColor}" />
+            <SolidColorBrush x:Key="ControllerKeySelectedLabelBrush" Color="{StaticResource WhiteColor}" />
+            <SolidColorBrush x:Key="ControllerKeySelectedBackgroundBrush" Color="{ThemeResource SystemAccentColor}" />
+            <SolidColorBrush x:Key="ControllerKeyHighContrastBorderBrush" Color="{StaticResource BlackColor}" />
+            <Thickness x:Key="ControllerKeyHighContrastBorderThickness">1</Thickness>
+            <SolidColorBrush x:Key="ControllerChildKeyOverlayBrush"
+                             Opacity="0.55"
+                             Color="White" />
+            <!--  /key brushes  -->
+
+            <x:Double x:Key="SecondaryLabelOpacity">1</x:Double>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>
+

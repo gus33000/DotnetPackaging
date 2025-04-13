@@ -1,0 +1,18 @@
+﻿<Page x:ConnectionId='1'
+    x:Class="WindowsInternal.ComposableShell.Experiences.TextInputUndocked.InputApp.ExpressiveInputControlPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked.InputApp"
+    xmlns:controls="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+                                               
+                                                   >
+
+    <Grid Background="Transparent">
+        <controls:ExpressiveInputControl x:ConnectionId='2' x:Name="ExpressiveInputControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Margin="0" Visibility="Collapsed"/>
+    </Grid>
+</Page>
+
+

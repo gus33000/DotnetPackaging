@@ -1,0 +1,130 @@
+﻿<UserControl x:ConnectionId='1' x:Class="TextInput.DictationUI.DictationEntryPoint"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:TextInput.DictationUI"
+             xmlns:common="using:WindowsInternal.ComposableShell.Experiences.TextInput.Common"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Name="DictationEntryPointControl"
+             mc:Ignorable="d"
+                                                 
+             MinWidth="45"
+             MinHeight="30"
+                                       
+             >
+    <UserControl.Resources>
+        <local:DictationUIStyles />
+    </UserControl.Resources>
+
+    <Grid CornerRadius="{ThemeResource OverlayCornerRadius}">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:ConnectionId='2' x:Name="EntryPointState">
+                <VisualState x:ConnectionId='3' x:Name="EntryPointEnabled">
+                    <VisualState.Setters>
+                        <Setter Target="EntryPointContainer.Opacity" Value="1.0" />
+                        <Setter Target="MicrophoneButton.IsEnabled" Value="True" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:ConnectionId='4' x:Name="EntryPointDisabled">
+                    <VisualState.Setters>
+                        <Setter Target="EntryPointContainer.Opacity" Value="0.4" />
+                        <Setter Target="MicrophoneButton.IsEnabled" Value="False" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+
+        <Grid.Resources>
+            <ThemeShadow x:ConnectionId='5' x:Name="SharedShadow" />
+        </Grid.Resources>
+
+        <Grid x:ConnectionId='6' x:Name="DropShadowGrid" Background="Transparent" CornerRadius="{ThemeResource OverlayCornerRadius}" />
+
+        <common:FloatingContentControl x:ConnectionId='7' x:Name="SettingFlyout"                                                                                                       
+                                       Background="Transparent" ShouldConstrainToRootBounds="False" PlacementMargin="2" Style="{StaticResource DefaultAlignedPopupStyle}">
+            <common:FloatingContentControl.PreferredPlacements>
+                <common:FloatingContentControlPlacementMode>TopLeft</common:FloatingContentControlPlacementMode>
+            </common:FloatingContentControl.PreferredPlacements>
+            <ContentControl.ContentTemplate>
+                <DataTemplate                                                    >
+                    <Grid x:ConnectionId='13' x:Name="SettingFlyoutGrid" Background="{ThemeResource EntryPointSettingFlyoutAcrylicBrush}"
+                          BorderBrush="{ThemeResource EntryPointBorderBrush}" BorderThickness="{ThemeResource EntryPointBorderThickness}"
+                          Width="254" CornerRadius="4" Padding="12,8,12,16">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid Grid.Row="0" MinHeight="28" Margin="0,0,0,2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid Grid.Column="0" VerticalAlignment="Bottom">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid Grid.Column="0" Padding="0,0,12,0">
+                                    <FontIcon Glyph="&#xE720;" FontFamily="Segoe MDL2 Assets" FontSize="16" VerticalAlignment="Center" />
+                                </Grid>
+                                <TextBlock x:Uid="EntryPointVoiceTypingLauncherHeader" Grid.Column="1" FontFamily="Segoe UI" FontSize="14"
+                                       TextTrimming="CharacterEllipsis" VerticalAlignment="Center" />
+                            </Grid>
+                            <Grid Grid.Column="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                                <Button x:ConnectionId='16' ClickMode="Press"                                     Style="{StaticResource NoAnimationButton}" Background="Transparent"
+                                    Width="16" Height="16" MinWidth="0" MinHeight="0" Margin="0" Padding="0" VerticalAlignment="Top" HorizontalAlignment="Right">
+                                    <FontIcon Glyph="&#xE8BB;" FontFamily="Segoe MDL2 Assets" FontSize="10" IsTextScaleFactorEnabled="False" />
+                                </Button>
+                            </Grid>
+                        </Grid>
+                        <Grid Grid.Row="1" Margin="0,0,0,3">
+                            <ToggleSwitch x:ConnectionId='15' Grid.Column="2"                                        HorizontalAlignment="Left" VerticalAlignment="Center">
+                                <ToggleSwitch.HeaderTemplate>
+                                    <DataTemplate />
+                                </ToggleSwitch.HeaderTemplate>
+                            </ToggleSwitch>
+                        </Grid>
+                        <!--Segoe MDL2 Assets is for microphone icon and EC MDL2 Assets is for Windows icon.-->
+                        <TextBlock x:ConnectionId='14' Grid.Row="2"                                          TextWrapping="Wrap"
+                                   FontFamily="Segoe UI,Segoe MDL2 Assets,/Assets/Fonts/ECMDL2.ttf#EC MDL2 Assets" FontSize="12" />
+                    </Grid>
+                </DataTemplate>
+            </ContentControl.ContentTemplate>
+        </common:FloatingContentControl>
+
+        <Grid x:ConnectionId='8' x:Name="EntryPointContainer"
+              Margin="{StaticResource EntryPointBorderMargin}"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch"
+              Background="{ThemeResource EntryPointPanelAcrylicBrush}"
+              CornerRadius="{ThemeResource OverlayCornerRadius}"
+              Shadow="{StaticResource SharedShadow}"
+              >
+            <Grid x:ConnectionId='9' x:Name="EntryPointLayout" Grid.Row="1" CornerRadius="4" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <Button x:ConnectionId='10' x:Name="MicrophoneButton" Grid.Column="0" ClickMode="Press"                                                   
+                        Style="{StaticResource NoAnimationButton}" Background="Transparent" CornerRadius="4,0,0,4"
+                        Width="30" Height="30" MinWidth="0" MinHeight="0" Margin="0" Padding="0">
+                    <Grid>
+                        <FontIcon Glyph="&#xEC71;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                                  IsTextScaleFactorEnabled="False" Foreground="{ThemeResource MicrophoneButtonForeground}" />
+                        <FontIcon Glyph="&#xE720;" FontFamily="Segoe MDL2 Assets" FontSize="16"
+                                  IsTextScaleFactorEnabled="False" />
+                    </Grid>
+                </Button>
+                <Button x:ConnectionId='11' x:Name="SettingButton" Grid.Column="1" ClickMode="Press"                                                             
+                        Style="{StaticResource NoAnimationButton}" Background="Transparent" CornerRadius="0,4,4,0"
+                        Width="15" Height="30" MinWidth="0" MinHeight="0" Margin="0" Padding="0">
+                    <FontIcon Glyph="&#x22EE;" FontFamily="Yu Gothic UI" FontSize="16"
+                              IsTextScaleFactorEnabled="False" Margin="0,0,0,2" />
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
+

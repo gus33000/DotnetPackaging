@@ -1,0 +1,139 @@
+﻿<UserControl
+    x:Class="WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Controls.EmojiSkinTonePicker"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="80"
+    d:DesignWidth="120">
+
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Dark">
+                    <SolidColorBrush x:Key="EmojiSkinTonePointerOverBrush" Color="White" Opacity="0.1"/>
+                    <SolidColorBrush x:Key="EmojiSkinTonePressedBrush" Color="White" Opacity="0.2"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneSelectedBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.4"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneBackground" Color="#2B2B2B"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneBorderBrush" Color="#767676"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneGridViewItemBorderBrush" Color="White"/>
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="Light">
+                    <SolidColorBrush x:Key="EmojiSkinTonePointerOverBrush" Color="Black" Opacity="0.1"/>
+                    <SolidColorBrush x:Key="EmojiSkinTonePressedBrush" Color="Black" Opacity="0.2"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneSelectedBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.4"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneBackground" Color="White"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneBorderBrush" Color="Black" Opacity="0.2"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneGridViewItemBorderBrush" Color="Black"/>
+                </ResourceDictionary>
+
+                <ResourceDictionary x:Key="HighContrast">
+                    <SolidColorBrush x:Key="EmojiSkinTonePointerOverBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+                    <SolidColorBrush x:Key="EmojiSkinTonePressedBrush" Color="{ThemeResource SystemColorHighlightTextColor}"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneSelectedBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneBackground" Color="{ThemeResource SystemColorWindowColor}"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneBorderBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+                    <SolidColorBrush x:Key="EmojiSkinToneGridViewItemBorderBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+
+            <x:String x:Key="EmojiSkinTonePickerBorderThickness">1</x:String>
+
+            <Style x:Key="EmojiSkinToneGridViewItemStyle" TargetType="GridViewItem">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+                <Setter Property="VerticalAlignment" Value="Stretch"/>
+                <Setter Property="MinWidth" Value="0"/>
+                <Setter Property="MinHeight" Value="0"/>
+                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="GridViewItem">
+                            <Grid x:Name="RootGrid" BorderBrush="{ThemeResource EmojiSkinToneGridViewItemBorderBrush}" BorderThickness="0">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="Disabled" />
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="FocusVisual">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource EmojiSkinTonePressedBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="PointerOver">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="FocusVisual">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource EmojiSkinTonePointerOverBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill" Storyboard.TargetName="FocusVisual">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource EmojiSkinToneSelectedBrush}"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                    <VisualStateGroup x:Name="FocusStates">
+                                        <VisualState x:Name="Unfocused"/>
+                                        <VisualState x:Name="Focused">
+                                            <Storyboard>
+                                                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderThickness" Storyboard.TargetName="RootGrid">
+                                                    <DiscreteObjectKeyFrame KeyTime="0" Value="2"/>
+                                                </ObjectAnimationUsingKeyFrames>
+                                            </Storyboard>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Rectangle x:Name="FocusVisual" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Fill="Transparent" IsHitTestVisible="True"/>
+                                <TextBlock x:Name="Label" Text="{TemplateBinding Content}"
+                                           HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Segoe UI Emoji" FontSize="20"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+            <Style x:Key="EmojiSkinTonePanelGridViewStyle" TargetType="GridView">
+                <Setter Property="ScrollViewer.BringIntoViewOnFocusChange" Value="True" />
+                <Setter Property="IsTabStop" Value="False"/>
+                <Setter Property="IsItemClickEnabled" Value="True"/>
+                <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Hidden"/>
+                <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Hidden"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="AllowFocusOnInteraction" Value="False"/>
+                <Setter Property="SelectionMode" Value="Single"/>
+                <Setter Property="ItemContainerTransitions">
+                    <Setter.Value>
+                        <TransitionCollection/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+
+        </ResourceDictionary>
+    </UserControl.Resources>
+
+    <Grid x:ConnectionId='15' x:Name="SkinTonePanel_RootGrid"
+          Background="{ThemeResource EmojiSkinToneBackground}"
+          BorderThickness="1"
+          BorderBrush="{ThemeResource EmojiSkinToneBorderBrush}">
+        <GridView x:ConnectionId='16' x:Name="SkinTonePanelModifier_GridView"
+                  Style="{StaticResource EmojiSkinTonePanelGridViewStyle}"
+                  ItemContainerStyle="{StaticResource EmojiSkinToneGridViewItemStyle}">
+            <GridViewItem TabIndex="0" Content="&#xE009;"/>
+            <GridViewItem TabIndex="1" Content="🏻"/>
+            <GridViewItem TabIndex="2" Content="🏼"/>
+            <GridViewItem TabIndex="3" Content="🏽"/>
+            <GridViewItem TabIndex="4" Content="🏾"/>
+            <GridViewItem TabIndex="5" Content="🏿"/>
+        </GridView>
+    </Grid>
+
+</UserControl>
+

@@ -1,0 +1,1236 @@
+﻿<ResourceDictionary
+    x:Class="WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Controls.ToolBarStyles"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:controls="using:WindowsInternal.ComposableShell.Experiences.TextInputUndocked.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <GridLength x:Key="ToolBarGripperLength">16</GridLength>
+    <GridLength x:Key="ToolBarTailLength">4</GridLength>
+    <GridLength x:Key="ToolBarMenuButtonHeight">32</GridLength>
+    <GridLength x:Key="ToolBarCommonMenuLabelWidth">147</GridLength> <!-- Common menu total width = 13 (left margin) + 147 = 160 -->
+    <GridLength x:Key="ToolBarPersonalizationMenuCheckMarkWidth">12</GridLength>
+    <GridLength x:Key="ToolBarPersonalizationMenuItemIconWidth">40</GridLength>
+    <GridLength x:Key="ToolBarPersonalizationMenuLabelWidth">135</GridLength> <!-- Personalization menu total width = 13 (left margin) + 12 + 40 + 135 = 200 -->
+    <GridLength x:Key="JpnToolBarSelectablePaddingWidth">12</GridLength> <!-- Personalization menu total width = 13 (left margin) + 12 + 12 + 163 = 200 -->
+    <GridLength x:Key="JpnToolBarSelectableLabelWidth">163</GridLength> <!-- Personalization menu total width = 13 (left margin) + 12 + 12 + 163 = 200 -->
+    <x:Double x:Key="ToolBarLogonUIWidth">48.0</x:Double>
+    <x:Double x:Key="ToolBarLogonUIHeight">48.0</x:Double>
+
+    <!-- For CHS ToolBar -->
+    <Style x:Key="ChsToolBarListHorizontalStyle" TargetType="controls:ChsToolBarList" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ChsToolBarList">
+                    <Grid Background="{ThemeResource ToolBarBackgroundAcrylicBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource ToolBarGripperLength}"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="{StaticResource ToolBarTailLength}"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="TEMPLATE_PART_ToolBarGripper" Grid.Column="0" Background="Transparent"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+                            <TextBlock Text="&#xE784;" FontSize="16" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource ToolBarLabelBrush}" Opacity="0.4" VerticalAlignment="Center" />
+                        </Border>
+                        <ListView x:Name="TEMPLATE_PART_ToolBarListView"
+                                Grid.Column="1"
+                                ScrollViewer.BringIntoViewOnFocusChange="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollMode="Disabled"
+                                IsTabStop="True"
+                                SelectionMode="None"
+                                Padding="0"
+                                IsItemClickEnabled="True"
+                                ItemTemplate="{StaticResource ChsToolBarItemHorizontalTemplate}"
+                                ItemContainerStyle="{StaticResource ToolBarItemStyle}"
+                                Style="{StaticResource ListViewStyleWithoutAnimation}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.Resources>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarCommonMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <MenuFlyoutSubItem x:Name="TEMPLATE_PART_ToolBarPersonalizationMenuItem" Style="{StaticResource ChsToolBarPersonalizationMenuItem}">
+                                        <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarPersonalizationListMenuItem" Style="{StaticResource ChsToolBarPersonalizationListMenuItem}"/>
+                                        <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarResetMenuItem" Style="{StaticResource ChsToolBarResetMenuItem}"/>
+                                    </MenuFlyoutSubItem>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarOrientationMenuItem" Style="{StaticResource ChsToolBarCommonMenuItem}"/>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarHideMenuItem" Style="{StaticResource ChsToolBarCommonMenuItem}"/>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarSettingsMenuItem" Style="{StaticResource ChsToolBarCommonMenuItem}"/>
+                                </MenuFlyout>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarEmojiMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarEmojiListMenuItem" Style="{StaticResource ChsToolBarEmojiListMenuItem}"/>
+                                </MenuFlyout>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarSIPMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarSIPListMenuItem" Style="{StaticResource ChsToolBarSIPListMenuItem}"/>
+                                </MenuFlyout>
+                            </ListView.Resources>
+                        </ListView>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ChsToolBarListVerticalStyle" TargetType="controls:ChsToolBarList" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ChsToolBarList">
+                    <Grid Background="{ThemeResource ToolBarBackgroundAcrylicBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource ToolBarGripperLength}"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="{StaticResource ToolBarTailLength}"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="TEMPLATE_PART_ToolBarGripper" Grid.Row="0" Background="Transparent"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+                            <TextBlock Text="&#xE784;" FontSize="16" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource ToolBarLabelBrush}" Opacity="0.4" TextAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                <TextBlock.RenderTransform>
+                                    <RotateTransform Angle="90" />
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Border>
+                        <ListView x:Name="TEMPLATE_PART_ToolBarListView"
+                                Grid.Row="1"
+                                ScrollViewer.BringIntoViewOnFocusChange="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollMode="Disabled"
+                                IsTabStop="True"
+                                SelectionMode="None"
+                                Padding="0"
+                                IsItemClickEnabled="True"
+                                ItemTemplate="{StaticResource ChsToolBarItemVerticalTemplate}"
+                                ItemContainerStyle="{StaticResource ToolBarItemStyle}"
+                                Style="{StaticResource ListViewStyleWithoutAnimation}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsStackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.Resources>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarCommonMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <MenuFlyoutSubItem x:Name="TEMPLATE_PART_ToolBarPersonalizationMenuItem" Style="{StaticResource ChsToolBarPersonalizationMenuItem}">
+                                        <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarPersonalizationListMenuItem" Style="{StaticResource ChsToolBarPersonalizationListMenuItem}"/>
+                                        <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarResetMenuItem" Style="{StaticResource ChsToolBarResetMenuItem}"/>
+                                    </MenuFlyoutSubItem>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarOrientationMenuItem" Style="{StaticResource ChsToolBarCommonMenuItem}"/>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarHideMenuItem" Style="{StaticResource ChsToolBarCommonMenuItem}"/>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarSettingsMenuItem" Style="{StaticResource ChsToolBarCommonMenuItem}"/>
+                                </MenuFlyout>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarEmojiMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarEmojiListMenuItem" Style="{StaticResource ChsToolBarEmojiListMenuItem}"/>
+                                </MenuFlyout>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarSIPMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarSIPListMenuItem" Style="{StaticResource ChsToolBarSIPListMenuItem}"/>
+                                </MenuFlyout>
+                            </ListView.Resources>
+                        </ListView>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="ChsToolBarItemHorizontalTemplate"                                     >
+        <Grid x:ConnectionId='154' Background="Transparent" AutomationProperties.AccessibilityView="Raw"                                                                 >
+            <TextBlock x:ConnectionId='155' x:Name="TEMPLATE_PART_ChsToolBarItemButton"
+                                                       
+                                                               
+                                                             
+                                                                 
+                    Foreground="{ThemeResource ToolBarLabelBrush}"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center"
+                    IsHitTestVisible="False"
+                    AutomationProperties.AccessibilityView="Raw">
+            </TextBlock>
+            <ToolTipService.ToolTip>
+                <ToolTip Background="{ThemeResource ToolBarToolTipBackgroundBrush}">
+                    <TextBlock x:ConnectionId='156' Margin="5,4,5,4"                                      Style="{StaticResource ToolBarToolTipTextStyle}"/>
+                </ToolTip>
+            </ToolTipService.ToolTip>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ChsToolBarItemVerticalTemplate"                                     >
+        <!-- need a Grid to make text vertically center aligned -->
+        <Grid x:ConnectionId='150'                                       Background="Transparent" AutomationProperties.AccessibilityView="Raw"                                                                 >
+            <TextBlock x:ConnectionId='151' x:Name="TEMPLATE_PART_ChsToolBarItemButton"
+                                                               
+                                                             
+                                                                 
+                    Foreground="{ThemeResource ToolBarLabelBrush}"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center"
+                    IsHitTestVisible="False"
+                    AutomationProperties.AccessibilityView="Raw">
+            </TextBlock>
+            <ToolTipService.ToolTip>
+                <ToolTip Background="{ThemeResource ToolBarToolTipBackgroundBrush}">
+                    <TextBlock x:ConnectionId='152' Margin="5,4,5,4"                                      Style="{StaticResource ToolBarToolTipTextStyle}"/>
+                </ToolTip>
+            </ToolTipService.ToolTip>
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="ChsToolBarStyle" TargetType="controls:ToolBarControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ToolBarControl">
+                    <controls:ChsToolBarList x:Name="TEMPLATE_PART_ToolBarList" Margin="0"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- For CHT ToolBar -->
+    <Style x:Key="ChtToolBarListHorizontalStyle" TargetType="controls:ChtToolBarList" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ChtToolBarList">
+                    <Grid Background="{ThemeResource ToolBarBackgroundAcrylicBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource ToolBarGripperLength}"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="{StaticResource ToolBarTailLength}"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="TEMPLATE_PART_ToolBarGripper" Grid.Column="0" Background="Transparent"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+                            <TextBlock Text="&#xE784;" FontSize="16" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource ToolBarLabelBrush}" Opacity="0.4" VerticalAlignment="Center" />
+                        </Border>
+                        <ListView x:Name="TEMPLATE_PART_ToolBarListView"
+                                Grid.Column="1"
+                                ScrollViewer.BringIntoViewOnFocusChange="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollMode="Disabled"
+                                IsTabStop="True"
+                                SelectionMode="None"
+                                Padding="0"
+                                IsItemClickEnabled="True"
+                                ItemTemplate="{StaticResource ChtToolBarItemHorizontalTemplate}"
+                                ItemContainerStyle="{StaticResource ToolBarItemStyle}"
+                                Style="{StaticResource ListViewStyleWithoutAnimation}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.Resources>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarCommonMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarOrientationMenuItem" Style="{StaticResource ChtToolBarCommonMenuItem}"/>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarHideMenuItem" Style="{StaticResource ChtToolBarCommonMenuItem}"/>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarSettingsMenuItem" Style="{StaticResource ChtToolBarCommonMenuItem}"/>
+                                </MenuFlyout>
+                            </ListView.Resources>
+                        </ListView>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ChtToolBarListVerticalStyle" TargetType="controls:ChtToolBarList" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ChtToolBarList">
+                    <Grid Background="{ThemeResource ToolBarBackgroundAcrylicBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource ToolBarGripperLength}"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="{StaticResource ToolBarTailLength}"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="TEMPLATE_PART_ToolBarGripper" Grid.Row="0" Background="Transparent"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+                            <TextBlock Text="&#xE784;" FontSize="16" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource ToolBarLabelBrush}" Opacity="0.4" TextAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                <TextBlock.RenderTransform>
+                                    <RotateTransform Angle="90" />
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Border>
+                        <ListView x:Name="TEMPLATE_PART_ToolBarListView"
+                                Grid.Row="1"
+                                ScrollViewer.BringIntoViewOnFocusChange="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollMode="Disabled"
+                                IsTabStop="True"
+                                SelectionMode="None"
+                                Padding="0"
+                                IsItemClickEnabled="True"
+                                ItemTemplate="{StaticResource ChtToolBarItemVerticalTemplate}"
+                                ItemContainerStyle="{StaticResource ToolBarItemStyle}"
+                                Style="{StaticResource ListViewStyleWithoutAnimation}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsStackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.Resources>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarCommonMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarOrientationMenuItem" Style="{StaticResource ChtToolBarCommonMenuItem}"/>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarHideMenuItem" Style="{StaticResource ChtToolBarCommonMenuItem}"/>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarSettingsMenuItem" Style="{StaticResource ChtToolBarCommonMenuItem}"/>
+                                </MenuFlyout>
+                            </ListView.Resources>
+                        </ListView>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="ChtToolBarItemHorizontalTemplate"                                     >
+        <Grid x:ConnectionId='128' Background="Transparent" AutomationProperties.AccessibilityView="Raw"                                                                 >
+            <TextBlock x:ConnectionId='129' x:Name="TEMPLATE_PART_ChtToolBarItemButton"
+                                                       
+                                                               
+                                                             
+                                                                 
+                    Foreground="{ThemeResource ToolBarLabelBrush}"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center"
+                    IsHitTestVisible="False"
+                    AutomationProperties.AccessibilityView="Raw">
+            </TextBlock>
+            <ToolTipService.ToolTip>
+                <ToolTip Background="{ThemeResource ToolBarToolTipBackgroundBrush}">
+                    <TextBlock x:ConnectionId='130' Margin="5,4,5,4"                                      Style="{StaticResource ToolBarToolTipTextStyle}"/>
+                </ToolTip>
+            </ToolTipService.ToolTip>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ChtToolBarItemVerticalTemplate"                                     >
+        <!-- need a Grid to make text vertically center aligned -->
+        <Grid x:ConnectionId='124'                                       Background="Transparent" AutomationProperties.AccessibilityView="Raw"                                                                 >
+            <TextBlock x:ConnectionId='125' x:Name="TEMPLATE_PART_ChtToolBarItemButton"
+                                                               
+                                                             
+                                                                 
+                    Foreground="{ThemeResource ToolBarLabelBrush}"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center"
+                    IsHitTestVisible="False"
+                    AutomationProperties.AccessibilityView="Raw">
+            </TextBlock>
+            <ToolTipService.ToolTip>
+                <ToolTip Background="{ThemeResource ToolBarToolTipBackgroundBrush}">
+                    <TextBlock x:ConnectionId='126' Margin="5,4,5,4"                                      Style="{StaticResource ToolBarToolTipTextStyle}"/>
+                </ToolTip>
+            </ToolTipService.ToolTip>
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="ChtToolBarStyle" TargetType="controls:ToolBarControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ToolBarControl">
+                    <controls:ChtToolBarList x:Name="TEMPLATE_PART_ToolBarList" Margin="0"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- For context menus -->
+    <Style x:Key="ChsToolBarPersonalizationMenuItem" TargetType="MenuFlyoutSubItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutSubItem">
+                    <Button x:Name="TEMPLATE_PART_ToolBarPersonalizationButton" Style="{StaticResource ToolBarPopupButtonStyle}" AutomationProperties.AccessibilityView="Raw">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource ToolBarCommonMenuLabelWidth}"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{StaticResource ToolBarMenuButtonHeight}"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{TemplateBinding Text}" Style="{StaticResource ToolBarPopupButtonTextStyle}" AutomationProperties.AccessibilityView="Raw"/>
+                            <TextBlock Text="&#xE00F;" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{ThemeResource ToolBarLabelBrush}" FontSize="12" FontFamily="Segoe MDL2 Assets" Margin="0,0,16,0" AutomationProperties.AccessibilityView="Raw"/>
+                        </Grid>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ChsToolBarCommonMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <Button x:Name="TEMPLATE_PART_ToolBarCommonMenuButton" Style="{StaticResource ToolBarPopupButtonStyle}" AutomationProperties.AccessibilityView="Raw">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource ToolBarCommonMenuLabelWidth}"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{StaticResource ToolBarMenuButtonHeight}"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{TemplateBinding Text}" Style="{StaticResource ToolBarPopupButtonTextStyle}" AutomationProperties.AccessibilityView="Raw"/>
+                        </Grid>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ChsToolBarResetMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <Button x:Name="TEMPLATE_PART_ToolBarResetButton" Style="{StaticResource ToolBarPopupButtonStyle}" HorizontalContentAlignment="Stretch" AutomationProperties.AccessibilityView="Raw">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource ToolBarPersonalizationMenuCheckMarkWidth}"></ColumnDefinition>
+                                <ColumnDefinition Width="{StaticResource ToolBarPersonalizationMenuItemIconWidth}"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{StaticResource ToolBarMenuButtonHeight}"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="&#xE8EE;" Style="{StaticResource ToolBarPopupButtonIconStyle}" FontFamily="Segoe MDL2 Assets" AutomationProperties.AccessibilityView="Raw"/>
+                            <TextBlock Grid.Column="2" Grid.Row="0" Text="{TemplateBinding Text}" Style="{StaticResource ToolBarPopupButtonTextStyle}" HorizontalAlignment="Stretch" AutomationProperties.AccessibilityView="Raw"/>
+                        </Grid>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ChsToolBarPersonalizationListMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarPersonalizationMenuListView"
+                                                IsTabStop="True"
+                                                SelectionMode="None"
+                                                Padding="0"
+                                                IsItemClickEnabled="True"
+                                                ItemTemplate="{StaticResource ChsToolBarPersonalizationMenuItemTemplate}"
+                                                ItemContainerStyle="{StaticResource ToolBarContextMenuItemStyle}"
+                                                Style="{StaticResource ListViewStyleWithoutAnimation}"
+                                                AutomationProperties.AccessibilityView="Raw">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ChsToolBarEmojiListMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarEmojiMenuListView"
+                                            Background="{ThemeResource ToolBarPopupButtonBackgroundBrush}"
+                                            IsTabStop="True"
+                                            SelectionMode="None"
+                                            Padding="0"
+                                            IsItemClickEnabled="True"
+                                            ItemTemplate="{StaticResource ChsToolBarContextMenuItemTemplate}"
+                                            ItemContainerStyle="{StaticResource ToolBarContextMenuItemStyle}"
+                                            Style="{StaticResource ListViewStyleWithoutAnimation}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ChsToolBarSIPListMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarSIPMenuListView"
+                                            Background="{ThemeResource ToolBarPopupButtonBackgroundBrush}"
+                                            IsTabStop="True"
+                                            SelectionMode="None"
+                                            Padding="0"
+                                            IsItemClickEnabled="True"
+                                            ItemTemplate="{StaticResource ChsToolBarContextMenuItemTemplate}"
+                                            ItemContainerStyle="{StaticResource ToolBarContextMenuItemStyle}"
+                                            Style="{StaticResource ListViewStyleWithoutAnimation}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style x:Key="ChtToolBarCommonMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <Button x:Name="TEMPLATE_PART_ToolBarCommonMenuButton" Style="{StaticResource ToolBarPopupButtonStyle}" AutomationProperties.AccessibilityView="Raw">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource ToolBarCommonMenuLabelWidth}"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{StaticResource ToolBarMenuButtonHeight}"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{TemplateBinding Text}" Style="{StaticResource ToolBarPopupButtonTextStyle}" AutomationProperties.AccessibilityView="Raw"/>
+                        </Grid>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <DataTemplate x:Key="ChsToolBarPersonalizationMenuItemTemplate"                                     >
+        <Grid x:ConnectionId='103'                                                               Padding="13,0,13,0"                                                                                  >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource ToolBarPersonalizationMenuCheckMarkWidth}"></ColumnDefinition>
+                <ColumnDefinition Width="{StaticResource ToolBarPersonalizationMenuItemIconWidth}"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource ToolBarMenuButtonHeight}"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock x:ConnectionId='104' Grid.Column="0" Grid.Row="0"                                       FontSize="12" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource ToolBarLabelBrush}" VerticalAlignment="Center" AutomationProperties.AccessibilityView="Raw"/>
+            <TextBlock x:ConnectionId='105' Grid.Column="1" Grid.Row="0"                                            Style="{StaticResource ToolBarPopupButtonIconStyle}"                                               AutomationProperties.AccessibilityView="Raw"/>
+            <TextBlock x:ConnectionId='106' Grid.Column="2" Grid.Row="0"                                               Style="{StaticResource ToolBarPopupButtonTextStyle}" AutomationProperties.AccessibilityView="Raw"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="ChsToolBarContextMenuItemTemplate"                                                >
+        <Grid x:ConnectionId='99'>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource ToolBarPersonalizationMenuItemIconWidth}"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource ToolBarMenuButtonHeight}"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock x:ConnectionId='100' Grid.Column="0" Grid.Row="0"                                             Style="{StaticResource ToolBarPopupButtonIconStyle}"                                                       />
+            <TextBlock x:ConnectionId='101' Grid.Column="1" Grid.Row="0"                                                Style="{StaticResource ToolBarPopupButtonTextStyle}"/>
+        </Grid>
+    </DataTemplate>
+
+    <!-- For JPN IME ToolBar -->
+    <Style x:Key="JpnToolBarListHorizontalStyle" TargetType="controls:JpnToolBarList" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:JpnToolBarList">
+                    <Grid Background="{ThemeResource ToolBarBackgroundAcrylicBrush}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="{StaticResource ToolBarGripperLength}"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="{StaticResource ToolBarTailLength}"/>
+                        </Grid.ColumnDefinitions>
+                        <Border x:Name="TEMPLATE_PART_ToolBarGripper" Grid.Column="0" Background="Transparent"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+                            <TextBlock Text="&#xE784;" FontSize="16" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource ToolBarLabelBrush}" Opacity="0.4" VerticalAlignment="Center" />
+                        </Border>
+                        <ListView x:Name="TEMPLATE_PART_ToolBarListView"
+                                Grid.Column="1"
+                                ScrollViewer.BringIntoViewOnFocusChange="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollMode="Disabled"
+                                IsTabStop="True"
+                                SelectionMode="None"
+                                Padding="0"
+                                IsItemClickEnabled="True"
+                                ItemTemplate="{StaticResource JpnToolBarItemHorizontalTemplate}"
+                                ItemContainerStyle="{StaticResource ToolBarItemStyle}"
+                                Style="{StaticResource ListViewStyleWithoutAnimation}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsStackPanel Orientation="Horizontal"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.Resources>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarInputModeMenuFlyout" MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarInputModeListMenuItem" Style="{StaticResource JpnToolBarInputModeListMenuItem}" AutomationProperties.AccessibilityView="Raw"/>
+                                </MenuFlyout>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarDictionaryToolMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarDictinoaryToolListMenuItem" Style="{StaticResource JpnToolBarDictinoaryToolListMenuItem}" AutomationProperties.AccessibilityView="Raw"/>
+                                </MenuFlyout>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarKanaModeMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarKanaModeListMenuItem" Style="{StaticResource JpnToolBarKanaModeListMenuItem}" AutomationProperties.AccessibilityView="Raw"/>
+                                </MenuFlyout>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarCommonMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <MenuFlyoutSubItem x:Name="TEMPLATE_PART_ToolBarPersonalizationMenuItem" Style="{StaticResource JpnToolBarPersonalizationMenuItem}">
+                                        <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarPersonalizationListMenuItem" Style="{StaticResource JpnToolBarPersonalizationListMenuItem}"/>
+                                    </MenuFlyoutSubItem>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarSettingsListMenuItem" Style="{StaticResource JpnToolBarSettingsListMenuItem}" AutomationProperties.AccessibilityView="Raw"/>
+                                </MenuFlyout>
+                            </ListView.Resources>
+                        </ListView>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="JpnToolBarListVerticalStyle" TargetType="controls:JpnToolBarList" >
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:JpnToolBarList">
+                    <Grid Background="{ThemeResource ToolBarBackgroundAcrylicBrush}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="{StaticResource ToolBarGripperLength}"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="{StaticResource ToolBarTailLength}"/>
+                        </Grid.RowDefinitions>
+                        <Border x:Name="TEMPLATE_PART_ToolBarGripper" Grid.Row="0" Background="Transparent"
+                                HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0">
+                            <TextBlock Text="&#xE784;" FontSize="16" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource ToolBarLabelBrush}" Opacity="0.4" TextAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                                <TextBlock.RenderTransform>
+                                    <RotateTransform Angle="90" />
+                                </TextBlock.RenderTransform>
+                            </TextBlock>
+                        </Border>
+                        <ListView x:Name="TEMPLATE_PART_ToolBarListView"
+                                Grid.Row="1"
+                                ScrollViewer.BringIntoViewOnFocusChange="False"
+                                ScrollViewer.HorizontalScrollMode="Disabled"
+                                ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                                ScrollViewer.VerticalScrollMode="Disabled"
+                                IsTabStop="True"
+                                SelectionMode="None"
+                                Padding="0"
+                                IsItemClickEnabled="True"
+                                ItemTemplate="{StaticResource JpnToolBarItemVerticalTemplate}"
+                                ItemContainerStyle="{StaticResource ToolBarItemStyle}"
+                                Style="{StaticResource ListViewStyleWithoutAnimation}">
+                            <ListView.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <ItemsStackPanel Orientation="Vertical"/>
+                                </ItemsPanelTemplate>
+                            </ListView.ItemsPanel>
+                            <ListView.Resources>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarInputModeMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarInputModeListMenuItem" Style="{StaticResource JpnToolBarInputModeListMenuItem}" AutomationProperties.AccessibilityView="Raw"/>
+                                </MenuFlyout>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarDictionaryToolMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarDictinoaryToolListMenuItem" Style="{StaticResource JpnToolBarDictinoaryToolListMenuItem}" AutomationProperties.AccessibilityView="Raw"/>
+                                </MenuFlyout>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarKanaModeMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarKanaModeListMenuItem" Style="{StaticResource JpnToolBarKanaModeListMenuItem}" AutomationProperties.AccessibilityView="Raw"/>
+                                </MenuFlyout>
+                                <MenuFlyout x:Name="TEMPLATE_PART_ToolBarCommonMenuFlyout" MenuFlyout.MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                    <MenuFlyoutSubItem x:Name="TEMPLATE_PART_ToolBarPersonalizationMenuItem" Style="{StaticResource JpnToolBarPersonalizationMenuItem}">
+                                        <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarPersonalizationListMenuItem" Style="{StaticResource JpnToolBarPersonalizationListMenuItem}"/>
+                                    </MenuFlyoutSubItem>
+                                    <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarSettingsListMenuItem" Style="{StaticResource JpnToolBarSettingsListMenuItem}" AutomationProperties.AccessibilityView="Raw"/>
+                                </MenuFlyout>
+                            </ListView.Resources>
+                        </ListView>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="JpnToolBarItemHorizontalTemplate"                                     >
+        <Grid x:ConnectionId='67' Background="Transparent" AutomationProperties.AccessibilityView="Raw"                                                                 >
+            <TextBlock x:ConnectionId='68' x:Name="TEMPLATE_PART_JpnToolBarItemButton"
+                                                       
+                                                               
+                                                             
+                                                                 
+                    Foreground="{ThemeResource ToolBarLabelBrush}"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center"
+                    IsHitTestVisible="False"
+                    AutomationProperties.AccessibilityView="Raw">
+            </TextBlock>
+            <ToolTipService.ToolTip>
+                <ToolTip Background="{ThemeResource ToolBarToolTipBackgroundBrush}">
+                    <TextBlock x:ConnectionId='69' Margin="5,4,5,4"                                      Style="{StaticResource ToolBarToolTipTextStyle}"/>
+                </ToolTip>
+            </ToolTipService.ToolTip>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="JpnToolBarItemVerticalTemplate"                                     >
+        <!-- need a Grid to make text vertically center aligned -->
+        <Grid x:ConnectionId='63'                                       Background="Transparent" AutomationProperties.AccessibilityView="Raw"                                                                 >
+            <TextBlock x:ConnectionId='64' x:Name="TEMPLATE_PART_JpnToolBarItemButton"
+                                                               
+                                                             
+                                                                 
+                    Foreground="{ThemeResource ToolBarLabelBrush}"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center"
+                    IsHitTestVisible="False"
+                    AutomationProperties.AccessibilityView="Raw">
+            </TextBlock>
+            <ToolTipService.ToolTip>
+                <ToolTip Background="{ThemeResource ToolBarToolTipBackgroundBrush}">
+                    <TextBlock x:ConnectionId='65' Margin="5,4,5,4"                                      Style="{StaticResource ToolBarToolTipTextStyle}"/>
+                </ToolTip>
+            </ToolTipService.ToolTip>
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="JpnToolBarStyle" TargetType="controls:ToolBarControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ToolBarControl">
+                    <controls:JpnToolBarList x:Name="TEMPLATE_PART_ToolBarList" Margin="0"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- For JPN Input Mode / Dictionary Tool / Kana Mode / Settings menus -->
+    <Style x:Key="JpnToolBarInputModeListMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarInputModeMenuListView"
+                                                IsTabStop="True"
+                                                SelectionMode="None"
+                                                Padding="0"
+                                                IsItemClickEnabled="True"
+                                                ItemTemplate="{StaticResource JpnToolBarSelectableMenuItemTemplate}"
+                                                ItemContainerStyle="{StaticResource ToolBarContextMenuItemStyle}"
+                                                Style="{StaticResource ListViewStyleWithoutAnimation}"
+                                                AutomationProperties.AccessibilityView="Raw">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="JpnToolBarDictinoaryToolListMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarDictinoaryToolMenuListView"
+                                                IsTabStop="True"
+                                                SelectionMode="None"
+                                                Padding="0"
+                                                IsItemClickEnabled="True"
+                                                ItemTemplate="{StaticResource JpnToolBarSimpleMenuItemTemplate}"
+                                                ItemContainerStyle="{StaticResource ToolBarContextMenuItemStyle}"
+                                                Style="{StaticResource ListViewStyleWithoutAnimation}"
+                                                AutomationProperties.AccessibilityView="Raw">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="JpnToolBarKanaModeListMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarKanaModeMenuListView"
+                                                IsTabStop="True"
+                                                SelectionMode="None"
+                                                Padding="0"
+                                                IsItemClickEnabled="True"
+                                                ItemTemplate="{StaticResource JpnToolBarSelectableMenuItemTemplate}"
+                                                ItemContainerStyle="{StaticResource ToolBarContextMenuItemStyle}"
+                                                Style="{StaticResource ListViewStyleWithoutAnimation}"
+                                                AutomationProperties.AccessibilityView="Raw">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="JpnToolBarSettingsListMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarSettingsMenuListView"
+                                                IsTabStop="True"
+                                                SelectionMode="None"
+                                                Padding="0"
+                                                IsItemClickEnabled="True"
+                                                ItemTemplate="{StaticResource JpnToolBarSimpleMenuItemTemplate}"
+                                                ItemContainerStyle="{StaticResource ToolBarContextMenuItemStyle}"
+                                                Style="{StaticResource ListViewStyleWithoutAnimation}"
+                                                AutomationProperties.AccessibilityView="Raw">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="JpnToolBarPersonalizationMenuItem" TargetType="MenuFlyoutSubItem">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutSubItem">
+                    <Button x:Name="TEMPLATE_PART_ToolBarPersonalizationButton" Style="{StaticResource ToolBarPopupButtonStyle}" AutomationProperties.AccessibilityView="Raw">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{StaticResource ToolBarCommonMenuLabelWidth}"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="{StaticResource ToolBarMenuButtonHeight}"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <TextBlock Text="{TemplateBinding Text}" Style="{StaticResource ToolBarPopupButtonTextStyle}" AutomationProperties.AccessibilityView="Raw"/>
+                            <TextBlock Text="&#xE00F;" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{ThemeResource ToolBarLabelBrush}" FontSize="12" FontFamily="Segoe MDL2 Assets" Margin="0,0,16,0" AutomationProperties.AccessibilityView="Raw" />
+                        </Grid>
+                    </Button>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- For JPN personalization menus -->
+    <Style x:Key="JpnToolBarPersonalizationListMenuItem" TargetType="MenuFlyoutItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuFlyoutItem">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarPersonalizationMenuListView"
+                                                IsTabStop="True"
+                                                SelectionMode="None"
+                                                Padding="0"
+                                                IsItemClickEnabled="True"
+                                                ItemTemplate="{StaticResource JpnToolBarPersonalizationMenuItemTemplate}"
+                                                ItemContainerStyle="{StaticResource ToolBarContextMenuItemStyle}"
+                                                Style="{StaticResource ListViewStyleWithoutAnimation}"
+                                                AutomationProperties.AccessibilityView="Raw">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Vertical"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="JpnToolBarSelectableMenuItemTemplate"                                     >
+        <Grid x:ConnectionId='45' Padding="13,0,13,0"                                                                             >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource ToolBarPersonalizationMenuCheckMarkWidth}"></ColumnDefinition>
+                <ColumnDefinition Width="{StaticResource JpnToolBarSelectablePaddingWidth}"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource ToolBarMenuButtonHeight}"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock x:ConnectionId='46' Grid.Column="0" Grid.Row="0"                                          FontSize="12" FontFamily="Yu Gothic UI" Foreground="{ThemeResource ToolBarLabelBrush}" VerticalAlignment="Center" AutomationProperties.AccessibilityView="Raw"/>
+            <TextBlock x:ConnectionId='47' Grid.Column="2" Grid.Row="0"                                               Style="{StaticResource ToolBarPopupButtonTextStyle}" AutomationProperties.AccessibilityView="Raw"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="JpnToolBarSimpleMenuItemTemplate"                                     >
+        <Grid x:ConnectionId='42' Padding="13,0,0,0"                                                                             >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource ToolBarCommonMenuLabelWidth}"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource ToolBarMenuButtonHeight}"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock x:ConnectionId='43' Grid.Column="0" Grid.Row="0"                                               Style="{StaticResource ToolBarPopupButtonTextStyle}" AutomationProperties.AccessibilityView="Raw"/>
+        </Grid>
+    </DataTemplate>
+
+    <DataTemplate x:Key="JpnToolBarPersonalizationMenuItemTemplate"                                     >
+        <Grid x:ConnectionId='38'                                                               Padding="13,0,13,0"                                                                             >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="{StaticResource ToolBarPersonalizationMenuCheckMarkWidth}"></ColumnDefinition>
+                <ColumnDefinition Width="{StaticResource JpnToolBarSelectablePaddingWidth}"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="{StaticResource ToolBarMenuButtonHeight}"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock x:ConnectionId='39' Grid.Column="0" Grid.Row="0"                                       FontSize="12" FontFamily="Segoe MDL2 Assets" Foreground="{ThemeResource ToolBarLabelBrush}" VerticalAlignment="Center" AutomationProperties.AccessibilityView="Raw"/>
+            <TextBlock x:ConnectionId='40' Grid.Column="2" Grid.Row="0"                                               Style="{StaticResource ToolBarPopupButtonTextStyle}" AutomationProperties.AccessibilityView="Raw"/>
+        </Grid>
+    </DataTemplate>
+
+    <!-- LogonUI Conversion mode icon -->
+    <Style x:Key="ChsToolBarListLogonUIStyle" TargetType="controls:ChsToolBarList">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ChsToolBarList">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarListView"
+                            ScrollViewer.BringIntoViewOnFocusChange="False"
+                            ScrollViewer.HorizontalScrollMode="Disabled"
+                            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                            ScrollViewer.VerticalScrollMode="Disabled"
+                            IsTabStop="True"
+                            SelectionMode="None"
+                            Padding="0"
+                            IsItemClickEnabled="True"
+                            ItemTemplate="{StaticResource ChsToolBarItemLogonUITemplate}"
+                            ItemContainerStyle="{StaticResource ToolBarLogonUIItemStyle}"
+                            Style="{StaticResource ListViewStyleWithoutAnimation}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="ChsToolBarItemLogonUITemplate"                                     >
+        <Grid x:ConnectionId='32' Width="{StaticResource ToolBarLogonUIWidth}" Height="{StaticResource ToolBarLogonUIHeight}" AutomationProperties.AccessibilityView="Content"                                                                 >
+            <TextBlock x:ConnectionId='33' x:Name="TEMPLATE_PART_ChsToolBarItemButton"
+                                                               
+                                                             
+                                                                 
+                    Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center"
+                    IsHitTestVisible="False"
+                    AutomationProperties.AccessibilityView="Raw">
+            </TextBlock>
+            <ToolTipService.ToolTip>
+                <ToolTip Background="{ThemeResource ToolBarToolTipBackgroundBrush}">
+                    <TextBlock x:ConnectionId='34' Margin="5,4,5,4"                                      Style="{StaticResource ToolBarToolTipTextStyle}"/>
+                </ToolTip>
+            </ToolTipService.ToolTip>
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="ChtToolBarListLogonUIStyle" TargetType="controls:ChtToolBarList">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ChtToolBarList">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarListView"
+                            Grid.Column="1"
+                            ScrollViewer.BringIntoViewOnFocusChange="False"
+                            ScrollViewer.HorizontalScrollMode="Disabled"
+                            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                            ScrollViewer.VerticalScrollMode="Disabled"
+                            IsTabStop="True"
+                            SelectionMode="None"
+                            Padding="0"
+                            IsItemClickEnabled="True"
+                            ItemTemplate="{StaticResource ChtToolBarItemLogonUITemplate}"
+                            ItemContainerStyle="{StaticResource ToolBarLogonUIItemStyle}"
+                            Style="{StaticResource ListViewStyleWithoutAnimation}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="ChtToolBarItemLogonUITemplate"                                     >
+        <Grid x:ConnectionId='26' Width="{StaticResource ToolBarLogonUIWidth}" Height="{StaticResource ToolBarLogonUIHeight}" AutomationProperties.AccessibilityView="Content"                                                                 >
+            <TextBlock x:ConnectionId='27' x:Name="TEMPLATE_PART_ChtToolBarItemButton"
+                                                               
+                                                             
+                                                                 
+                    Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center"
+                    IsHitTestVisible="False"
+                    AutomationProperties.AccessibilityView="Raw">
+            </TextBlock>
+            <ToolTipService.ToolTip>
+                <ToolTip Background="{ThemeResource ToolBarToolTipBackgroundBrush}">
+                    <TextBlock x:ConnectionId='28' Margin="5,4,5,4"                                      Style="{StaticResource ToolBarToolTipTextStyle}"/>
+                </ToolTip>
+            </ToolTipService.ToolTip>
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="JpnToolBarListLogonUIStyle" TargetType="controls:JpnToolBarList">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:JpnToolBarList">
+                    <ListView x:Name="TEMPLATE_PART_ToolBarListView"
+                            ScrollViewer.BringIntoViewOnFocusChange="False"
+                            ScrollViewer.HorizontalScrollMode="Disabled"
+                            ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                            ScrollViewer.VerticalScrollBarVisibility="Hidden"
+                            ScrollViewer.VerticalScrollMode="Disabled"
+                            IsTabStop="True"
+                            SelectionMode="None"
+                            Padding="0"
+                            IsItemClickEnabled="True"
+                            ItemTemplate="{StaticResource JpnToolBarItemLogonUITemplate}"
+                            ItemContainerStyle="{StaticResource ToolBarLogonUIItemStyle}"
+                            Style="{StaticResource ListViewStyleWithoutAnimation}">
+                        <ListView.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <ItemsStackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ListView.ItemsPanel>
+                        <ListView.Resources>
+                            <MenuFlyout x:Name="TEMPLATE_PART_ToolBarInputModeMenuFlyout" MenuFlyoutPresenterStyle="{ThemeResource ToolBarMenuFlyoutPresenterStyle}" Placement="Top" AllowFocusOnInteraction="False">
+                                <controls:ToolBarMenuFlyoutItem x:Name="TEMPLATE_PART_ToolBarInputModeListMenuItem" Style="{StaticResource JpnToolBarInputModeListMenuItem}" AutomationProperties.AccessibilityView="Raw"/>
+                            </MenuFlyout>
+                        </ListView.Resources>
+                    </ListView>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <DataTemplate x:Key="JpnToolBarItemLogonUITemplate"                                     >
+        <Grid x:ConnectionId='18' Width="{StaticResource ToolBarLogonUIWidth}" Height="{StaticResource ToolBarLogonUIHeight}" AutomationProperties.AccessibilityView="Content"                                                                 >
+            <TextBlock x:ConnectionId='19' x:Name="TEMPLATE_PART_JpnToolBarItemButton"
+                                                               
+                                                             
+                                                                 
+                    Foreground="{ThemeResource SystemControlForegroundBaseHighBrush}"
+                    VerticalAlignment="Center"
+                    TextAlignment="Center"
+                    IsHitTestVisible="False"
+                    AutomationProperties.AccessibilityView="Raw">
+            </TextBlock>
+            <ToolTipService.ToolTip>
+                <ToolTip Background="{ThemeResource ToolBarToolTipBackgroundBrush}">
+                    <TextBlock x:ConnectionId='20' Margin="5,4,5,4"                                      Style="{StaticResource ToolBarToolTipTextStyle}"/>
+                </ToolTip>
+            </ToolTipService.ToolTip>
+        </Grid>
+    </DataTemplate>
+
+    <Style x:Key="ToolBarLogonUIItemStyle" TargetType="SelectorItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <ListViewItemPresenter PressedBackground="{ThemeResource SystemControlBackgroundBaseMediumLowBrush}" PointerOverBackground="{ThemeResource ImmersiveSaturatedSettingCharmSystemPaneButtonHoverBrush}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Common styles-->
+    <Style x:Key="ToolBarItemStyle" TargetType="SelectorItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <ListViewItemPresenter PressedBackground="{ThemeResource ToolBarItemBackgroundPressedBrush}" PointerOverBackground="{ThemeResource ToolBarItemBackgroundPointerOverBrush}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToolBarItemAccentStyle" TargetType="SelectorItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <ListViewItemPresenter PressedBackground="{ThemeResource ToolBarItemBackgroundPressedAccentBrush}" PointerOverBackground="{ThemeResource ToolBarItemBackgroundPointerOverAccentBrush}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToolBarToolTipTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="TextAlignment" Value="Center"/>
+        <Setter Property="Foreground" Value="{ThemeResource ToolBarLabelBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="ToolBarContextMenuItemStyle" TargetType="SelectorItem">
+        <Setter Property="Padding" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="MinHeight" Value="0"/>
+        <Setter Property="MinWidth" Value="0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListViewItem">
+                    <ListViewItemPresenter PressedBackground="{ThemeResource ToolBarPopupButtonBackgroundPressedBrush}" PointerOverBackground="{ThemeResource ToolBarPopupButtonBackgroundPointerOverBrush}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToolBarPopupButtonStyle" TargetType="Button">
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="13,0,0,0"/>
+        <Setter Property="HorizontalAlignment" Value="Stretch"/>
+        <Setter Property="VerticalAlignment" Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid x:Name="RootGrid">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualState x:Name="Normal">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="Transparent"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="PointerOver">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToolBarPopupButtonBackgroundPointerOverBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <PointerUpThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background" Storyboard.TargetName="RootGrid">
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{ThemeResource ToolBarPopupButtonBackgroundPressedBrush}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <PointerDownThemeAnimation Storyboard.TargetName="RootGrid"/>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <ContentPresenter x:Name="ContentPresenter" AutomationProperties.AccessibilityView="Raw" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTransitions="{TemplateBinding ContentTransitions}" Content="{TemplateBinding Content}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" Padding="{TemplateBinding Padding}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ToolBarPopupButtonIconStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Margin" Value="12,0,12,0"/>
+        <Setter Property="Foreground" Value="{ThemeResource ToolBarLabelBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="ToolBarPopupButtonTextStyle" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="13"/>
+        <Setter Property="TextAlignment" Value="Left"/>
+        <Setter Property="Foreground" Value="{ThemeResource ToolBarLabelBrush}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+
+    <Style x:Key="ToolBarMenuFlyoutPresenterStyle" TargetType="MenuFlyoutPresenter">
+        <Setter Property="Background" Value="{ThemeResource ToolBarPopupButtonBackgroundBrush}"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="0,1,0,1"/>
+        <Setter Property="BorderBrush" Value="#767676"/>
+    </Style>
+
+    <ResourceDictionary.ThemeDictionaries>
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="ToolBarToolTipBackgroundBrush" Color="#1F1F1F" />
+            <SolidColorBrush x:Key="ToolBarPopupButtonBackgroundBrush" Color="#1F1F1F" />
+            <AcrylicBrush x:Key="ToolBarBackgroundAcrylicBrush" BackgroundSource="Backdrop" TintColor="#1F1F1F" FallbackColor="#1F1F1F" TintOpacity="0.5" />
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPointerOverBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.8" />
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPressedBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.9" />
+            <SolidColorBrush x:Key="ToolBarLabelBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" />
+            <AcrylicBrush x:Key="ToolBarPopupButtonBackgroundAcrylicBrush" BackgroundSource="HostBackdrop" TintColor="#1F1F1F" FallbackColor="#1F1F1F" TintOpacity="0.5" />
+            <SolidColorBrush x:Key="ToolBarPopupButtonBackgroundPointerOverBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" Opacity="0.2" />
+            <SolidColorBrush x:Key="ToolBarPopupButtonBackgroundPressedBrush" Color="{StaticResource XboxClrVideoSafeWhiteColor}" Opacity="0.2" />
+
+            <!-- Accent style colors -->
+            <SolidColorBrush x:Key="ToolBarBackgroundAccentBrush" Color="{ThemeResource SystemAccentColorDark3}" />
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPointerOverAccentBrush" Color="{ThemeResource SystemAccentColorDark2}" />
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPressedAccentBrush" Color="{ThemeResource SystemAccentColor}" />
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="ToolBarToolTipBackgroundBrush" Color="#EEEEEE" />
+            <SolidColorBrush x:Key="ToolBarPopupButtonBackgroundBrush" Color="#EEEEEE" />
+            <AcrylicBrush x:Key="ToolBarBackgroundAcrylicBrush" BackgroundSource="Backdrop" TintColor="#EEEEEE" FallbackColor="#EEEEEE" TintOpacity="0.5" />
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPointerOverBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.8" />
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPressedBrush" Color="{ThemeResource SystemAccentColor}" Opacity="0.9" />
+            <SolidColorBrush x:Key="ToolBarLabelBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}" />
+            <AcrylicBrush x:Key="ToolBarPopupButtonBackgroundAcrylicBrush" BackgroundSource="HostBackdrop" TintColor="#EEEEEE" FallbackColor="#EEEEEE" TintOpacity="0.5" />
+            <SolidColorBrush x:Key="ToolBarPopupButtonBackgroundPointerOverBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}" Opacity="0.2" />
+            <SolidColorBrush x:Key="ToolBarPopupButtonBackgroundPressedBrush" Color="{StaticResource XboxClrVideoSafeBlackColor}" Opacity="0.2" />
+
+            <!-- Accent style colors -->
+            <SolidColorBrush x:Key="ToolBarBackgroundAccentBrush" Color="{ThemeResource SystemAccentColorDark3}" />
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPointerOverAccentBrush" Color="{ThemeResource SystemAccentColorDark2}" />
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPressedAccentBrush" Color="{ThemeResource SystemAccentColor}" />
+        </ResourceDictionary>
+
+        <!--
+            This covers all High Contrast Themes as long as the standard High Contrast colors are used (ThemeResource SystemColor)
+        -->
+        <ResourceDictionary x:Key="HighContrast">
+            <SolidColorBrush x:Key="ToolBarToolTipBackgroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}"/>
+            <SolidColorBrush x:Key="ToolBarPopupButtonBackgroundBrush" Color="{ThemeResource SystemColorButtonFaceColor}" />
+            <SolidColorBrush x:Key="ToolBarBackgroundAcrylicBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPointerOverBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPressedBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ToolBarLabelBrush" Color="{StaticResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ToolBarPopupButtonBackgroundAcrylicBrush" Color="{ThemeResource SystemColorButtonFaceColor}"/>
+            <SolidColorBrush x:Key="ToolBarPopupButtonBackgroundPointerOverBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ToolBarPopupButtonBackgroundPressedBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+
+            <!-- Accent style colors -->
+            <SolidColorBrush x:Key="ToolBarBackgroundAccentBrush" Color="{ThemeResource SystemColorWindowTextColor}"/>
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPointerOverAccentBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+            <SolidColorBrush x:Key="ToolBarItemBackgroundPressedAccentBrush" Color="{ThemeResource SystemColorHighlightColor}"/>
+        </ResourceDictionary>
+    </ResourceDictionary.ThemeDictionaries>
+</ResourceDictionary>
+

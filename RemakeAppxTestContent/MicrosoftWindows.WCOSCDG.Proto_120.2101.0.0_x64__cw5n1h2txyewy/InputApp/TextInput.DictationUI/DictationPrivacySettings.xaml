@@ -1,0 +1,87 @@
+﻿<UserControl x:ConnectionId='1'
+    x:Class="TextInput.DictationUI.DictationPrivacySettings"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:TextInput.DictationUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    AllowFocusOnInteraction="True"
+    IsTabStop="True"
+    mc:Ignorable="d">
+
+    <Grid x:ConnectionId='2' Style="{ThemeResource PrivacySettingsGridStyle}"                                        >
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*" />
+                <RowDefinition Height="6*" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Border x:ConnectionId='3' Grid.Row="0" Grid.RowSpan="2" x:Name="Grip" Background="Transparent" AutomationProperties.AutomationId="MoveGripper" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+
+            <Grid x:ConnectionId='4' Grid.Row="1" x:Uid="ConsentPage1" x:Name="ConsentSetting_Page1" MinWidth="538" MinHeight="318" MaxWidth="548"
+                  AutomationProperties.AutomationId="ConsentPage1" AutomationProperties.AccessibilityView="Control" AutomationProperties.IsDialog="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <TextBlock x:Uid="ConsentPage1Title" Grid.Row="0" Style="{StaticResource PrivacySettingsTitleTextStyle}" />
+                <StackPanel Grid.Row="1">
+                    <TextBlock x:Uid="ConsentPage1Body1" Style="{StaticResource PrivacySettingsTextStyle}" />
+                    <TextBlock x:Uid="ConsentPage1Body2" Style="{StaticResource PrivacySettingsTextStyle}" />
+                    <TextBlock x:Uid="ConsentPage1Body3" Style="{StaticResource PrivacySettingsTextStyle}" />
+                </StackPanel>
+                <HyperlinkButton x:ConnectionId='8' x:Uid="ConsentPrivacyStatementLink" Grid.Row="2" Style="{StaticResource PrivacySettingsHyperlinkButtonStyle}" AutomationProperties.AutomationId="ConsentPrivacyStatementLink"
+                                 NavigateUri="https://go.microsoft.com/fwlink/p/?linkid=2006085"
+                                                               >
+                    <HyperlinkButton.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" />
+                        </DataTemplate>
+                    </HyperlinkButton.ContentTemplate>
+                </HyperlinkButton>
+                <HyperlinkButton x:ConnectionId='9' x:Uid="ConsentPrivacyDashboardLink" Grid.Row="3" Style="{StaticResource PrivacySettingsHyperlinkButtonStyle}" AutomationProperties.AutomationId="DictationPrivacyStatementLink"
+                                 NavigateUri="https://go.microsoft.com/fwlink/?linkid=864206"
+                                                               >
+                    <HyperlinkButton.ContentTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding}" />
+                        </DataTemplate>
+                    </HyperlinkButton.ContentTemplate>
+                </HyperlinkButton>
+                <Grid Grid.Row="4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:ConnectionId='10' x:Uid="ConsentButtonYes" x:Name="ConsentButton_Yes" Margin="20,8,6,10" Grid.Column="0" Style="{StaticResource PrivacySettingsButtonStyle}"                                    AutomationProperties.AutomationId="ConsentPage1Accept" />
+                    <Button x:ConnectionId='11' x:Uid="ConsentButtonExit" x:Name="ConsentButton_Exit" Margin="6,8,20,10" Grid.Column="1" Style="{StaticResource PrivacySettingsButtonStyle}"                                     AutomationProperties.AutomationId="ConsentPage1Decline" />
+                </Grid>
+            </Grid>
+
+            <Grid x:ConnectionId='5' Grid.Row="1" x:Uid="ConsentPage2" x:Name="ConsentSetting_Page2" Visibility="Collapsed" MinWidth="527" MinHeight="231" MaxWidth="548"
+                  AutomationProperties.AutomationId="ConsentPage2" AutomationProperties.AccessibilityView="Control" AutomationProperties.IsDialog="True">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="60" />
+                </Grid.RowDefinitions>
+                <TextBlock x:Uid="ConsentPage2Title" Grid.Row="0" Style="{StaticResource PrivacySettingsTitleTextStyle}" />
+                <TextBlock x:Uid="ConsentPage2Body" Grid.Row="1" Style="{StaticResource PrivacySettingsTextStyle}" />
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="1*" />
+                    </Grid.ColumnDefinitions>
+                    <Button x:ConnectionId='6' x:Uid="ConsentButtonGoBack" x:Name="ConsentButton_GoBack" Margin="20,2,6,10" Grid.Column="0" Style="{StaticResource PrivacySettingsButtonStyle}"                                       AutomationProperties.AutomationId="ConsentPage2GoBack" />
+                    <Button x:ConnectionId='7' x:Uid="ConsentButtonImSure" x:Name="ConsentButton_ImSure" Margin="6,2,20,10" Grid.Column="1" Style="{StaticResource PrivacySettingsButtonStyle}"                                       AutomationProperties.AutomationId="ConsentPage2ImSure" />
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>
+
