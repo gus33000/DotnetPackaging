@@ -51,7 +51,7 @@ public class MsixPackager(Maybe<ILogger> logger)
         "zip"
     ];
 
-    public Result<IByteSource> Pack(IDirectory directory)
+    public Result<IByteSource> Pack(IDirectory directory, bool bundleMode, bool unsignedMode)
     {
         IEnumerable<INamedByteSourceWithPath> files = directory.FilesWithPathsRecursive();
 
@@ -60,34 +60,44 @@ public class MsixPackager(Maybe<ILogger> logger)
             if (file.Name.Equals("AppxBlockMap.xml"))
                 return false;
 
-            /*if (file.Name.Equals("AppxSignature.p7x"))
+            if (file.Name.Equals("[Content_Types].xml"))
                 return false;
 
-            if (file.Path.Value.Equals("AppxMetadata"))
-                return false;*/
+            if (unsignedMode)
+            {
+                if (file.Name.Equals("AppxSignature.p7x"))
+                    return false;
+
+                if (file.Path.Value.Equals("AppxMetadata") && file.Name.Equals("CodeIntegrity.cat"))
+                    return false;
+            }
 
             return true;
         });
 
         return Result.Success()
-            .Map(() => Compress(files));
+            .Map(() => Compress(files, bundleMode, unsignedMode));
     }
 
-    private IByteSource Compress(IEnumerable<INamedByteSourceWithPath> files)
+    private IByteSource Compress(IEnumerable<INamedByteSourceWithPath> files, bool bundleMode, bool unsignedMode)
     {
-        return ByteSource.FromAsyncStreamFactory(() => GetStream(files.ToList()));
+        return ByteSource.FromAsyncStreamFactory(() => GetStream(files.ToList(), bundleMode, unsignedMode));
     }
 
-    private async Task<Stream> GetStream(IList<INamedByteSourceWithPath> files)
+    private async Task<Stream> GetStream(IList<INamedByteSourceWithPath> files, bool bundleMode, bool unsignedMode)
     {
         var zipStream = new MemoryStream();
         
         await using (var zipper = new MsixBuilder(zipStream, logger))
         {
-            await WritePayload(files, zipper);
-            await WriteContentTypes(files, zipper);
-            await AddAppxMetadata(zipper, files);
-            await AddAppxSignature(zipper, files);
+            await WritePayload(files, zipper, bundleMode);
+            await WriteContentTypes(files, zipper, bundleMode);
+
+            if (!unsignedMode && !bundleMode)
+                await AddAppxMetadata(zipper, files);
+
+            if (!unsignedMode)
+                await AddAppxSignature(zipper, files);
         }
         
         var finalStream = new MemoryStream();
@@ -98,10 +108,10 @@ public class MsixPackager(Maybe<ILogger> logger)
         return finalStream;
     }
 
-    private static async Task WriteContentTypes(IEnumerable<INamedByteSourceWithPath> files, MsixBuilder msix)
+    private static async Task WriteContentTypes(IEnumerable<INamedByteSourceWithPath> files, MsixBuilder msix, bool bundleMode)
     {
         // No blockmap
-        var contentTypes = ContentTypesGenerator.Create(files.Select(x => x.Name).Append("AppxBlockMap.xml"));
+        var contentTypes = ContentTypesGenerator.Create(files.Select(x => x.Name).Append("AppxBlockMap.xml"), bundleMode);
         var xml = ContentTypesSerializer.Serialize(contentTypes);
         await msix.PutNextEntry(MsixEntryFactory.Compress("[Content_Types].xml", ByteSource.FromString(xml, Encoding.UTF8)));
 
@@ -116,7 +126,7 @@ public class MsixPackager(Maybe<ILogger> logger)
         await msix.PutNextEntry(MsixEntryFactory.Compress("[Content_Types].xml", ByteSource.FromBytes(bytes)));//ByteSource.FromString(xml, Encoding.UTF8)));*/
     }
 
-    private async Task WritePayload(IEnumerable<INamedByteSourceWithPath> files, MsixBuilder msix)
+    private async Task WritePayload(IEnumerable<INamedByteSourceWithPath> files, MsixBuilder msix, bool bundleMode)
     {
         var blockInfos = new List<FileBlockInfo>();
 
@@ -128,7 +138,7 @@ public class MsixPackager(Maybe<ILogger> logger)
             if (file.Name.Equals("AppxSignature.p7x"))
                 continue;
 
-            if (file.Path.Value.Equals("AppxMetadata"))
+            if (file.Path.Value.Equals("AppxMetadata") && file.Name.Equals("CodeIntegrity.cat"))
                 continue;
 
             logger.Debug("Processing {File}", file.FullPath());
@@ -170,9 +180,12 @@ public class MsixPackager(Maybe<ILogger> logger)
             await msix.PutNextEntry(entry);
             
             logger.Debug("Added entry for {File}", file.FullPath());
-            
-            var fileBlockInfo = new FileBlockInfo(entry, blocks);
-            blockInfos.Add(fileBlockInfo);
+
+            if (!bundleMode || !file.FullPath().Value.EndsWith("appx"))
+            {
+                var fileBlockInfo = new FileBlockInfo(entry, blocks);
+                blockInfos.Add(fileBlockInfo);
+            }
         }
         
         await AddBlockMap(msix, blockInfos, files);
@@ -199,7 +212,12 @@ public class MsixPackager(Maybe<ILogger> logger)
 
     private async Task AddAppxMetadata(MsixBuilder msix, IEnumerable<INamedByteSourceWithPath> files)
     {
-        IObservable<byte[]> AppxMetadata = files.First(t => t.Path.Value.Equals("AppxMetadata")).Bytes;
+        if (!files.Any(t => t.Path.Value.Equals("AppxMetadata") && t.Name.Equals("CodeIntegrity.cat")))
+        {
+            return;
+        }
+
+        IObservable<byte[]> AppxMetadata = files.First(t => t.Path.Value.Equals("AppxMetadata") && t.Name.Equals("CodeIntegrity.cat")).Bytes;
 
         logger.Debug("Adding AppxMetadata entry to package");
         await msix.PutNextEntry(MsixEntryFactory.Compress("AppxMetadata/CodeIntegrity.cat", ByteSource.FromByteObservable(AppxMetadata)));
@@ -209,6 +227,11 @@ public class MsixPackager(Maybe<ILogger> logger)
 
     private async Task AddAppxSignature(MsixBuilder msix, IEnumerable<INamedByteSourceWithPath> files)
     {
+        if (!files.Any(t => t.Name.Equals("AppxSignature.p7x")))
+        {
+            return;
+        }
+
         IObservable<byte[]> AppxSignature = files.First(t => t.Name.Equals("AppxSignature.p7x")).Bytes;
 
         logger.Debug("Adding AppxSignature.p7x entry to package");

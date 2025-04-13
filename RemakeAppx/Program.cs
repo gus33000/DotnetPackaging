@@ -34,14 +34,50 @@ namespace RemakeAppx
                 return;
             }
 
+            await MakeAppx(args[0], args[1], false, false);
+        }
+
+        private static async Task TestBundle()
+        {
+            await MakeAppx(
+                @"C:\Users\gus33\Downloads\BundleTest2\Microsoft.WindowsCalculator_10.1906.55.0_x64__8wekyb3d8bbwe",
+                @"C:\Users\gus33\Downloads\BundleTest2\Microsoft.WindowsCalculator_2020.1906.55.0_neutral_~_8wekyb3d8bbwe\Calculator_10.1906.55.0_x64.appx",
+                false,
+                false);
+
+            await MakeAppx(
+                @"C:\Users\gus33\Downloads\BundleTest2\Microsoft.WindowsCalculator_10.1906.55.0_neutral_split.scale-100_8wekyb3d8bbwe",
+                @"C:\Users\gus33\Downloads\BundleTest2\Microsoft.WindowsCalculator_2020.190²6.55.0_neutral_~_8wekyb3d8bbwe\Calculator_10.1906.55.0_scale-100.appx",
+                false,
+                false);
+
+            await MakeAppx(
+                @"C:\Users\gus33\Downloads\BundleTest2\Microsoft.WindowsCalculator_10.1906.55.0_neutral_split.scale-125_8wekyb3d8bbwe",
+                @"C:\Users\gus33\Downloads\BundleTest2\Microsoft.WindowsCalculator_2020.1906.55.0_neutral_~_8wekyb3d8bbwe\Calculator_10.1906.55.0_scale-125.appx",
+                false,
+                false);
+
+            await MakeAppx(
+                @"C:\Users\gus33\Downloads\BundleTest2\Microsoft.WindowsCalculator_2020.1906.55.0_neutral_~_8wekyb3d8bbwe",
+                @"C:\Users\gus33\Downloads\BundleTest2\Microsoft.WindowsCalculator_2020.1906.55.0_neutral_~_8wekyb3d8bbwe.Rebuilt.appxbundle",
+                true,
+                false);
+        }
+
+        private static async Task MakeAppx(string inputFolder, string outputFile, bool bundleMode, bool unsignedMode)
+        {
+            Console.WriteLine("Making " + outputFile + " out of " + inputFolder);
+            Console.WriteLine("Bundle Mode: " + bundleMode);
+            Console.WriteLine("Unsigned Mode: " + unsignedMode);
+
             FileSystem fs = new FileSystem();
-            IDirectoryInfo directoryInfo = fs.DirectoryInfo.New(args[0]);
+            IDirectoryInfo directoryInfo = fs.DirectoryInfo.New(inputFolder);
             IODir ioDir = new IODir(directoryInfo);
 
-            await Msix.FromDirectory(ioDir, Maybe<ILogger>.None)
+            await Msix.FromDirectory(ioDir, Maybe<ILogger>.None, bundleMode, unsignedMode)
                 .Map(async source =>
                 {
-                    await using var fileStream = File.Open(args[1], FileMode.Create);
+                    await using var fileStream = File.Open(outputFile, FileMode.Create);
                     return await source.DumpTo(fileStream);
                 });
         }
