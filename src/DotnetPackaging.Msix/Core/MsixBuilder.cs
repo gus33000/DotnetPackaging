@@ -16,9 +16,11 @@ public class MsixBuilder : IAsyncDisposable
     private readonly List<MsixEntry> entries = new List<MsixEntry>();
     private readonly List<long> localHeaderOffsets = new List<long>();
     private bool finished = false;
+    private readonly string inputPath;
     
-    public MsixBuilder(Stream stream, Maybe<ILogger> logger)
+    public MsixBuilder(Stream stream, Maybe<ILogger> logger, string inputPath)
     {
+        this.inputPath = inputPath;
         this.logger = logger.Map(l => l.ForContext<MsixBuilder>());
         baseStream = stream ?? throw new ArgumentNullException(nameof(stream));
     }
@@ -83,7 +85,15 @@ public class MsixBuilder : IAsyncDisposable
             short compressionMethod = (short)(entry.CompressionLevel == CompressionLevel.Optimal ? 8 : 0);
             writer.Write(compressionMethod);
             // Date/time
-            int dosTime = GetDosTime(entry.ModificationTime);
+            // This is temp!
+            //int dosTime = GetDosTime(entry.ModificationTime);
+            string filePath = System.IO.Path.Combine(inputPath, entry.FullPath.Replace('/', System.IO.Path.DirectorySeparatorChar));
+            if (entry.FullPath.Equals("[Content_Types].xml") && !System.IO.File.Exists(entry.FullPath))
+            {
+                filePath = System.IO.Path.Combine(inputPath, "AppxBlockMap.xml");
+            }
+
+            int dosTime = GetDosTime(System.IO.File.GetLastWriteTime(filePath));
             writer.Write(dosTime);
 
             if (entry.FullPath.Equals("[Content_Types].xml") ||
@@ -168,7 +178,15 @@ public class MsixBuilder : IAsyncDisposable
 
                 short compressionMethod = (short)(entry.CompressionLevel == CompressionLevel.Optimal ? 8 : 0);
                 writer.Write(compressionMethod);
-                int dosTime = GetDosTime(entry.ModificationTime);
+                // This is temp!
+                //int dosTime = GetDosTime(entry.ModificationTime);
+                string filePath = System.IO.Path.Combine(inputPath, entry.FullPath.Replace('/', System.IO.Path.DirectorySeparatorChar));
+                if (entry.FullPath.Equals("[Content_Types].xml") && !System.IO.File.Exists(entry.FullPath))
+                {
+                    filePath = System.IO.Path.Combine(inputPath, "AppxBlockMap.xml");
+                }
+
+                int dosTime = GetDosTime(System.IO.File.GetLastWriteTime(filePath));
                 writer.Write((int)dosTime);
                 writer.Write(await entry.Original.Crc32());
 
@@ -230,8 +248,8 @@ public class MsixBuilder : IAsyncDisposable
         {
             writer.Write(0x06054b50); // EOCD signature
 
-            writer.Write((ushort)0xFFFF); // Disk number
-            writer.Write((ushort)0xFFFF); // Disk with central dir
+            writer.Write((ushort)0x0000); // Disk number
+            writer.Write((ushort)0x0000); // Disk with central dir
             writer.Write((ushort)0xFFFF); // Entries on this disk
             writer.Write((ushort)0xFFFF); // Total entries
             writer.Write(0xFFFFFFFF);     // Central dir size

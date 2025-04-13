@@ -74,7 +74,7 @@ namespace RemakeAppx
             IDirectoryInfo directoryInfo = fs.DirectoryInfo.New(inputFolder);
             IODir ioDir = new IODir(directoryInfo);
 
-            await Msix.FromDirectory(ioDir, Maybe<ILogger>.None, bundleMode, unsignedMode)
+            await Msix.FromDirectory(ioDir, Maybe<ILogger>.None, bundleMode, unsignedMode, inputFolder)
                 .Map(async source =>
                 {
                     await using var fileStream = File.Open(outputFile, FileMode.Create);

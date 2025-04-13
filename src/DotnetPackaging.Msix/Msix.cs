@@ -10,19 +10,19 @@ namespace DotnetPackaging.Msix;
 
 public class Msix
 {
-    public static Result<IByteSource> FromDirectory(IDirectory directory, Maybe<ILogger> logger, bool bundleMode, bool unsignedMode)
+    public static Result<IByteSource> FromDirectory(IDirectory directory, Maybe<ILogger> logger, bool bundleMode, bool unsignedMode, string inputPath)
     {
-        return new MsixPackager(logger).Pack(directory, bundleMode, unsignedMode);
+        return new MsixPackager(logger).Pack(directory, bundleMode, unsignedMode, inputPath);
     }
     
-    public static Result<IByteSource> FromDirectoryAndMetadata(IDirectory directory, AppManifestMetadata metadata, Maybe<ILogger> logger, bool bundleMode, bool unsignedMode)
+    public static Result<IByteSource> FromDirectoryAndMetadata(IDirectory directory, AppManifestMetadata metadata, Maybe<ILogger> logger, bool bundleMode, bool unsignedMode, string inputPath)
     {
         var generateAppManifest = AppManifestGenerator.GenerateAppManifest(metadata);
         var appxManifiest = ByteSource.FromString(generateAppManifest, Encoding.UTF8);
         var dir = Directory.Create("metadata", new File("AppxManifest.xml", appxManifiest));
         
         var merged = Dir.Combine("merged", directory, dir);
-        return new MsixPackager(logger).Pack(merged, bundleMode, unsignedMode);
+        return new MsixPackager(logger).Pack(merged, bundleMode, unsignedMode, inputPath);
     }
 }
 

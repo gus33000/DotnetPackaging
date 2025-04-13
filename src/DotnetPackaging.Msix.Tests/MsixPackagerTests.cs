@@ -62,7 +62,7 @@ public class MsixPackagerTests
         var fs = new FileSystem();
         var directoryInfo = fs.DirectoryInfo.New($"TestFiles/MinimalNoMetadata/Contents");
         var ioDir = new IODir(directoryInfo);
-        await Msix.FromDirectoryAndMetadata(ioDir, new AppManifestMetadata(), Maybe<ILogger>.None, false, true)
+        await Msix.FromDirectoryAndMetadata(ioDir, new AppManifestMetadata(), Maybe<ILogger>.None, false, true, $"TestFiles/MinimalNoMetadata/Contents")
             .Map(async source =>
             {
                 await using var fileStream = File.Open("TestFiles/MinimalNoMetadata/Actual.msix", FileMode.Create);
@@ -75,7 +75,7 @@ public class MsixPackagerTests
         var fs = new FileSystem();
         var directoryInfo = fs.DirectoryInfo.New($"TestFiles/{folderName}/Contents");
         var ioDir = new IODir(directoryInfo);
-        var package = new MsixPackager(Log.Logger.AsMaybe()).Pack(ioDir, false, true);
+        var package = new MsixPackager(Log.Logger.AsMaybe()).Pack(ioDir, false, true, $"TestFiles/{folderName}/Contents");
         await using (var fileStream = File.Create($"TestFiles/{folderName}/Actual.msix"))
         {
             await package.Value.DumpTo(fileStream);

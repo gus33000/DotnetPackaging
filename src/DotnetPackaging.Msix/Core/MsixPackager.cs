@@ -11,6 +11,10 @@ namespace DotnetPackaging.Msix.Core;
 
 public class MsixPackager(Maybe<ILogger> logger)
 {
+    private const bool USE_EXTERNAL_CONTENTTYPE = false;
+    private const string EXTERNAL_CONTENTTYPE_LOCATION = @"C:\Users\gus33\Downloads\MSIXTESTs\Microsoft.zGamesTwoGo_8wekyb3d8bbwe\[Content_Types].xml";
+    private const bool USE_EXISTING_BLOCKMAP = false;
+
     private string[] NoCompressionExtensions =
     [
         "appx",
@@ -51,15 +55,12 @@ public class MsixPackager(Maybe<ILogger> logger)
         "zip"
     ];
 
-    public Result<IByteSource> Pack(IDirectory directory, bool bundleMode, bool unsignedMode)
+    public Result<IByteSource> Pack(IDirectory directory, bool bundleMode, bool unsignedMode, string inputPath)
     {
         IEnumerable<INamedByteSourceWithPath> files = directory.FilesWithPathsRecursive();
 
         files = files.Where(file =>
         {
-            if (file.Name.Equals("AppxBlockMap.xml"))
-                return false;
-
             if (file.Name.Equals("[Content_Types].xml"))
                 return false;
 
@@ -76,19 +77,19 @@ public class MsixPackager(Maybe<ILogger> logger)
         });
 
         return Result.Success()
-            .Map(() => Compress(files, bundleMode, unsignedMode));
+            .Map(() => Compress(files, bundleMode, unsignedMode, inputPath));
     }
 
-    private IByteSource Compress(IEnumerable<INamedByteSourceWithPath> files, bool bundleMode, bool unsignedMode)
+    private IByteSource Compress(IEnumerable<INamedByteSourceWithPath> files, bool bundleMode, bool unsignedMode, string inputPath)
     {
-        return ByteSource.FromAsyncStreamFactory(() => GetStream(files.ToList(), bundleMode, unsignedMode));
+        return ByteSource.FromAsyncStreamFactory(() => GetStream(files.ToList(), bundleMode, unsignedMode, inputPath));
     }
 
-    private async Task<Stream> GetStream(IList<INamedByteSourceWithPath> files, bool bundleMode, bool unsignedMode)
+    private async Task<Stream> GetStream(IList<INamedByteSourceWithPath> files, bool bundleMode, bool unsignedMode, string inputPath)
     {
         var zipStream = new MemoryStream();
         
-        await using (var zipper = new MsixBuilder(zipStream, logger))
+        await using (var zipper = new MsixBuilder(zipStream, logger, inputPath))
         {
             await WritePayload(files, zipper, bundleMode);
             await WriteContentTypes(files, zipper, bundleMode);
@@ -110,20 +111,26 @@ public class MsixPackager(Maybe<ILogger> logger)
 
     private static async Task WriteContentTypes(IEnumerable<INamedByteSourceWithPath> files, MsixBuilder msix, bool bundleMode)
     {
-        // No blockmap
-        var contentTypes = ContentTypesGenerator.Create(files.Select(x => x.Name).Append("AppxBlockMap.xml"), bundleMode);
-        var xml = ContentTypesSerializer.Serialize(contentTypes);
-        await msix.PutNextEntry(MsixEntryFactory.Compress("[Content_Types].xml", ByteSource.FromString(xml, Encoding.UTF8)));
+        if (USE_EXTERNAL_CONTENTTYPE)
+        {
+            // Use external content type
+            var bytes = System.IO.File.ReadAllBytes(EXTERNAL_CONTENTTYPE_LOCATION);
 
-        // Use existing blockmap to generate content type
-        /*var contentTypes = ContentTypesGenerator.Create(files.Select(x => x.Name));
-        var xml = ContentTypesSerializer.Serialize(contentTypes);
-        await msix.PutNextEntry(MsixEntryFactory.Compress("[Content_Types].xml", ByteSource.FromString(xml, Encoding.UTF8)));*/
+            await msix.PutNextEntry(MsixEntryFactory.Compress("[Content_Types].xml", ByteSource.FromBytes(bytes)));
+        }
+        else
+        {
+            var allFileNames = files.Select(x => x.Name);
+            if (!allFileNames.Contains("AppxBlockMap.xml"))
+            {
+                allFileNames.Append("AppxBlockMap.xml");
+            }
 
-        // Use external content type
-        /*var bytes = System.IO.File.ReadAllBytes(@"PreInstalled\TRIAL\MicrosoftWindows.WCOSCDG.Proto\[Content_Types].xml");
+            var contentTypes = ContentTypesGenerator.Create(allFileNames, bundleMode);
+            var xml = ContentTypesSerializer.Serialize(contentTypes);
+            await msix.PutNextEntry(MsixEntryFactory.Compress("[Content_Types].xml", ByteSource.FromString(xml, Encoding.UTF8)));
+        }
 
-        await msix.PutNextEntry(MsixEntryFactory.Compress("[Content_Types].xml", ByteSource.FromBytes(bytes)));//ByteSource.FromString(xml, Encoding.UTF8)));*/
     }
 
     private async Task WritePayload(IEnumerable<INamedByteSourceWithPath> files, MsixBuilder msix, bool bundleMode)
@@ -152,8 +159,7 @@ public class MsixPackager(Maybe<ILogger> logger)
                     Compressed = file,
                     Original = file,
                     FullPath = file.FullPath(),
-                    CompressionLevel = CompressionLevel.NoCompression,
-                    ModificationTime = new DateTime(2020, 01, 29, 21, 35, 18, DateTimeKind.Utc)
+                    CompressionLevel = CompressionLevel.NoCompression
                 };
 
                 blocks = await file.Bytes.Flatten().Buffer(64 * 1024).Select(list => new DeflateBlock
@@ -170,8 +176,7 @@ public class MsixPackager(Maybe<ILogger> logger)
                     Original = file,
                     Compressed = ByteSource.FromByteObservable(compressionBlocks.Select(x => x.CompressedData)),
                     FullPath = file.FullPath(),
-                    CompressionLevel = CompressionLevel.Optimal,
-                    ModificationTime = new DateTime(2020, 01, 29, 21, 35, 18, DateTimeKind.Utc)
+                    CompressionLevel = CompressionLevel.Optimal
                 };
 
                 blocks = await compressionBlocks.ToList();
@@ -193,19 +198,24 @@ public class MsixPackager(Maybe<ILogger> logger)
 
     private async Task AddBlockMap(MsixBuilder msix, List<FileBlockInfo> blockInfos, IEnumerable<INamedByteSourceWithPath> files)
     {
-        logger.Debug("Adding Block Map");
-        var blockMapModel = new BlockMapModel("SHA256", blockInfos.ToImmutableList());
-        logger.Debug("Serializing block map");
-        var blockMapXml = await new BlockMapSerializer(logger).GenerateBlockMapXml(blockMapModel);
-        logger.Debug("Block map serialized");
+        if (USE_EXISTING_BLOCKMAP)
+        {
+            IObservable<byte[]> blockMapXml = files.First(t => t.Name.Equals("AppxBlockMap.xml")).Bytes;
 
-        logger.Debug("Adding Block Map entry to package");
-        await msix.PutNextEntry(MsixEntryFactory.Compress("AppxBlockMap.xml", ByteSource.FromString(blockMapXml, Encoding.UTF8)));
+            logger.Debug("Adding Block Map entry to package");
+            await msix.PutNextEntry(MsixEntryFactory.Compress("AppxBlockMap.xml", ByteSource.FromByteObservable(blockMapXml)));
+        }
+        else
+        {
+            logger.Debug("Adding Block Map");
+            var blockMapModel = new BlockMapModel("SHA256", blockInfos.ToImmutableList());
+            logger.Debug("Serializing block map");
+            var blockMapXml = await new BlockMapSerializer(logger).GenerateBlockMapXml(blockMapModel);
+            logger.Debug("Block map serialized");
 
-        /*IObservable<byte[]> blockMapXml = files.First(t => t.Name.Equals("AppxBlockMap.xml")).Bytes;
-
-        logger.Debug("Adding Block Map entry to package");
-        await msix.PutNextEntry(MsixEntryFactory.Compress("AppxBlockMap.xml", ByteSource.FromByteObservable(blockMapXml)));*/
+            logger.Debug("Adding Block Map entry to package");
+            await msix.PutNextEntry(MsixEntryFactory.Compress("AppxBlockMap.xml", ByteSource.FromString(blockMapXml, Encoding.UTF8)));
+        }
 
         logger.Debug("Block map added");
     }

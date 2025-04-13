@@ -6,16 +6,29 @@ public static class MsixEntryFactory
 {
     public static MsixEntry Compress(string entryName, IByteSource data)
     {
+        IByteSource compressedByteSource = ByteSource.FromByteObservable(data.Bytes.Compressed());
+
+        /*if (entryName.Equals("AppxBlockMap.xml"))
+        {
+            compressedByteSource = ByteSource.FromBytes(System.IO.File.ReadAllBytes(@"C:\Users\gus33\Downloads\MSIXTESTs\CompressedzGamesTwoGoBundleFiles\AppxBlockmap.Deflate"));
+        }
+        else if (entryName.Equals("[Content_Types].xml"))
+        {
+            compressedByteSource = ByteSource.FromBytes(System.IO.File.ReadAllBytes(@"C:\Users\gus33\Downloads\MSIXTESTs\CompressedzGamesTwoGoBundleFiles\ContentType.Deflate"));
+        }
+        else if (entryName.Equals("AppxSignature.p7x"))
+        {
+            compressedByteSource = ByteSource.FromBytes(System.IO.File.ReadAllBytes(@"C:\Users\gus33\Downloads\MSIXTESTs\CompressedzGamesTwoGoBundleFiles\AppxSignature.Deflate"));
+        }*/
+
         var compressionLevel = CompressionLevel.Optimal;
 
         var msixEntry = new MsixEntry
         {
             Original = data,
-            Compressed = ByteSource.FromByteObservable(data.Bytes.Compressed()),
+            Compressed = compressedByteSource,
             FullPath = entryName,
-            CompressionLevel = compressionLevel,
-            //2020-01-29 21:35:18
-            ModificationTime = new DateTime(2020, 01, 29, 21, 35, 18, DateTimeKind.Utc)
+            CompressionLevel = compressionLevel
         };
 
         return msixEntry;

@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "RemakeAppx": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\gus33\\Downloads\\MSIXTESTs\\PreInstalled\\Apps\\MicrosoftWindows.WCOSCDG.Proto_120.2101.0.0_x64__cw5n1h2txyewy C:\\Users\\gus33\\Downloads\\MSIXTESTs\\wow.appxbundle"
+    }
+  }
+}
