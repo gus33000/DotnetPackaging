@@ -11,9 +11,9 @@ namespace DotnetPackaging.Msix.Core;
 
 public class MsixPackager(Maybe<ILogger> logger)
 {
-    private const bool USE_EXTERNAL_CONTENTTYPE = false;
-    private const string EXTERNAL_CONTENTTYPE_LOCATION = @"C:\Users\gus33\Downloads\MSIXTESTs\Microsoft.zGamesTwoGo_8wekyb3d8bbwe\[Content_Types].xml";
-    private const bool USE_EXISTING_BLOCKMAP = false;
+    private const bool USE_EXTERNAL_CONTENTTYPE = true;
+    private const string EXTERNAL_CONTENTTYPE_LOCATION = @"C:\Users\gus33\Documents\GitHub\DotnetPackaging\RemakeAppxTestContent\Microsoft.zGamesTwoGo_8wekyb3d8bbwe\[Content_Types].xml";
+    private const bool USE_EXISTING_BLOCKMAP = true;
 
     private string[] NoCompressionExtensions =
     [

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Bundle SchemaVersion="3.0" xmlns="http://schemas.microsoft.com/appx/2013/bundle">
+	<Identity Name="Microsoft.zGamesTwoGo" Publisher="CN=Microsoft Corporation, O=Microsoft Corporation, L=Redmond, S=Washington, C=US" Version="1.0.31023.0"/>
+	<Packages>
+		<Package Type="application" Version="1.0.31023.0" Architecture="arm" FileName="zGamesTwoGo_1.0.31023.0_ARM.appx" Offset="62" Size="4468017">
+			<Resources>
+				<Resource Language="EN-US"/>
+			</Resources>
+		</Package>
+		<Package Type="application" Version="1.0.31023.0" Architecture="x86" FileName="zGamesTwoGo_1.0.31023.0_x86.appx" Offset="9300875" Size="4194915">
+			<Resources>
+				<Resource Language="EN-US"/>
+			</Resources>
+		</Package>
+		<Package Type="application" Version="1.0.31023.0" Architecture="x64" FileName="zGamesTwoGo_1.0.31023.0_x64.appx" Offset="4468165" Size="4832624">
+			<Resources>
+				<Resource Language="EN-US"/>
+			</Resources>
+		</Package>
+	</Packages>
+</Bundle>

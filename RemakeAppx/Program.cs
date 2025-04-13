@@ -34,7 +34,7 @@ namespace RemakeAppx
                 return;
             }
 
-            await MakeAppx(args[0], args[1], false, false);
+            await MakeAppx(args[0], args[1], true, false);
         }
 
         private static async Task TestBundle()

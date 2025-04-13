@@ -8,18 +8,18 @@ public static class MsixEntryFactory
     {
         IByteSource compressedByteSource = ByteSource.FromByteObservable(data.Bytes.Compressed());
 
-        /*if (entryName.Equals("AppxBlockMap.xml"))
+        if (entryName.Equals("AppxBlockMap.xml"))
         {
-            compressedByteSource = ByteSource.FromBytes(System.IO.File.ReadAllBytes(@"C:\Users\gus33\Downloads\MSIXTESTs\CompressedzGamesTwoGoBundleFiles\AppxBlockmap.Deflate"));
+            compressedByteSource = ByteSource.FromBytes(System.IO.File.ReadAllBytes(@"C:\Users\gus33\Documents\GitHub\DotnetPackaging\RemakeAppxTestContent\CompressedzGamesTwoGoBundleFiles\AppxBlockmap.Deflate"));
         }
         else if (entryName.Equals("[Content_Types].xml"))
         {
-            compressedByteSource = ByteSource.FromBytes(System.IO.File.ReadAllBytes(@"C:\Users\gus33\Downloads\MSIXTESTs\CompressedzGamesTwoGoBundleFiles\ContentType.Deflate"));
+            compressedByteSource = ByteSource.FromBytes(System.IO.File.ReadAllBytes(@"C:\Users\gus33\Documents\GitHub\DotnetPackaging\RemakeAppxTestContent\CompressedzGamesTwoGoBundleFiles\ContentType.Deflate"));
         }
         else if (entryName.Equals("AppxSignature.p7x"))
         {
-            compressedByteSource = ByteSource.FromBytes(System.IO.File.ReadAllBytes(@"C:\Users\gus33\Downloads\MSIXTESTs\CompressedzGamesTwoGoBundleFiles\AppxSignature.Deflate"));
-        }*/
+            compressedByteSource = ByteSource.FromBytes(System.IO.File.ReadAllBytes(@"C:\Users\gus33\Documents\GitHub\DotnetPackaging\RemakeAppxTestContent\CompressedzGamesTwoGoBundleFiles\AppxSignature.Deflate"));
+        }
 
         var compressionLevel = CompressionLevel.Optimal;
 
